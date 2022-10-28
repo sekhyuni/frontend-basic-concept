@@ -13,7 +13,7 @@
                 ```
         - Update
             - Component 내 props나 state값이 변경되면서 Component가 재렌더링되어 변경된 DOM을 조작할 수 있는 상태
-            - Functional Component에서 아래와 같이 구현
+            - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념
                 ```javascript
                 useEffect(() => {
                     // You can control new DOM elements
@@ -21,7 +21,7 @@
                 ```
         - Unmount
             - Component가 페이지 상에서 사라진 상태
-            - Functional Component에서 아래와 같이 구현
+            - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념
                 ```javascript
                 useEffect(() => {
                     // You can clean up event listeners, clearTimeout, etc.
@@ -29,9 +29,11 @@
                     };
                 }, []);
                 ```
-            - clean up이 필요없는 effect : Network Request, DOM Control, Logging, etc.
-            - clean up이 필요한 effect : Add Event Listener
-                - clean up을 하지 않았을 때 발생 가능한 버그 : 예를 들어 특정 페이지에서만 사용할 목적으로 window에 Event Listener 설정 후 clean up을 하지 않고 다른 페이지로 넘어가면, 해당 Event 발생 시 Event Handler 함수가 호출됨
+            - clean up
+                - clean up 과정 : props나 state값이 변경 -> Component 재렌더링 -> 이전 side effects clean up -> 새로운 side effects 발생
+                - clean up이 필요없는 effect : Network Request, DOM Control, Logging, etc.
+                - clean up이 필요한 effect : Add Event Listener
+                    - clean up을 하지 않았을 때 발생 가능한 버그 : 예를 들어 특정 페이지에서만 사용할 목적으로 window에 Event Listener 설정 후 clean up을 하지 않고 다른 페이지로 넘어가면, 해당 Event 발생 시 Event Handler 함수가 호출됨
 
 ## Hooks
 1. useState
