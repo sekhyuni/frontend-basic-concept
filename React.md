@@ -24,8 +24,8 @@
             - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념
                 ```javascript
                 useEffect(() => {
-                    // You can clean up event listeners, clearTimeout, etc.
                     return () => {
+                        // You can clean up event listeners, clearTimeout, etc.
                     };
                 }, []);
                 ```
