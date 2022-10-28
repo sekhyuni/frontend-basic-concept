@@ -1,4 +1,5 @@
 # HTML
+## Basic Concept
 1. Semantic Tags
     - The semantic tags help the search engines and other user devices to determine the importance and context of web pages.
     - header, nav, main, section, article, aside, footer, etc.
