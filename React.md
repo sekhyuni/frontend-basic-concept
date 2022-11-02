@@ -48,3 +48,40 @@
     - Functional Component에서 함수를 메모이제이션하기 위해서 사용되는 Hook
     - useEffect의 deps에 특정 함수를 넣어서 사용할 때, 해당 함수 선언 시 useCallback을 특정 변수를 갖는 deps와 함께 사용하면 Component가 렌더링될 때마다 useEffect 내의 side effects가 발생하는 것을 방지 가능
 1. useRef
+
+## Performance
+1. Input Element Optimization
+    - 기존
+        ```javascript
+            const [inputValue, setInputValue] = useState<string>('');
+
+            return (
+                <form onSubmit={(event: SyntheticEvent) => {
+                    event.preventDefault();
+
+                    // do something with inputValue
+                }}>
+                    <input value={inputValue} onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                        setInputValue(event.target.value);
+                    }} />
+                </form>
+            );
+        ```
+    - 개선
+        ```javascript
+            const inputRef = useRef<HTMLInputElement | null>(null);
+
+            return (
+                <form onSubmit={(event: SyntheticEvent) => {
+                    event.preventDefault();
+
+                    if (!inputRef.current) {
+                        return;
+                    }
+
+                    // do something with inputRef.current.value
+                }}>
+                    <input ref={inputRef} />
+                </form>
+            );
+        ```
