@@ -1,5 +1,26 @@
 # CSS
 ## Basic Concept
+1. display: block에서의 width: auto와 height: auto
+    1. width: auto
+        - 부모 요소를 기준으로 함 (부모 width와 동일)
+            ```css
+                .parent {
+                    width: 200px;
+                }
+                
+                // .child는 width가 200px로 자동 설정
+            ```
+    1. height: auto
+        - 자식 요소를 기준으로 함 (자식 width + padding + border와 동일)
+            ```css
+                .child {
+                    heigth: 200px;
+                    border: 1px;
+                    padding: 10px;
+                }
+                
+                // .parent는 height가 222px로 자동 설정
+            ```
 1. position
     - 속성
         ```css
