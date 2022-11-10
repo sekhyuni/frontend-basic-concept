@@ -43,7 +43,8 @@
     - Component Tree 외부에 있는 것들을 props나 state에 따라 동기화하는 것
         - Network Request, DOM Control, Add Event Listener, etc.
 1. useLayoutEffect
-    - Funcional Component에서 DOM이 마운트되고 스크린에 그리기 전에 동기적으로 호출되는 Hook
+    - Funcional Component에서 DOM이 마운트되고 스크린에 그 전에 동기적으로 호출되는 Hook
+    - 동기적으로 호출되므로 많은 로직이 존재할 경우, 사용자가 레이아웃을 보기까지 시간이 오래 걸릴 수 있음
         ```javascript
             import React, {useRef, useEffect, useLayoutEffect) from 'react'
 
