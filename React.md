@@ -39,10 +39,38 @@
 1. useState
     - Functional Component에서 상태값을 다루기 위한 Hook
 1. useEffect
-    - Functional Component에서 Component가 렌더링될 때마다 호출되는 Hook
+    - Functional Component에서 DOM이 마운트되고 스크린에 그려진 후 비동기적으로 호출되는 Hook
     - Component Tree 외부에 있는 것들을 props나 state에 따라 동기화하는 것
         - Network Request, DOM Control, Add Event Listener, etc.
 1. useLayoutEffect
+    - Funcional Component에서 DOM이 마운트되고 스크린에 그리기 전에 동기적으로 호출되는 Hook
+        ```javascript
+            import React, {useRef, useEffect, useLayoutEffect) from 'react'
+
+            const App = () => {
+              const inputRef = useRef(null)
+              
+              useEffect(()=>{
+                inputRef.current.value = "another user"
+              });
+
+              useLayoutEffect(()=>{
+                console.log(inputRef.current.value)
+
+              });
+              
+              return(
+                <div>
+                  <input type="text" value="EmmanuelTheCoder" ref= 
+                    {inputRef}/>
+                </div>
+              );
+            }
+            
+            export default App;
+            
+            // 화면에는 "another user"가 나오지만, 콘솔에는 "EmmanuelTheCoder"가 찍힌다.
+        ```
 1. useMemo
 1. useCallback
     - Functional Component에서 함수를 메모이제이션하기 위해서 사용되는 Hook
