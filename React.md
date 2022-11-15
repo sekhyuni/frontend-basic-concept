@@ -49,10 +49,10 @@
             import React, {useRef, useEffect, useLayoutEffect) from 'react'
 
             const App = () => {
-              const inputRef = useRef(null)
+              const inputRef = useRef<HTMLInputElement | null>(null)
               
               useEffect(()=>{
-                inputRef.current.value = "another user"
+                inputRef.current.value = 'another user'
               });
 
               useLayoutEffect(()=>{
@@ -60,10 +60,9 @@
 
               });
               
-              return(
+              return (
                 <div>
-                  <input type="text" value="EmmanuelTheCoder" ref= 
-                    {inputRef}/>
+                  <input type='text' value='EmmanuelTheCoder' ref={inputRef} />
                 </div>
               );
             }
@@ -77,6 +76,35 @@
     - Functional Component에서 함수를 메모이제이션하기 위해서 사용되는 Hook
     - useEffect의 deps에 특정 함수를 넣어서 사용할 때, 해당 함수 선언 시 useCallback을 특정 변수를 갖는 deps와 함께 사용하면 Component가 렌더링될 때마다 useEffect 내의 side effects가 발생하는 것을 방지 가능
 1. useRef
+    - Functional Component에서 Component Life-Cycle동안 사용 가능한 변수로서, DOM 요소 접근 또는 특정 값을 담기 위한 객체를 반환하는 Hook
+        ```javascript
+            const App = () => {
+                const refObject = useRef<number>(1);
+                const rawObject = { current: 1 };
+
+                const [isChanged, setIsChanged] = useState<boolean>(false);
+
+                return (
+                    <>
+                        <button onClick={() => {
+                            refObject.current = 2;
+                            rawObject.current = 2;
+                        }}>값 변경</button>
+                        <button onClick={() => {
+                            setIsChanged(true);
+                        }}>리렌더링</button>
+                        <button onClick={() => {
+                            console.log(refObject.current);
+                            console.log(rawObject.current);
+                        }}>값 확인</button>
+                    </>
+                );
+            };
+
+            // 값 변경 버튼 클릭 -> 리렌더링 버튼 클릭 -> 값 확인 버튼 클릭 시,
+            // refObject.current는 2 출력 (useRef가 반환한 객체는 Life-Cycle동안 값을 유지)
+            // rawObject.current는 1 출력 (일반 JavaScript 객체는 리렌더링 시 값이 초기화됨)
+        ```
 
 ## Performance
 1. Input Element Optimization
