@@ -27,14 +27,14 @@
             position: static | relative | absolute | fixed | sticky;
         ```
     - 값
-        - static : 기본값이며, 위치를 임의로 지정 불가
-        - relative : 원래 있던 위치를 기준으로 좌표 지정
-        - absolute : 절대 좌표와 함께 위치 지정
+        - static: 기본값이며, 위치를 임의로 지정 불가
+        - relative: 원래 있던 위치를 기준으로 좌표 지정
+        - absolute: 절대 좌표와 함께 위치 지정
             - top, left, bottom, right 속성과 같이 쓰임
             - 상위 레벨 Element 중 속성값이 relative 또는 absolute인 것이 있으면 해당 Element 기준 위치 지정
             - 상위 레벨 Element 중 속성값이 relative 또는 absolute인 것이 없으면 최상위 Element 기준 위치 지정 
-        - fixed : 스크롤과 상관없이 항상 문서 최좌측상단을 기준으로 좌표 고정
-        - sticky : 평소에는 문서 내에서 static 속성값과 같이 일반적인 흐름을 따르지만 스크롤 위치가 임계치에 이르면 fixed 속성값과 같이 좌표 고정
+        - fixed: 스크롤과 상관없이 항상 문서 최좌측상단을 기준으로 좌표 고정
+        - sticky: 평소에는 문서 내에서 static 속성값과 같이 일반적인 흐름을 따르지만 스크롤 위치가 임계치에 이르면 fixed 속성값과 같이 좌표 고정
 1. flex
     - 속성
         ```css
