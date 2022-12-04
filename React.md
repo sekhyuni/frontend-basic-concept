@@ -72,87 +72,87 @@
         ```
 1. useMemo
     - Functional Component에서 값을 메모이제이션하기 위해서 사용되는 Hook
-    ```typescript
-    import { useState, useMemo } from 'react';
+        ```typescript
+        import { useState, useMemo } from 'react';
 
-    const CounterButton = ({ counter, setCounter }: { counter: number; setCounter: (counter: number) => void }): JSX.Element => {
-        return (
-            <div>
-                <button style={{
-                    border: 'none',
-                    borderRadius: '10px',
-                    fontSize: '18px',
-                    backgroundColor: 'skyblue',
-                    cursor: 'pointer',
-                }}
-                    onClick={() => {
-                        setCounter(counter + 1);
-                    }}>카운터 업데이트</button>
-            </div>
-        );
-    };
+        const CounterButton = ({ counter, setCounter }: { counter: number; setCounter: (counter: number) => void }): JSX.Element => {
+            return (
+                <div>
+                    <button style={{
+                        border: 'none',
+                        borderRadius: '10px',
+                        fontSize: '18px',
+                        backgroundColor: 'skyblue',
+                        cursor: 'pointer',
+                    }}
+                        onClick={() => {
+                            setCounter(counter + 1);
+                        }}>카운터 업데이트</button>
+                </div>
+            );
+        };
 
-    const OtherCounterButton = ({ otherCounter, setOtherCounter }: { otherCounter: number; setOtherCounter: (otherCounter: number) => void }): JSX.Element => {
-        return (
-            <div>
-                <button style={{
-                    border: 'none',
-                    borderRadius: '10px',
-                    fontSize: '18px',
-                    backgroundColor: 'red',
-                    cursor: 'pointer',
-                }}
-                    onClick={() => {
-                        setOtherCounter(otherCounter + 1);
-                    }}>다른 카운터 업데이트</button>
-            </div>
-        );
-    };
+        const OtherCounterButton = ({ otherCounter, setOtherCounter }: { otherCounter: number; setOtherCounter: (otherCounter: number) => void }): JSX.Element => {
+            return (
+                <div>
+                    <button style={{
+                        border: 'none',
+                        borderRadius: '10px',
+                        fontSize: '18px',
+                        backgroundColor: 'red',
+                        cursor: 'pointer',
+                    }}
+                        onClick={() => {
+                            setOtherCounter(otherCounter + 1);
+                        }}>다른 카운터 업데이트</button>
+                </div>
+            );
+        };
 
-    const App = (): JSX.Element => {
-        const [counter, setCounter] = useState<number>(0);
-        const [otherCounter, setOtherCounter] = useState<number>(0);
-        const doubleNumber = useMemo(() => {
-            return slowFunction(counter);
-        }, [counter]);
-        // const doubleNumber = slowFunction(counter);
+        const App = (): JSX.Element => {
+            const [counter, setCounter] = useState<number>(0);
+            const [otherCounter, setOtherCounter] = useState<number>(0);
+            const doubleNumber = useMemo(() => {
+                return slowFunction(counter);
+            }, [counter]);
+            // const doubleNumber = slowFunction(counter);
 
-        return (
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100vh',
-            }}>
+            return (
                 <div style={{
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
                     alignItems: 'center',
+                    height: '100vh',
                 }}>
-                    <p>카운터: {counter}</p>
-                    <CounterButton counter={counter} setCounter={setCounter} />
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                    }}>
+                        <p>카운터: {counter}</p>
+                        <CounterButton counter={counter} setCounter={setCounter} />
+                    </div>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                    }}>
+                        <p>다른 카운터: {otherCounter}</p>
+                        <OtherCounterButton otherCounter={otherCounter} setOtherCounter={setOtherCounter} />
+                    </div>
+                    <p>카운터 X 2: {doubleNumber}</p>
                 </div>
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                }}>
-                    <p>다른 카운터: {otherCounter}</p>
-                    <OtherCounterButton otherCounter={otherCounter} setOtherCounter={setOtherCounter} />
-                </div>
-                <p>카운터 X 2: {doubleNumber}</p>
-            </div>
-        );
-    };
+            );
+        };
 
-    const slowFunction = (num: number): number => {
-        for (let i = 0; i < 500000000; i++) { }
-        return num * 2;
-    }
+        const slowFunction = (num: number): number => {
+            for (let i = 0; i < 500000000; i++) { }
+            return num * 2;
+        }
 
-    export default App;
-    ```
+        export default App;
+        ```
 1. useCallback
     - Functional Component에서 함수를 메모이제이션하기 위해서 사용되는 Hook
     - useEffect의 deps에 특정 함수를 넣어서 사용할 때, 해당 함수 선언 시 useCallback을 특정 변수를 갖는 deps와 함께 사용하면 Component가 렌더링될 때마다 useEffect 내의 side effects가 발생하는 것을 방지 가능
