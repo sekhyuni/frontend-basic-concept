@@ -51,11 +51,11 @@
         const App = (): JSX.Element => {
             const inputRef = useRef<HTMLInputElement | null>(null);
             
-            useEffect(()=>{
+            useEffect(() => {
                 inputRef.current.value = 'another user';
             });
 
-            useLayoutEffect(()=>{
+            useLayoutEffect(() => {
                 console.log(inputRef.current.value);
             });
             
@@ -199,7 +199,7 @@
         import { useState, FormEvent, ChangeEvent } from 'react';
 
         const App = (): JSX.Element => {
-            const [inputValue, setInputValue] = useState<string>('');
+            const [inputState, setInputState] = useState<string>('');
 
             return (
                 <form onSubmit={(event: FormEvent<HTMLFormElement>) => {
@@ -207,8 +207,8 @@
 
                     // do something with inputValue
                 }}>
-                    <input value={inputValue} onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                        setInputValue(event.target.value);
+                    <input value={inputState} onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                        setInputState(event.target.value);
                     }} />
                 </form>
             );
