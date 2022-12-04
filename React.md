@@ -7,27 +7,27 @@
             - Component가 렌더링되어 DOM을 조작할 수 있는 상태
             - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 것
                 ```javascript
-                useEffect(() => {
-                    // You can control DOM elements
-                }, []);
+                    useEffect(() => {
+                        // You can control DOM elements
+                    }, []);
                 ```
         - Update
             - Component 내 props나 state값이 변경되면서 Component가 재렌더링되어 변경된 DOM을 조작할 수 있는 상태
             - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념
                 ```javascript
-                useEffect(() => {
-                    // You can control new DOM elements
-                }, [deps]);
+                    useEffect(() => {
+                        // You can control new DOM elements
+                    }, [deps]);
                 ```
         - Unmount
             - Component가 페이지 상에서 사라진 상태
             - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념
                 ```javascript
-                useEffect(() => {
-                    return () => {
-                        // You can clean up event listeners, clearTimeout, etc.
-                    };
-                }, []);
+                    useEffect(() => {
+                        return () => {
+                            // You can clean up event listeners, clearTimeout, etc.
+                        };
+                    }, []);
                 ```
             - clean up
                 - clean up 과정: props나 state값이 변경 -> Component 재렌더링 -> 이전 side effects clean up -> 새로운 side effects 발생
@@ -112,7 +112,7 @@
             const [inputValue, setInputValue] = useState<string>('');
 
             return (
-                <form onSubmit={(event: SyntheticEvent) => {
+                <form onSubmit={(event: FormEvent<HTMLFormElement>) => {
                     event.preventDefault();
 
                     // do something with inputValue
@@ -128,7 +128,7 @@
             const inputRef = useRef<HTMLInputElement | null>(null);
 
             return (
-                <form onSubmit={(event: SyntheticEvent) => {
+                <form onSubmit={(event: FormEvent<HTMLFormElement>) => {
                     event.preventDefault();
 
                     if (!inputRef.current) {
