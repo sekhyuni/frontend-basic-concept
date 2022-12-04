@@ -4,27 +4,27 @@
     1. width: auto
         - 부모 요소를 기준으로 함 (부모 width와 동일)
             ```css
-                .parent {
-                    width: 200px;
-                }
-                
-                // .child는 width가 200px로 자동 설정
+            .parent {
+                width: 200px;
+            }
+            
+            <!-- .child는 width가 200px로 자동 설정 -->
             ```
     1. height: auto
         - 자식 요소를 기준으로 함 (자식 width + padding + border와 동일)
             ```css
-                .child {
-                    heigth: 200px;
-                    border: 1px;
-                    padding: 10px;
-                }
-                
-                // .parent는 height가 222px로 자동 설정
+            .child {
+                heigth: 200px;
+                border: 1px;
+                padding: 10px;
+            }
+            
+            <!-- .parent는 height가 222px로 자동 설정 -->
             ```
 1. position
     - 속성
         ```css
-            position: static | relative | absolute | fixed | sticky;
+        position: static | relative | absolute | fixed | sticky;
         ```
     - 값
         - static: 기본값이며, 위치를 임의로 지정 불가
@@ -38,11 +38,11 @@
 1. flex
     - 속성
         ```css
-            display: flex;
-            flex-direction: row | column;
-            justfiy-content: start | center | end;
-            align-items: start | center | end;
-            flex-wrap: no-wrap | wrap;
+        display: flex;
+        flex-direction: row | column;
+        justfiy-content: start | center | end;
+        align-items: start | center | end;
+        flex-wrap: no-wrap | wrap;
         ```
 
 ## ETC Concept
