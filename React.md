@@ -52,11 +52,11 @@
             const inputRef = useRef<HTMLInputElement | null>(null);
             
             useEffect(()=>{
-            inputRef.current.value = 'another user';
+                inputRef.current.value = 'another user';
             });
 
             useLayoutEffect(()=>{
-            console.log(inputRef.current.value);
+                console.log(inputRef.current.value);
             });
             
             return (
