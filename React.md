@@ -72,6 +72,7 @@
         ```
 1. useMemo
     - Functional Component에서 값을 메모이제이션하기 위해서 사용되는 Hook
+    - useEffect가 a라는 변수에 따라 side effects가 발생해야 하는 상황에서 a 선언 시 b라는 변수의 값에 따라 값이 변하는 useMemo를 선언 후 사용하면, b라는 변수의 값이 변하지 않는 상황에서 Component가 리렌더링될 때 useEffect의 side effects가 발생하는 것을 방지 가능
         ```typescript
         import { useState, useMemo } from 'react';
 
@@ -155,7 +156,7 @@
         ```
 1. useCallback
     - Functional Component에서 함수를 메모이제이션하기 위해서 사용되는 Hook
-    - useEffect의 deps에 특정 함수를 넣어서 사용할 때, 해당 함수 선언 시 useCallback을 특정 변수를 갖는 deps와 함께 사용하면 Component가 렌더링될 때마다 useEffect 내의 side effects가 발생하는 것을 방지 가능
+    - useEffect가 a라는 함수에 따라 side effects가 발생해야 하는 상황에서 a 선언 시 b라는 변수의 값에 따라 내부 로직이 변하는 useCallback을 선언 후 사용하면, b라는 변수의 값이 변하지 않는 상황에서 Component가 리렌더링될 때 useEffect의 side effects가 발생하는 것을 방지 가능
 1. useRef
     - Functional Component에서 Component Life-Cycle동안 사용 가능한 변수로서, DOM 요소 접근 또는 특정 값을 담기 위한 객체를 반환하는 Hook
         ```typescript
