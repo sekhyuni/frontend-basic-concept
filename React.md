@@ -6,7 +6,7 @@
         - Mount
             - Component가 렌더링되어 DOM을 조작할 수 있는 상태
             - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 것
-                ```javascript
+                ```typescript
                 useEffect(() => {
                     // You can control DOM elements
                 }, []);
@@ -14,7 +14,7 @@
         - Update
             - Component 내 props나 state값이 변경되면서 Component가 재렌더링되어 변경된 DOM을 조작할 수 있는 상태
             - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념
-                ```javascript
+                ```typescript
                 useEffect(() => {
                     // You can control new DOM elements
                 }, [deps]);
@@ -22,7 +22,7 @@
         - Unmount
             - Component가 페이지 상에서 사라진 상태
             - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념
-                ```javascript
+                ```typescript
                 useEffect(() => {
                     return () => {
                         // You can clean up event listeners, clearTimeout, etc.
@@ -45,7 +45,7 @@
 1. useLayoutEffect
     - Funcional Component에서 DOM이 마운트되고 스크린에 그 전에 동기적으로 호출되는 Hook
     - 동기적으로 호출되므로 많은 로직이 존재할 경우, 사용자가 레이아웃을 보기까지 시간이 오래 걸릴 수 있음
-        ```javascript
+        ```typescript
         import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
         const App = () => {
@@ -76,7 +76,7 @@
     - useEffect의 deps에 특정 함수를 넣어서 사용할 때, 해당 함수 선언 시 useCallback을 특정 변수를 갖는 deps와 함께 사용하면 Component가 렌더링될 때마다 useEffect 내의 side effects가 발생하는 것을 방지 가능
 1. useRef
     - Functional Component에서 Component Life-Cycle동안 사용 가능한 변수로서, DOM 요소 접근 또는 특정 값을 담기 위한 객체를 반환하는 Hook
-        ```javascript
+        ```typescript
         const App = () => {
             const refObject = useRef<number>(1);
             const rawObject = { current: 1 };
@@ -108,7 +108,7 @@
 ## Performance
 1. Input Element Optimization
     - 기존
-        ```javascript
+        ```typescript
         const [inputValue, setInputValue] = useState<string>('');
 
         return (
@@ -124,7 +124,7 @@
         );
         ```
     - 개선
-        ```javascript
+        ```typescript
         const inputRef = useRef<HTMLInputElement | null>(null);
 
         return (

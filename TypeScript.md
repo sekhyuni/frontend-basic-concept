@@ -3,7 +3,7 @@
 1. interface vs type
 	1. interface
     	- 확장 방법
-      		```javascript
+      		```typescript
 			interface PeopleInterface {
 				name: string;
 				age: number;
@@ -14,7 +14,7 @@
 			}    
       		```
 		- 선언적 확장 가능	
-			```javascript
+			```typescript
 			interface Window {
 				title: string;
 			}
@@ -26,7 +26,7 @@
 			// 같은 interface 명으로 Window를 다시 만든다면, 자동으로 확장이 된다.
 			```
 		- 객체에만 사용 가능
-			```javascript
+			```typescript
 			interface FooInterface {
 				value: string;
 			}
@@ -43,7 +43,7 @@
 			```            
 	1. type
 		- 확장 방법
-			```javascript
+			```typescript
 			type PeopleType = {
 				name: string;
 				age: number;
@@ -56,7 +56,7 @@
 1. Utility Type
 	1. Partial
     	- 특정 타입의 부분 집합을 만족하는 타입을 정의
-      		```javascript
+      		```typescript
 			interface Address {
 				email: string;
 				address: string;
@@ -69,7 +69,7 @@
       		```
   	1. Pick
     	- 특정 타입에서 몇 개의 속성을 선택해서 타입을 정의
-			```javascript
+			```typescript
 			interface Product {
 				id: number;
 				name: string;
@@ -88,7 +88,7 @@
 			```
 	1. Omit
 		- 특정 속성만 제거한 타입을 정의
-			```javascript
+			```typescript
 			interface Product {
 				id: number;
 				name: string;
@@ -105,7 +105,7 @@
 			};        
 			```
 1. Use Property Type Of Any Interface
-	```javascript
+	```typescript
 	interface Meta {
 		code: string;
 		message: string;
