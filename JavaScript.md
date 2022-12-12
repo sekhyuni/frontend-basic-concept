@@ -57,3 +57,39 @@
     - Prototype Chain: 특정 객체의 프로퍼티나 메소드에 접근하려고 할 때 해당 객체에 접근하려는 프로퍼티 또는 메소드가 없다면 자신의 부모 역할을 하는 Prototype 객체의 프로퍼티나 메소드를 차례대로 검색 
 1. Closure
     - 외부함수의 실행 컨텍스트가 소멸되어도 외부함수의 Scope에 접근할 수 있는 내부함수
+1. Object vs Map
+    1. Object
+        - Object does not implement an iteration protocol, and so objects are not directly iterable using the JavaScript for...of statement (by default)
+        - The keys of an Object must be either a String or a Symbol
+        - Not optimized for frequent additions and removals of key-value pairs
+        - Native support for serialization or parsing.
+            ```javascript
+                var o = {};
+                var o = Object.create(null);
+                o.key = 1;
+                o.key += 10;
+                for(let k in o) o[k]++;
+                var sum = 0;
+                for(let v of Object.values(m)) sum += v;
+                if('key' in o);
+                if(o.hasOwnProperty('key'));
+                delete(o.key);
+                Object.keys(o).length;
+            ```
+    1. Map
+        - A Map is an iterable, so it can be directly iterated
+        - A Map's keys can be any value (including functions, objects, or any primitive)
+        - Performs better in scenarios involving frequent additions and removals of key-value pairs
+        - No native support for serialization or parsing
+            ```javascript
+                var m = new Map();
+                m.set('key', 1);
+                m.set('key', m.get('key') + 10);
+                m.foreach((k, v) => m.set(k, m.get(k) + 1));
+                for(let k of m.keys()) m.set(k, m.get(k) + 1);
+                var sum = 0;
+                for(let v of m.values()) sum += v;
+                if(m.has('key'));
+                m.delete('key');
+                m.size();
+            ```
