@@ -1,6 +1,6 @@
 1. TypeScript + Next.js
     ```shell
-    $ npx create-next-app@latest opgg --typescript    
+    $ npx create-next-app@latest next-app --typescript    
     ```
 1. Emotion
     ```shell
