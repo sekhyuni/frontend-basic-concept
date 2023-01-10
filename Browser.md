@@ -76,6 +76,30 @@
             ```
     1. 이벤트 위임
         - 이벤트 버블링의 개념을 기반으로 하는 이벤트 처리 패턴
+            ```html
+            <div>
+                <section style="width: fit-content">
+                    <button>Button 1</button>
+                    <button>Button 2</button>
+                    <button>Button 3</button>
+                </section>
+            </div>
+            <script>
+                const div = document.querySelector('div');
+
+                div.addEventListener('click', (event) => {
+                    if (event.target.tagName === 'DIV') {
+                        console.log('div');
+                    }
+                    if (event.target.tagName === 'SECTION') {
+                        console.log('section');
+                    }
+                    if (event.target.tagName === 'BUTTON') {
+                        console.log(event.target.innerText);
+                    }
+                });
+            </script>
+            ```
         - 구현 순서
             1. 컨테이너에 하나의 핸들러를 할당
             1. 핸들러의 event.target을 사용해서 이벤트가 발생한 요소가 어디인지 알아냄
@@ -86,30 +110,6 @@
         - 단점
             1. 이벤트 위임을 사용하려면 이벤트가 반드시 버블링되어야 하는데, 몇몇 이벤트는 버블링 되지 않음
             1. 컨테이너에 할당된 핸들러가 모든 하위 요소에서 발생하는 이벤트에 응답해야 하므로 CPU 작업 부하가 늘어날 수 있으나, 이런 부하는 무시할만한 수준이므로 실제로는 잘 고려하지 않음
-            ```html
-                <div>
-                    <section style="width: fit-content">
-                        <button>Button 1</button>
-                        <button>Button 2</button>
-                        <button>Button 3</button>
-                    </section>
-                </div>
-                <script>
-                    const div = document.querySelector('div');
-
-                    div.addEventListener('click', (event) => {
-                        if (event.target.tagName === 'DIV') {
-                            console.log('div');
-                        }
-                        if (event.target.tagName === 'SECTION') {
-                            console.log('section');
-                        }
-                        if (event.target.tagName === 'BUTTON') {
-                            console.log(event.target.innerText);
-                        }
-                    });
-                </script>
-            ```
     1. 이벤트 캡처링
         - 특정 요소에서 이벤트가 발생했을 때 해당 이벤트가 최상위 요소인 html 요소부터 특정 요소까지 점점 더 하위 요소들로 전달되어가는 특성
             ```html
