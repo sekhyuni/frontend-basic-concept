@@ -50,7 +50,6 @@
                                 console.log('html');
                             }
                         );
-
                         body.addEventListener(
                             'click',
                             () => {
@@ -63,7 +62,6 @@
                                 console.log('pink div');
                             }
                         );
-
                         greenDiv.addEventListener(
                             'click',
                             () => {
@@ -159,7 +157,6 @@
                             },
                             true
                         );
-
                         body.addEventListener(
                             'click',
                             () => {
@@ -174,7 +171,6 @@
                             },
                             true
                         );
-
                         greenDiv.addEventListener(
                             'click',
                             () => {
