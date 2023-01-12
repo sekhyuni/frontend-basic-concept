@@ -57,6 +57,77 @@
     - Prototype Chain: 특정 객체의 프로퍼티나 메소드에 접근하려고 할 때 해당 객체에 접근하려는 프로퍼티 또는 메소드가 없다면 자신의 부모 역할을 하는 Prototype 객체의 프로퍼티나 메소드를 차례대로 검색 
 1. Closure
     - 외부함수의 실행 컨텍스트가 소멸되어도 외부함수의 Scope에 접근할 수 있는 내부함수
+1. Debouncing vs Throttling
+    1. Debouncing
+        - 동일 이벤트가 반복적으로 일어나는 경우 마지막 이벤트가 일어나고 나서 일정 시간(ms)동안 해당 이벤트가 다시 일어나지 않으면 해당 이벤트의 콜백함수를 실행시키는 기술
+            ```html
+            <input placeholder='search' />
+            <script>
+                const debounce = (callback, delay) => {
+                    let timer;
+                    return (...args) => {
+                        clearTimeout(timer);
+                        timer = setTimeout(() => {
+                            callback(...args);
+                        }, delay);
+                    };
+                };
+
+                const getSearchResults = (keyword) => {
+                    return new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            resolve(`Results of ${keyword} are ..`);
+                        }, 50);
+                    });
+                };
+
+                const searchHandler = async (event) => {
+                    const { value } = event.target;
+                    const results = await getSearchResults(value);
+                    console.log(results);
+                };
+
+                const optimisedSearchHandler = debounce(searchHandler, 500);
+
+                const input = document.querySelector('input');
+                
+                input.addEventListener('keyup', (event) => {
+                    // searchHandler(event);
+                    optimisedSearchHandler(event);
+                });
+            </script>
+            ```
+    1. Throttling
+        - 동일 이벤트가 반복적으로 일어나는 경우 이벤트의 실제 반복 주기와 상관없이 임의로 설정한 일정 시간(ms) 간격으로 콜백함수를 실행시키는 기술
+            ```html
+            <script>
+                const throttle = (callback, interval) => {
+                    let shouldWait = false;
+                    return (...args) => {
+                        if (shouldWait) {
+                            return;
+                        }
+
+                        callback();
+                        shouldWait = true;
+                        setTimeout(() => {
+                            shouldWait = false;
+                        }, interval);
+                    };
+                };
+
+                const handlerTrigger = () => {
+                    console.log('Fire shot');
+                };
+
+                const optimisedTriggerHandler = throttle(handlerTrigger, 500);
+
+                window.addEventListener('mousemove', () => {
+                    // handlerTrigger();
+                    optimisedTriggerHandler();
+                });
+            </script>
+            ```
 1. Object vs Map
     1. Object
         - Object does not implement an iteration protocol, and so objects are not directly iterable using the JavaScript for...of statement (by default)
