@@ -72,9 +72,9 @@
 [맨 위로 가기](#javascript)
 ## Closure
 - 외부함수의 실행 컨텍스트가 소멸되어도 외부함수의 Scope에 접근할 수 있는 내부함수
-- Closure를 활용한 예
+- 클로저를 활용한 예
     - Debouncing vs Throttling
-        1. Debouncing
+        1. 디바운씽
             - 동일 이벤트가 반복적으로 일어나는 경우 마지막 이벤트가 일어나고 나서 일정 시간(ms)동안 해당 이벤트가 다시 일어나지 않으면 해당 이벤트의 콜백함수를 실행시키는 기술
                 ```html
                 <input placeholder='search' />
@@ -113,7 +113,7 @@
                     });
                 </script>
                 ```
-        1. Throttling
+        1. 쓰로틀링
             - 동일 이벤트가 반복적으로 일어나는 경우 이벤트의 실제 반복 주기와 상관없이 임의로 설정한 일정 시간(ms) 간격으로 콜백함수를 실행시키는 기술
                 ```html
                 <script>
