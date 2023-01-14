@@ -1,40 +1,45 @@
 # React
-## Basic Concept
-1. Life-Cycle
-    - 순서: Mount -> Update -> Unmount
-    - 상태
-        - Mount
-            - Component가 렌더링되어 DOM을 조작할 수 있는 상태
-            - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 것
-                ```typescript
-                useEffect(() => {
-                    // You can control DOM elements
-                }, []);
-                ```
-        - Update
-            - Component 내 props나 state값이 변경되면서 Component가 재렌더링되어 변경된 DOM을 조작할 수 있는 상태
-            - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념
-                ```typescript
-                useEffect(() => {
-                    // You can control new DOM elements
-                }, [deps]);
-                ```
-        - Unmount
-            - Component가 페이지 상에서 사라진 상태
-            - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념
-                ```typescript
-                useEffect(() => {
-                    return () => {
-                        // You can clean up event listeners, clearTimeout, etc.
-                    };
-                }, []);
-                ```
-            - clean up
-                - clean up 과정: props나 state값이 변경 -> Component 재렌더링 -> 이전 side effects clean up -> 새로운 side effects 발생
-                - clean up이 필요없는 effect: Network Request, DOM Control, Logging, etc.
-                - clean up이 필요한 effect: Add Event Listener
-                    - clean up을 하지 않았을 때 발생 가능한 버그: 예를 들어 특정 페이지에서만 사용할 목적으로 window에 Event Listener 설정 후 clean up을 하지 않고 다른 페이지로 넘어가면, 해당 Event 발생 시 Event Handler 함수가 호출됨
 
+* [Life-Cycle](#life-cycle)
+* [Hooks](#hooks)
+* [Performance Optimization](#performance-optimization)
+
+## Life-Cycle
+- 순서: Mount -> Update -> Unmount
+- 상태
+    - Mount
+        - Component가 렌더링되어 DOM을 조작할 수 있는 상태
+        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋다.
+            ```typescript
+            useEffect(() => {
+                // You can control DOM elements
+            }, []);
+            ```
+    - Update
+        - Component 내 props나 state값이 변경되면서 Component가 재렌더링되어 변경된 DOM을 조작할 수 있는 상태
+        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋다.
+            ```typescript
+            useEffect(() => {
+                // You can control new DOM elements
+            }, [deps]);
+            ```
+    - Unmount
+        - Component가 페이지 상에서 사라진 상태
+        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋다.
+            ```typescript
+            useEffect(() => {
+                return () => {
+                    // You can clean up event listeners, clearTimeout, etc.
+                };
+            }, []);
+            ```
+        - clean up
+            - clean up 과정: props나 state값이 변경 -> Component 재렌더링 -> 이전 side effects clean up -> 새로운 side effects 발생
+            - clean up이 필요없는 effect: Network Request, DOM Control, Logging, etc.
+            - clean up이 필요한 effect: Add Event Listener
+                - clean up을 하지 않았을 때 발생 가능한 버그: 예를 들어 특정 페이지에서만 사용할 목적으로 window에 Event Listener 설정 후 clean up을 하지 않고 다른 페이지로 넘어가면, 해당 Event 발생 시 Event Handler 함수가 호출됨
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#react)
 ## Hooks
 1. useState
     - Functional Component에서 상태값을 다루기 위한 Hook
@@ -191,9 +196,10 @@
         // refObject.current는 2 출력 (useRef가 반환한 객체는 Life-Cycle동안 값을 유지)
         // rawObject.current는 1 출력 (일반 JavaScript 객체는 리렌더링 시 값이 초기화됨)
         ```
-
-## Performance
-1. Input Element Optimization
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#react)
+## Performance Optimization
+1. Input Element
     - 기존
         ```typescript
         import { useState, FormEvent, ChangeEvent } from 'react';
@@ -240,3 +246,5 @@
 
         export default App;
         ```
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#react)
