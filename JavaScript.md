@@ -63,9 +63,13 @@
     - Event Queue: Task Queue, Microtask Queue, Animation Frames와 같이 Task가 Call Stack으로 옮겨지기 전에 대기하는 Queue를 일컬음
         - Call Stack으로 옮겨지는 순서: Microtask Queue -> Animation Frames -> Task Queue
     - Event Loop: 지속적으로 Call Stack과 Event Queue를 확인하여, Call Stack이 비워져 있는 경우 Event Queue에서 Task를 꺼내어 Call Stack으로 옮김
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#javascript)
 ## Prototype
 - 부모 역할을 담당하는 객체
 - Prototype Chain: 특정 객체의 프로퍼티나 메소드에 접근하려고 할 때 해당 객체에 접근하려는 프로퍼티 또는 메소드가 없다면 자신의 부모 역할을 하는 Prototype 객체의 프로퍼티나 메소드를 차례대로 검색 
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#javascript)
 ## Closure
 - 외부함수의 실행 컨텍스트가 소멸되어도 외부함수의 Scope에 접근할 수 있는 내부함수
 - Closure를 활용한 예
