@@ -57,6 +57,7 @@
 			school: string;
 		}
 		```
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#typescript)
 ## Utility Type
@@ -110,6 +111,7 @@
 			brand: 'del',
 		};        
 		```
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#typescript)
 ## Use Property Type Of Any Interface
@@ -140,5 +142,6 @@
 		stock,
 	}
 	```
+	
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#typescript)

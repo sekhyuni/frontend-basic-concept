@@ -29,6 +29,7 @@
             // In Normal Function에서는 Timeout 객체 출력
             // In Arrow Function에서는 Test 객체 출력
             ```
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Hoisting
@@ -55,6 +56,7 @@
 
         // ReferenceError: Cannot access 'a' before initialization 출력
         ```
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Asynchronous Processing
@@ -63,11 +65,13 @@
     - Event Queue: Task Queue, Microtask Queue, Animation Frames와 같이 Task가 Call Stack으로 옮겨지기 전에 대기하는 Queue를 일컬음
         - Call Stack으로 옮겨지는 순서: Microtask Queue -> Animation Frames -> Task Queue
     - Event Loop: 지속적으로 Call Stack과 Event Queue를 확인하여, Call Stack이 비워져 있는 경우 Event Queue에서 Task를 꺼내어 Call Stack으로 옮김
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Prototype
 - 부모 역할을 담당하는 객체
 - Prototype Chain: 특정 객체의 프로퍼티나 메소드에 접근하려고 할 때 해당 객체에 접근하려는 프로퍼티 또는 메소드가 없다면 자신의 부모 역할을 하는 Prototype 객체의 프로퍼티나 메소드를 차례대로 검색 
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Closure
@@ -144,6 +148,7 @@
                     });
                 </script>
                 ```
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Object vs Map
@@ -184,5 +189,6 @@
             hashTable.delete('key');
             hashTable.size();
         ```
+        
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)

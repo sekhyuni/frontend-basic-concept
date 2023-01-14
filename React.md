@@ -38,6 +38,7 @@
             - clean up이 필요없는 effect: Network Request, DOM Control, Logging, etc.
             - clean up이 필요한 effect: Add Event Listener
                 - clean up을 하지 않았을 때 발생 가능한 버그: 예를 들어 특정 페이지에서만 사용할 목적으로 window에 Event Listener 설정 후 clean up을 하지 않고 다른 페이지로 넘어가면, 해당 Event 발생 시 Event Handler 함수가 호출됨
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
 ## Hooks
@@ -196,6 +197,7 @@
         // refObject.current는 2 출력 (useRef가 반환한 객체는 Life-Cycle동안 값을 유지)
         // rawObject.current는 1 출력 (일반 JavaScript 객체는 리렌더링 시 값이 초기화됨)
         ```
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
 ## Performance Optimization
@@ -246,5 +248,6 @@
 
         export default App;
         ```
+        
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)

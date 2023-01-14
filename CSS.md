@@ -27,6 +27,7 @@
             
             <!-- .parent는 height가 222px로 자동 설정 -->
             ```
+            
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)
 ## position
@@ -43,6 +44,7 @@
         - 상위 레벨 Element 중 속성값이 relative 또는 absolute인 것이 없으면 최상위 Element 기준 위치 지정 
     - fixed: 스크롤과 상관없이 항상 문서 최좌측상단을 기준으로 좌표 고정
     - sticky: 평소에는 문서 내에서 static 속성값과 같이 일반적인 흐름을 따르지만 스크롤 위치가 임계치에 이르면 fixed 속성값과 같이 좌표 고정
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)
 ## flex
@@ -54,6 +56,7 @@
     align-items: start | center | end;
     flex-wrap: no-wrap | wrap;
     ```
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)
 ## ETC
@@ -61,5 +64,6 @@
     - 각 컴포넌트 별 고유 네임 스페이스에 CSS 작성 가능
         - 복잡한 애플리케이션 개발 시, 선택자 충돌 방지 가능 ({file}.module.css 형식으로 사용하면 CSS-in-CSS로도 선택자 충돌 방지 가능)
     - JavaScript와 CSS간에 상수와 함수 공유 가능 (props를 사용하여 조건부 스타일링 가능)
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)
