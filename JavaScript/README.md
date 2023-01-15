@@ -157,7 +157,7 @@
     - Object의 key는 String 또는 Symbol 타입으로만 설정 가능
     - 빈번한 추가 및 제거 작업에서 Map보다 성능이 낮음
     - Serialization 또는 Parsing을 기본적으로 지원함
-    - V8 Engine에서 Object는 Hash Table로 구현되어 있지 않은 것으로 알려짐
+    - V8 Engine에서 Object는 Hash Table로 구현되어 있지 않음
         ```javascript
             var obj = {};
             var obj = Object.create(null);
