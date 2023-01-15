@@ -140,7 +140,7 @@
 		price,
 		brand,
 		stock,
-	}
+	};
 	```
 	
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
