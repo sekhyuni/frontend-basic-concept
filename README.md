@@ -5,6 +5,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [x] Browser Rendering Process
 - [ ] Browser Communication Process
 - [x] CORS
+- [ ] CSR vs SSR
 - [x] Event Bubbling vs Event Capturing
 
 ## [HTML](https://github.com/sekhyuni/frontend-basic-concept/blob/main/HTML/README.md)

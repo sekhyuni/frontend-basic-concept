@@ -3,6 +3,7 @@
 * [Browser Rendering Process](#browser-rendering-process)
 * [Browser Communication Process](#browser-communication-process)
 * [CORS](#cors)
+* [CSR vs SSR](#csr-vs-ssr)
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
 
 ## Browser Rendering Process
@@ -24,6 +25,11 @@
     - 본격적인 Cross Origin HTTP 요청 전에 **서버 측에서 그 요청의 메서드와 헤더에 대해 인식하고 있는지 체크**하는 것
     - 일반적으로 **브라우저에서 자동적으로 발생**하며, **OPTION 메서드**를 통해 HTTP 요청 헤더에 **Access-Control-Allow-Header, Access-Control-Allow-Methods, Origin** 정보를 담아서 요청
     - 사전 요청을 보냄으로써 **CORS를 인식할 수 없는 서버를 악성 요청으로부터 보호**할 수 있음
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#browser)
+## CSR vs SSR
+- Update later..
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
