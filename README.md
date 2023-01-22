@@ -2,6 +2,9 @@
 Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer로서 갖추어야 할 기본적인 Frontend 지식을 정리해둔 공간입니다.
 
 ## [Browser](https://github.com/sekhyuni/frontend-basic-concept/blob/main/Browser/README.md)
+- [x] Browser Rendering Process
+- [ ] Browser Communication Process
+- [x] CORS
 - [x] Event Bubbling vs Event Capturing
 
 ## [HTML](https://github.com/sekhyuni/frontend-basic-concept/blob/main/HTML/README.md)

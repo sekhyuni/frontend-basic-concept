@@ -1,10 +1,35 @@
 # Browser
 
+* [Browser Rendering Process](#browser-rendering-process)
+* [Browser Communication Process](#browser-communication-process)
+* [CORS](#cors)
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
 
+## Browser Rendering Process
+1. HTML을 Parsing해서 **DOM Tree**를 생성하고, HTML에 CSS가 포함되어 있다면 **CSSOM Tree**도 함께 생성
+1. DOM Tree와 CSSOM Tree를 합쳐서 **Render Tree**를 생성
+1. Render Tree를 통해 **Layouting**
+1. **Painting**
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#browser)
+## Browser Communication Process
+- 먼저 www.naver.com의 IP를 찾기 위해 DNS 서버에서 해당 도메인 네임에 매핑된 IP를 얻어오고, 그 다음 해당 IP의 서버와 TCP 연결을 맺게 됩니다. 이 후 HTTP 요청이 진행되고, 그에 맞는 HTTP 응답을 받아서 브라우저에 전달 후, 응답받은 페이지가 브라우저에 렌더링되는 순서로 진행되게 됩니다.
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#browser)
+## CORS
+- 기본적으로 브라우저에서 서버의 응답을 받기 위해서는 Same Origin(Protocol, IP, Port)일 경우에만 가능했으나, Cross Origin Resource Sharing 정책이 등장하면서 Cross Origin인 경우에도 상호작용이 가능해졌음. CORS를 정석적으로 사용하기 위해서는 서버 HTTP 응답 헤더의 Access-Conrtol-Allow-Origin에 클라이언트 Origin 정보를 추가해주면 되며, webpack-dev-server에 proxy 설정을 함으로써 서버측의 작업없이도 CORS 이슈를 우회하여 해결할 수 있음
+- Preflight Request
+    - 본격적인 Cross Origin HTTP 요청 전에 **서버 측에서 그 요청의 메서드와 헤더에 대해 인식하고 있는지 체크**하는 것
+    - 일반적으로 **브라우저에서 자동적으로 발생**하며, **OPTION 메서드**를 통해 HTTP 요청 헤더에 **Access-Control-Allow-Header, Access-Control-Allow-Methods, Origin** 정보를 담아서 요청
+    - 사전 요청을 보냄으로써 **CORS를 인식할 수 없는 서버를 악성 요청으로부터 보호**할 수 있음
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#browser)
 ## Event Bubbling vs Event Capturing
 1. 이벤트 버블링
-    - 특정 요소에서 이벤트가 발생했을 때 해당 이벤트가 가장 하위에 있는 요소부터 최상위 요소인 html 요소까지 점점 더 상위 요소들로 전달되어가는 특성
+    - 특정 요소에서 이벤트가 발생했을 때 해당 이벤트가 **가장 하위에 있는 요소부터 최상위 요소인 html 요소까지** 점점 더 상위 요소들로 전달되어가는 특성
     - 대표적으로 버블링되는 이벤트: click, mousedown, mouseup, wheel, scroll, keydown, keyup
         ```html
         <html>
@@ -112,7 +137,7 @@
                 1. 이벤트 위임을 사용하려면 이벤트가 반드시 버블링되어야 하는데, 몇몇 이벤트는 버블링 되지 않음
                 1. 컨테이너에 할당된 핸들러가 모든 하위 요소에서 발생하는 이벤트에 응답해야 하므로 CPU 작업 부하가 늘어날 수 있으나, 이런 부하는 무시할만한 수준이므로 실제로는 잘 고려하지 않음
 1. 이벤트 캡처링
-    - 특정 요소에서 이벤트가 발생했을 때 해당 이벤트가 최상위 요소인 html 요소부터 가장 하위에 있는 요소까지 점점 더 하위 요소들로 전달되어가는 특성
+    - 특정 요소에서 이벤트가 발생했을 때 해당 이벤트가 **최상위 요소인 html 요소부터 가장 하위에 있는 요소까지** 점점 더 하위 요소들로 전달되어가는 특성
         ```html
         <html>
             <head>
