@@ -16,7 +16,7 @@
         1. 상태 변경을 트리거한 Component에 플래그를 지정
         1. Component와 하위 Component들이 parsing되고 JSX가 React.createElement를 통해 React Element로 변환되고 메모리에 저장
         1. React Element를 통해 새 가상 DOM을 생성
-        1. diffing 알고리즘을 통해 이전 가상 DOM과 새 가상 DOM을 비교
+        1. Diffing 알고리즘을 통해 이전 가상 DOM과 새 가상 DOM을 비교
 - Commit: 새 가상 DOM 또는 변경 사항을 실제 DOM에 업데이트하는 단계
     1. React DOM 라이브러리를 사용하여 새 가상 DOM 또는 변경 사항을 실제 DOM에 업데이트
 
