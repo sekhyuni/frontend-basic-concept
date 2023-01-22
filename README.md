@@ -28,6 +28,8 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [x] Use Property Type Of Any Interface
 
 ## [React](https://github.com/sekhyuni/frontend-basic-concept/blob/main/React/README.md)
+- [x] Rendering Process 
+- [x] Reconciliation
 - [x] Life-Cycle
 - [x] Hooks
 - [ ] Performance Optimization
