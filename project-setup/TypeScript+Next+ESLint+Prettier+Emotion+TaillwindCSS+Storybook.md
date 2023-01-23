@@ -180,6 +180,28 @@
       // ...
     };
     ```
+1.  @emotion/babel-preset-css-prop 설치
+    ```shell
+    $ yarn add -D @emotion/babel-preset-css-prop
+    ```
+1.  @emotion/babel-preset-css-prop 설정을 위한 .storybook/main.js 수정
+    ```javascript
+    module.exports = {
+      // ...
+      webpackFinal: async (config) => {
+        config.module.rules.push({
+          test: /\.(ts|tsx)$/,
+          loader: require.resolve("babel-loader"),
+          options: {
+            presets: [require.resolve("@emotion/babel-preset-css-prop")],
+          },
+        });
+        return config;
+      },
+      framework: "@storybook/react",
+      // ...
+    };
+    ```
 1.  PostCSS addon 설치
     ```shell
     $ yarn add -D @storybook/addon-postcss
