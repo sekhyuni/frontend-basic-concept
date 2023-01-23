@@ -89,6 +89,10 @@
    ```shell
    $ mkdir src && mv ./pages ./src/pages && mv ./styles ./src/styles
    ```
+1. 유형별 디렉토리 생성
+   ```shell
+   $ mkdir assets components constants contexts helpers hooks i18n layouts styles services types utils
+   ```
 1. 절대경로관련 tsconfig.json 수정
    ```json
    {
