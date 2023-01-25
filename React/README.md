@@ -107,13 +107,15 @@
         - 다음으로 render() 메서드가 호출되고 비교 알고리즘이 이전 결과와 새로운 결과를 재귀적으로 처리
     1. 자식에 대한 재귀적 처리
         - DOM 노드의 자식들을 재귀적으로 처리할 때, React는 기본적으로 **동시에 두 리스트를 순회하고 차이점이 있으면 변경을 생성**
-        - 자식들이 key를 가지고 있다면, React는 key를 통해 기존 Tree와 이후 Tree의 자식들이 일치하는지 확인함. 예를 들어, 아래 예시에 key를 추가하여 Tree의 변환 작업이 효율적으로 수행되도록 수정할 수 있음
+        - 자식들이 key를 가지고 있다면, React는 **key를 통해 이전 Tree와 새로운 Tree의 자식들이 일치하는지 확인**함. 예를 들어, 아래 예시에서 ChildComponentMemo에 key를 추가하여 Tree의 변환 작업이 효율적으로 수행되도록 수정할 수 있음
             ```tsx
-            import { useState, useEffect } from 'react';
+            import React, { useState } from 'react';
 
             const App = (): JSX.Element => {
-                const [counts, updateCount] = useState<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-                
+                const [counts, updateCount] = useState<number[]>(
+                    Array.from({ length: 10000 }, (_, i) => i)
+                );
+
                 return (
                     <>
                         <button onClick={() => updateCount([counts.length + 1, ...counts])}>
@@ -121,7 +123,11 @@
                         </button>
                         <ul>
                             {counts.map((item: number) => (
-                                <ChildComponent key={item} text={item} />
+                                // key를 넣지 않은 경우
+                                // <ChildComponentMemo text={item} />
+
+                                // key를 넣은 경우
+                                <ChildComponentMemo key={item} text={item} />
                             ))}
                         </ul>
                     </>
@@ -131,12 +137,16 @@
             const ChildComponent = (props: { text: number }): JSX.Element => {
                 const [state] = useState<number>(props.text);
 
+                console.log('ChildComponent --> re-render');
+
                 return (
                     <li>
                         state: {state} -- text props: {props.text}
                     </li>
                 );
             };
+
+            const ChildComponentMemo = React.memo(ChildComponent);
 
             export default App;
             ```
@@ -188,7 +198,7 @@
     - Component Tree 외부에 있는 것들을 props나 state에 따라 동기화하는 것
         - Network Request, DOM Control, Add Event Listener, etc.
 1. useLayoutEffect
-    - Funcional Component에서 DOM이 마운트되고 스크린에 그 전에 동기적으로 호출되는 Hook
+    - Functional Component에서 DOM이 마운트되고 스크린에 그 전에 동기적으로 호출되는 Hook
     - 동기적으로 호출되므로 많은 로직이 존재할 경우, 사용자가 레이아웃을 보기까지 시간이 오래 걸릴 수 있음
         ```tsx
         import { useEffect, useRef, useLayoutEffect } from 'react';
