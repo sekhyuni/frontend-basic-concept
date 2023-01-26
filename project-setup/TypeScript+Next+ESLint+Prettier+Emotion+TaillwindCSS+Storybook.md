@@ -33,7 +33,7 @@
       "useTabs": false
     }
     ```
-1.  VSCode에서 Prettier Plugin 설치 후, setting.json 수정
+1.  VSCode에서 Prettier Plugin 설치 후, setting.json 수정 (.prettier.json보다 Code Formatting 적용 우선순위 낮음)
     ```json
     {
       // ...
