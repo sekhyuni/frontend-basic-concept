@@ -20,7 +20,7 @@
         - 자식 요소를 기준으로 함 (자식 width + padding + border와 동일)
             ```css
             .child {
-                heigth: 200px;
+                height: 200px;
                 border: 1px;
                 padding: 10px;
             }
@@ -52,7 +52,7 @@
     ```css
     display: flex;
     flex-direction: row | column;
-    justfiy-content: start | center | end;
+    justify-content: start | center | end;
     align-items: start | center | end;
     flex-wrap: no-wrap | wrap;
     ```
