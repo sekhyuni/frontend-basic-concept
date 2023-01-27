@@ -16,6 +16,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [ ] display
 - [x] position
 - [x] flex
+- [ ] Layout Shift
 - [ ] ETC
 
 ## [JavaScript](https://github.com/sekhyuni/frontend-basic-concept/blob/main/JavaScript/README.md)

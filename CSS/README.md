@@ -3,6 +3,7 @@
 * [display](#display)
 * [position](#position)
 * [flex](#flex)
+* [Layout Shift](#layout-shift)
 * [ETC](#etc)
 
 ## display
@@ -56,6 +57,23 @@
     align-items: start | center | end;
     flex-wrap: no-wrap | wrap;
     ```
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#css)
+## Layout Shift
+- 레이아웃 이동이란 화면상의 요소 변화로 레이아웃이 갑자기 밀리는 현상
+- CLS가 발생하는 이유
+    1. 크기가 정해지지 않은 이미지
+    1. 크기가 정해지지 않은 광고, 임베드 및 iframe
+    1. 동적으로 주입된 콘텐츠
+    1. FOIT/FOUT을 유발하는 웹 글꼴
+    1. DOM을 업데이트하기 전에 네트워크 응답을 대기하는 작업
+- CLS를 측정하는 방법
+    1. Lighthouse를 통해 Analyze page load 클릭 후, View Original Trace를 클릭하면 Chrome DevTools Performance 탭으로 이동되어 Layout Shift가 발생한 요소를 확인할 수 있음
+- CLS를 개선하는 방법
+    1. 이미지 및 비디오 요소에 항상 크기 속성을 포함하거나 CSS 가로 세로 비율 상자와 같은 방식으로 필요한 공간을 미리 확보
+    1. 사용자 상호 작용에 대한 응답을 제외하고는 기존 콘텐츠 위에 콘텐츠를 삽입하지 않기
+    1. 레이아웃 변경을 트리거하는 속성의 애니메이션보다 전환 애니메이션을 사용하기
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)
