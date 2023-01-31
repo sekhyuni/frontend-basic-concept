@@ -45,6 +45,43 @@
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
     ```
+1.  src 디렉토리 생성 및 각종 디렉토리 이동
+    ```shell
+    $ mkdir src && mv ./pages ./src/pages && mv ./styles ./src/styles
+    ```
+1.  유형별 디렉토리 생성
+    ```shell
+    $ cd src && mkdir assets components constants contexts helpers hooks i18n layouts styles services types utils
+    ```
+1.  절대경로관련 tsconfig.json 수정
+    ```json
+    {
+      "compilerOptions": {
+        // ...
+        "incremental": true,
+        "baseUrl": ".",
+        "paths": {
+          "~assets/*": ["./src/assets/*"],
+          "~components/*": ["./src/components/*"],
+          "~constants/*": ["./src/constants/*"],
+          "~contexts/*": ["./src/contexts/*"],
+          "~helpers/*": ["./src/helpers/*"],
+          "~hooks/*": ["./src/hooks/*"],
+          "~i18n/*": ["./src/i18n/*"],
+          "~layouts/*": ["./src/layouts/*"],
+          "~pages/*": ["./src/pages/*"],
+          "~styles/*": ["./src/styles/*"],
+          "~services/*": ["./src/services/*"],
+          "~types/*": ["./src/types/*"],
+          "~utils/*": ["./src/utils/*"],
+          "~public/*": ["./public/*"],
+          "~src/*": ["./src/*"],
+          "~/*": ["./*"]
+        }
+      }
+      // ...
+    }
+    ```
 1.  Emotion 설치
     ```shell
     $ yarn add @emotion/react @emotion/styled @emotion/css @emotion/server
@@ -112,43 +149,6 @@
       ],
       plugins: ["@emotion/babel-plugin", "babel-plugin-macros"],
     };
-    ```
-1.  src 디렉토리 생성 및 각종 디렉토리 이동
-    ```shell
-    $ mkdir src && mv ./pages ./src/pages && mv ./styles ./src/styles
-    ```
-1.  유형별 디렉토리 생성
-    ```shell
-    $ cd src && mkdir assets components constants contexts helpers hooks i18n layouts styles services types utils
-    ```
-1.  절대경로관련 tsconfig.json 수정
-    ```json
-    {
-      "compilerOptions": {
-        // ...
-        "incremental": true,
-        "baseUrl": ".",
-        "paths": {
-          "~assets/*": ["./src/assets/*"],
-          "~components/*": ["./src/components/*"],
-          "~constants/*": ["./src/constants/*"],
-          "~contexts/*": ["./src/contexts/*"],
-          "~helpers/*": ["./src/helpers/*"],
-          "~hooks/*": ["./src/hooks/*"],
-          "~i18n/*": ["./src/i18n/*"],
-          "~layouts/*": ["./src/layouts/*"],
-          "~pages/*": ["./src/pages/*"],
-          "~styles/*": ["./src/styles/*"],
-          "~services/*": ["./src/services/*"],
-          "~types/*": ["./src/types/*"],
-          "~utils/*": ["./src/utils/*"],
-          "~public/*": ["./public/*"],
-          "~src/*": ["./src/*"],
-          "~/*": ["./*"]
-        }
-      }
-      // ...
-    }
     ```
 1.  Storybook 설치
     ```shell
