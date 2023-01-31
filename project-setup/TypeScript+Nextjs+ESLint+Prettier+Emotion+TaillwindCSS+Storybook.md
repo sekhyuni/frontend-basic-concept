@@ -37,7 +37,7 @@
     ```json
     {
       // ...
-      "editor.fontWeight": "normal",
+      // "editor.fontWeight": "normal",
       "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
       },
@@ -58,7 +58,7 @@
     {
       "compilerOptions": {
         // ...
-        "incremental": true,
+        // "incremental": true,
         "baseUrl": ".",
         "paths": {
           "~assets/*": ["./src/assets/*"],
@@ -91,7 +91,7 @@
     {
       "compilerOptions": {
         // ...
-        "jsx": "preserve",
+        // "jsx": "preserve",
         "jsxImportSource": "@emotion/react"
         // ...
       }
@@ -119,6 +119,7 @@
     ```javascript
     module.exports = {
       content: ['./src/**/*.{js,ts,jsx,tsx}'],
+      // presets: [],
       // ...
     };
     ```
@@ -127,7 +128,6 @@
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
-    <!-- ... -->
     ```
 1.  Emotion와 Tailwind CSS의 연동을 위한 macro 설치
     ```shell
@@ -153,29 +153,29 @@
 1.  CORS 이슈 우회 설정을 위한 next.config.js 수정
     ```javascript
     const nextConfig = {
-      reactStrictMode: true,
+      // reactStrictMode: true,
       async rewrites() {
         return [
           {
             source: '/:path*',
-            destination: 'http://localhost:8081/:path*',
+            destination: 'http://{BACKEND_IP}:{BACKEND_PORT}/:path*',
           },
         ];
       },
     };
     ```
+1.  SVGR 설정을 위한 file-loader, @svgr/webpack 설치
+    ```shell
+    $ yarn add file-loader
+    $ yarn add -D @svgr/webpack
+    ```
 1.  SVGR 설정을 위한 next.config.js 수정
     ```javascript
     const nextConfig = {
       // ...
-      async rewrites() {
-        return [
-          {
-            source: '/:path*',
-            destination: 'http://localhost:8081/:path*',
-          },
-        ];
-      },
+      // async rewrites() {
+      //   // ...
+      // },
       webpack: (config) => {
         config.module.rules.push({
           test: /\.svg$/,
@@ -199,6 +199,31 @@
       },
     };
     ```
+1.  SVGR 설정을 위한 svg.d.ts 생성
+    ```typescript
+    declare module '*.svg; {
+      import React = require('react');
+      export const ReactComponent: React.FunctionComponent<
+        React.SVGProps<SVGSVGElement>
+      >;
+      const src: string;
+      export default src;
+    }
+    ```
+1.  svg.d.ts 인식을 위한 tsconfig.json 수정
+    ```json
+    {
+      // "compilerOptions": {
+      //   // ...
+      // },
+      "include": [
+        // ...
+        // ".next/types/**/*.ts",
+        "src/types/*.d.ts"
+      ],
+      // ...
+    }
+    ```
 1.  Storybook 설치
     ```shell
     $ npx sb init --builder webpack5
@@ -220,9 +245,12 @@
     const path = require('path');
     const PROJECT_ROOT = process.cwd();
     const pathAlias = require('../tsconfig.json').compilerOptions.paths;
-    // ...
+    
     module.exports = {
       // ...
+      // addons: [
+      //   // ...
+      // ],
       webpackFinal: async (config) => {
         config.resolve.alias = {
           ...config.resolve.alias,
@@ -238,9 +266,8 @@
             ])
           ),
         };
-        // ...
+        return config;
       },
-      framework: '@storybook/react',
       // ...
     };
     ```
@@ -251,7 +278,7 @@
         '../src/components/**/*.stories.@(js|jsx|ts|tsx|mdx)',
         '../src/layouts/**/*.stories.@(js|jsx|ts|tsx|mdx)',
         '../src/pages/**/*.stories.@(js|jsx|ts|tsx|mdx)',
-        '../src/**/*.stories.mdx',
+        // '../src/**/*.stories.mdx',
         // ...
       ],
       staticDir: ['../public'],
@@ -266,8 +293,13 @@
     ```javascript
     module.exports = {
       // ...
+      // addons: [
+      //   // ...
+      // ],
       webpackFinal: async (config) => {
-        // ...
+        // config.resolve.alias = {
+        //   // ...
+        // };
         config.module.rules.push({
           test: /\.(ts|tsx)$/,
           loader: require.resolve('babel-loader'),
@@ -277,7 +309,6 @@
         });
         return config;
       },
-      framework: '@storybook/react',
       // ...
     };
     ```
@@ -289,9 +320,10 @@
     ```javascript
     module.exports = {
       // ...
+      // staticDir: ['../public'],
       addons: [
         // ...
-        '@storybook/addon-interactions',
+        // '@storybook/addon-interactions',
         {
           name: '@storybook/addon-postcss',
           options: {
@@ -301,6 +333,41 @@
           },
         },
       ],
+      // ...
+    };
+    ```
+1.  Storybook에 SVGR 설정을 위한 .storybook/main.js 수정
+    ```javascript
+    module.exports = {
+      // ...
+      // addons: [
+      //   // ...
+      // ],
+      webpackFinal: async (config) => {
+        // ...
+        // config.module.rules.push({
+        //   // ...
+        // });
+        config.module.rules.push({
+          test: /\.svg$/,
+          use: [
+            {
+              loader: '@svgr/webpack',
+            },
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'static/[path][name].[ext]',
+              },
+            },
+          ],
+          type: 'javascript/auto',
+          issuer: {
+            and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
+          },
+        });
+        return config;
+      },
       // ...
     };
     ```
