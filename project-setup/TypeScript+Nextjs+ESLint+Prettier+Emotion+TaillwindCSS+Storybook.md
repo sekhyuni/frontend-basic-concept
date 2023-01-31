@@ -166,6 +166,35 @@
       value: (props) => <OriginalNextImage {...props} unoptimized />,
     });
     ```
+1.  Storybook에 절대경로관련 설정을 위한 .storybook/main.js 수정
+    ```javascript
+    const path = require('path');
+    const PROJECT_ROOT = process.cwd();
+    const pathAlias = require('../tsconfig.json').compilerOptions.paths;
+    // ...
+    module.exports = {
+      // ...
+      webpackFinal: async (config) => {
+        config.resolve.alias = {
+          ...config.resolve.alias,
+          ...Object.fromEntries(
+            Object.entries(pathAlias).map(([key, valArr]) => [
+              key.replace('/*', ''),
+              valArr.map((val) =>
+                path.resolve(
+                  PROJECT_ROOT,
+                  ...val.replace('/*', '').replace('./', '').split('/')
+                )
+              ),
+            ])
+          ),
+        };
+        // ...
+      },
+      framework: "@storybook/react",
+      // ...
+    };
+    ```
 1.  Storybook에 보여줄 디렉토리 추가 및 public 디렉토리 제공을 위한 .storybook/main.js 수정
     ```javascript
     module.exports = {
@@ -189,6 +218,7 @@
     module.exports = {
       // ...
       webpackFinal: async (config) => {
+        // ...
         config.module.rules.push({
           test: /\.(ts|tsx)$/,
           loader: require.resolve("babel-loader"),
