@@ -118,7 +118,7 @@
 1.  Template 경로 설정을 위한 tailwind.config.js 수정
     ```javascript
     module.exports = {
-      content: ["./src/**/*.{js,ts,jsx,tsx}"],
+      content: ['./src/**/*.{js,ts,jsx,tsx}'],
       // ...
     };
     ```
@@ -138,16 +138,65 @@
     module.exports = {
       presets: [
         [
-          "next/babel",
+          'next/babel',
           {
-            "preset-react": {
-              runtime: "automatic",
-              importSource: "@emotion/react",
+            'preset-react': {
+              runtime: 'automatic',
+              importSource: '@emotion/react',
             },
           },
         ],
       ],
-      plugins: ["@emotion/babel-plugin", "babel-plugin-macros"],
+      plugins: ['@emotion/babel-plugin', 'babel-plugin-macros'],
+    };
+    ```
+1.  CORS 이슈 우회 설정을 위한 next.config.js 수정
+    ```javascript
+    const nextConfig = {
+      reactStrictMode: true,
+      async rewrites() {
+        return [
+          {
+            source: '/:path*',
+            destination: 'http://localhost:8081/:path*',
+          },
+        ];
+      },
+    };
+    ```
+1.  SVGR 설정을 위한 next.config.js 수정
+    ```javascript
+    const nextConfig = {
+      // ...
+      async rewrites() {
+        return [
+          {
+            source: '/:path*',
+            destination: 'http://localhost:8081/:path*',
+          },
+        ];
+      },
+      webpack: (config) => {
+        config.module.rules.push({
+          test: /\.svg$/,
+          use: [
+            {
+              loader: '@svgr/webpack',
+            },
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'static/[path][name].[ext]',
+              },
+            },
+          ],
+          type: 'javascript/auto',
+          issuer: {
+            and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
+          },
+        });
+        return config;
+      },
     };
     ```
 1.  Storybook 설치
@@ -156,12 +205,12 @@
     ```
 1.  Storybook에 globals.css 적용 및 Next Images관련 .storybook/preview.js 수정
     ```javascript
-    import "../src/app/globals.css";
-    import * as NextImage from "next/image";
+    import '../src/styles/globals.css';
+    import * as NextImage from 'next/image';
 
     const OriginalNextImage = NextImage.default;
 
-    Object.defineProperty(NextImage, "default", {
+    Object.defineProperty(NextImage, 'default', {
       configurable: true,
       value: (props) => <OriginalNextImage {...props} unoptimized />,
     });
@@ -191,7 +240,7 @@
         };
         // ...
       },
-      framework: "@storybook/react",
+      framework: '@storybook/react',
       // ...
     };
     ```
@@ -199,13 +248,13 @@
     ```javascript
     module.exports = {
       stories: [
-        "../src/components/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-        "../src/layouts/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-        "../src/pages/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-        "../src/**/*.stories.mdx",
+        '../src/components/**/*.stories.@(js|jsx|ts|tsx|mdx)',
+        '../src/layouts/**/*.stories.@(js|jsx|ts|tsx|mdx)',
+        '../src/pages/**/*.stories.@(js|jsx|ts|tsx|mdx)',
+        '../src/**/*.stories.mdx',
         // ...
       ],
-      staticDir: ["../public"],
+      staticDir: ['../public'],
       // ...
     };
     ```
@@ -221,14 +270,14 @@
         // ...
         config.module.rules.push({
           test: /\.(ts|tsx)$/,
-          loader: require.resolve("babel-loader"),
+          loader: require.resolve('babel-loader'),
           options: {
-            presets: [require.resolve("@emotion/babel-preset-css-prop")],
+            presets: [require.resolve('@emotion/babel-preset-css-prop')],
           },
         });
         return config;
       },
-      framework: "@storybook/react",
+      framework: '@storybook/react',
       // ...
     };
     ```
@@ -242,12 +291,12 @@
       // ...
       addons: [
         // ...
-        "@storybook/addon-interactions",
+        '@storybook/addon-interactions',
         {
-          name: "@storybook/addon-postcss",
+          name: '@storybook/addon-postcss',
           options: {
             postcssLoaderOptions: {
-              implementation: require("postcss"),
+              implementation: require('postcss'),
             },
           },
         },
