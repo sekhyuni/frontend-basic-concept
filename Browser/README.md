@@ -2,6 +2,7 @@
 
 * [Rendering Process](#rendering-process)
 * [Communication Process](#communication-process)
+* [Cache](#cache)
 * [CORS](#cors)
 * [CSR vs SSR](#csr-vs-ssr)
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
@@ -16,6 +17,11 @@
 [맨 위로 가기](#browser)
 ## Communication Process
 - 먼저 www.naver.com의 IP를 찾기 위해 DNS 서버에서 해당 도메인 네임에 매핑된 IP를 얻어오고, 그 다음 해당 IP의 서버와 TCP 연결을 맺게 됩니다. 이 후 HTTP 요청이 진행되고, 그에 맞는 HTTP 응답을 받아서 브라우저에 전달 후, 응답받은 페이지가 브라우저에 렌더링되는 순서로 진행되게 됩니다.
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#browser)
+## Cache
+- Update later..
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
