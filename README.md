@@ -29,9 +29,13 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [x] Object vs Map
 
 ## [TypeScript](https://github.com/sekhyuni/frontend-basic-concept/blob/main/TypeScript/README.md)
+- [x] Type Options
 - [x] interface vs type
 - [x] Utility Type
+- [x] Index Signature
 - [x] Use Property Type Of Any Interface
+- [x] Generic
+- [x] Readonly
 
 ## [React](https://github.com/sekhyuni/frontend-basic-concept/blob/main/React/README.md)
 - [x] Rendering Process 
