@@ -14,7 +14,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [x] Not Semantic Tags
 
 ## [CSS](https://github.com/sekhyuni/frontend-basic-concept/blob/main/CSS/README.md)
-- [ ] display
+- [x] display
 - [x] position
 - [x] flex
 - [ ] Layout Shift

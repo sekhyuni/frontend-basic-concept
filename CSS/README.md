@@ -7,27 +7,38 @@
 * [ETC](#etc)
 
 ## display
-- block에서의 width: auto와 height: auto
-    1. width: auto (기본값)
-        - 부모 요소를 기준으로 함 (부모 width와 동일)
-            ```css
-            .parent {
-                width: 200px;
-            }
-            
-            <!-- .child는 width가 200px로 자동 설정 -->
-            ```
-    1. height: auto (기본값)
-        - 자식 요소를 기준으로 함 (자식 width + padding + border와 동일)
-            ```css
-            .child {
-                height: 200px;
-                border: 1px;
-                padding: 10px;
-            }
-            
-            <!-- .parent는 height가 222px로 자동 설정 -->
-            ```
+- block
+    - 한 줄을 점유하고 있으며, 다음 요소는 줄바꿈 발생
+    - width/height/padding/margin 스타일 적용 가능
+    - 대표적인 요소: div, header, main, footer, section, form, ul, li, table, p, etc.
+    - block에서의 width: auto와 height: auto
+        1. width: auto (기본값)
+            - 부모 요소를 기준으로 함 (부모 width와 동일)
+                ```css
+                .parent {
+                    width: 200px;
+                }
+                
+                <!-- .child는 width가 200px로 자동 설정 -->
+                ```
+        1. height: auto (기본값)
+            - 자식 요소를 기준으로 함 (자식 width + padding + border와 동일)
+                ```css
+                .child {
+                    height: 200px;
+                    border: 1px;
+                    padding: 10px;
+                }
+                
+                <!-- .parent는 height가 222px로 자동 설정 -->
+                ```
+- inline
+    - text 크기만큼 공간을 점유하고 있으며, 줄바꿈 발생하지 않음
+    - width/height/padding/margin 스타일 적용 불가
+    - 대표적인 요소: button, a, input, span, img, label, etc.
+- inline-block
+    - text 크기만큼 공간을 점유하고 있으며, 줄바꿈 발생하지 않음
+    - width/height/padding/margin 스타일 적용 가능
             
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)
