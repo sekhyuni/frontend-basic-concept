@@ -14,43 +14,69 @@
     - 변경 사항이 있을 때, 업데이트를 여러 번 하지 않고 한 번만 수행
         - Observable Pattern을 사용하여 약 16ms 버퍼 후, 한 번에 업데이트
     - 이전 가상 DOM과 새 가상 DOM을 비교하고, 실제 DOM에는 변경 사항만 업데이트
+        - HTML과 Vanilla JavaScript만 사용한 경우 실제 DOM의 요소가 변경되면 해당 요소와 모든 자식 요소가 업데이트
         - JavaScript
-            ```javascript
-            const update = () => {
-                const element = `
-                    <h3>JavaScript:</h3>
-                    <form>
-                    <input type='text'/>
-                    </form>
-                    <span>Time: ${new Date().toLocaleTimeString()}</span>
-                `;
-
-                document.getElementById('root').innerHTML = element;
-            };
-
-            setInterval(update, 1000);
+            ```html
+            <html>
+                <body>
+                    <div id="parent">
+                        old parent content
+                        <div id="child">child content</div>
+                    </div>
+                    <script>
+                        let on = true;
+                        setInterval(function () {
+                            on = !on;
+                            document.querySelector('#parent').innerHTML = `
+                                ${on ? 'old parent content' : 'new parent content'}
+                                <div id="child">child content</div>
+                            `;
+                        }, 1000);
+                    </script>
+                </body>
+            </html>
             ```
         - React
-            ```javascript
-            import { createRoot } from 'react-dom/client';
+            ```jsx
+            import React, { useState, useEffect, useRef } from 'react';
 
-            const rootElement = document.getElementById('root');
-            const root = createRoot(rootElement);
+            const useInterval = (callback, delay) => {
+                const savedCallback = useRef();
 
-            const update = () => {
-                const element = (
-                    <>
-                        <h3>React:</h3>
-                        <form>
-                            <input type='text' />
-                        </form>
-                        <span>Time: {new Date().toLocaleTimeString()}</span>
-                    </>
+                useEffect(() => {
+                    savedCallback.current = callback;
+                }, [callback]);
+
+                useEffect(() => {
+                    const tick = () => {
+                        savedCallback.current();
+                    };
+
+                    if (delay) {
+                        const intervalId = setInterval(tick, delay);
+                        return () => {
+                            clearInterval(intervalId);
+                        };
+                    }
+                }, []);
+            }
+
+            const App = () => {
+                const [on, setOn] = useState(true);
+
+                useInterval(function () {
+                    setOn(!on);
+                }, 1000);
+
+                return (
+                    <div id='parent'>
+                        {on ? 'old parent content' : 'new parent content'}
+                        <div id='child'>child content</div>
+                    </div>
                 );
-                root.render(element);
             };
 
-            setInterval(update, 1000);
+            export default App;
             ```
 1. 선언형 프로그래밍으로 인한 가독성, 예측성, 유지보수성 향상
     - 선언형 프로그래밍: What에 집중 -> 무엇을 구현할 것인지 기술 -> 가독성, 예측성, 유지보수성 향상
@@ -60,9 +86,9 @@
                 const arr = [1, 2, 3, 4, 5];
                 return (
                     <ul>
-                    {arr.map((LIElement) => (
-                        <li>{LIElement}</li>
-                    ))}
+                        {arr.map((LIElement) => (
+                            <li>{LIElement}</li>
+                        ))}
                     </ul>
                 );
             };
@@ -74,10 +100,10 @@
             <body>
                 <ul></ul>
                 <script>
-                const arr = [1, 2, 3, 4, 5];
-                for (let i = 0; i < arr.length; i++) {
-                    $('ul').append($('<li>').prop({ innerHTML: arr[i] }));
-                }
+                    const arr = [1, 2, 3, 4, 5];
+                    for (let i = 0; i < arr.length; i++) {
+                        $('ul').append($('<li>').prop({ innerHTML: arr[i] }));
+                    }
                 </script>
             </body>
             </html>
@@ -137,7 +163,7 @@
                 useEffect(() => {
                     console.log('ChildComponent --> render');
 
-                    return (): void => {
+                    return () => {
                         console.log('ChildComponent --> unMount');
                     };
                 }, []);
@@ -174,7 +200,7 @@
                 useEffect(() => {
                     console.log('ChildComponent --> render');
 
-                    return (): void => {
+                    return () => {
                         console.log('ChildComponent --> unMount');
                     };
                 }, []);
