@@ -14,14 +14,16 @@
     - 변경 사항이 있을 때, 업데이트를 여러 번 하지 않고 한 번만 수행
         - Observable Pattern을 사용하여 약 16ms 버퍼 후, 한 번에 업데이트
     - 이전 가상 DOM과 새 가상 DOM을 비교하고, 실제 DOM에는 변경 사항만 업데이트
-        - HTML과 Vanilla JavaScript만 사용한 경우 실제 DOM의 요소가 변경되면 해당 요소와 모든 자식 요소가 업데이트
-        - JavaScript
+        - HTML & Vanilla JavaScript만 사용한 경우 실제 DOM의 요소가 변경되면 해당 요소와 모든 자식 요소가 업데이트
+        - HTML & Vanilla JavaScript
             ```html
             <html>
                 <body>
-                    <div id="parent">
-                        old parent content
-                        <div id="child">child content</div>
+                    <div id="root">
+                        <div id="parent">
+                            old parent content
+                            <div id="child">child content</div>
+                        </div>
                     </div>
                     <script>
                         let on = true;
