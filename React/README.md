@@ -19,10 +19,10 @@
             ```html
             <html>
                 <body>
-                    <div id="root">
-                        <div id="parent">
+                    <div id='root'>
+                        <div id='parent'>
                             old parent content
-                            <div id="child">child content</div>
+                            <div id='child'>child content</div>
                         </div>
                     </div>
                     <script>
