@@ -1,11 +1,121 @@
 # React
 
+* [Benefits of using React](#benefits-of-using-react)
 * [Rendering Process](#rendering-process)
 * [Reconciliation](#reconciliation)
 * [Life-Cycle](#life-cycle)
 * [Hooks](#hooks)
 * [Performance Optimization](#performance-optimization)
 
+## Benefits of using React
+1. 페이지 이동 시, 앱을 사용하는 듯한 사용자 경험
+    - React는 기본적으로 Single Page기반의 CSR 방식을 채택하므로 페이지 이동 시 브라우저단에서 화면을 그리고 데이터만 서버에서 받아옴. 이는 페이지 전부를 가져와야하는 SSR과 다르게 페이지 리로딩이 없기 때문에 앱을 사용하는 듯한 사용자 경험을 제공할 수 있음
+1. 높은 렌더링 효율 (feat. 가상 DOM)
+    - 변경 사항이 있을 때, 업데이트를 여러 번 하지 않고 한 번만 수행
+        - Observable Pattern을 사용하여 약 16ms 버퍼 후, 한 번에 업데이트
+    - 이전 가상 DOM과 새 가상 DOM을 비교하고, 실제 DOM에는 변경 사항만 업데이트
+        - HTML & Vanilla JavaScript만 사용한 경우 실제 DOM의 요소가 변경되면 해당 요소와 모든 자식 요소가 업데이트
+        - HTML & Vanilla JavaScript
+            ```html
+            <html>
+                <body>
+                    <div id='root'>
+                        <div id='parent'>
+                            old parent content
+                            <div id='child'>child content</div>
+                        </div>
+                    </div>
+                    <script>
+                        let on = true;
+                        setInterval(function () {
+                            on = !on;
+                            document.querySelector('#parent').innerHTML = `
+                                ${on ? 'old parent content' : 'new parent content'}
+                                <div id="child">child content</div>
+                            `;
+                        }, 1000);
+                    </script>
+                </body>
+            </html>
+            ```
+        - React
+            ```jsx
+            import React, { useState, useEffect, useRef } from 'react';
+
+            const useInterval = (callback, delay) => {
+                const savedCallback = useRef();
+
+                useEffect(() => {
+                    savedCallback.current = callback;
+                }, [callback]);
+
+                useEffect(() => {
+                    const tick = () => {
+                        savedCallback.current();
+                    };
+
+                    if (delay) {
+                        const intervalId = setInterval(tick, delay);
+                        return () => {
+                            clearInterval(intervalId);
+                        };
+                    }
+                }, []);
+            }
+
+            const App = () => {
+                const [on, setOn] = useState(true);
+
+                useInterval(function () {
+                    setOn(!on);
+                }, 1000);
+
+                return (
+                    <div id='parent'>
+                        {on ? 'old parent content' : 'new parent content'}
+                        <div id='child'>child content</div>
+                    </div>
+                );
+            };
+
+            export default App;
+            ```
+1. 선언형 프로그래밍으로 인한 가독성, 예측성, 유지보수성 향상
+    - 선언형 프로그래밍: What에 집중 -> 무엇을 구현할 것인지 기술 -> 가독성, 예측성, 유지보수성 향상
+        - React
+            ```jsx
+            const App = () => {
+                const arr = [1, 2, 3, 4, 5];
+                return (
+                    <ul>
+                        {arr.map((LIElement) => (
+                            <li>{LIElement}</li>
+                        ))}
+                    </ul>
+                );
+            };
+            ```
+    - 명령형 프로그래밍: How에 집중 -> 어떻게 구현할 것인지 기술 -> 처리 속도는 빠르나, 가독성, 예측성, 유지보수성 저하 
+        - jQuery
+            ```html
+            <html>
+            <body>
+                <ul></ul>
+                <script>
+                    const arr = [1, 2, 3, 4, 5];
+                    for (let i = 0; i < arr.length; i++) {
+                        $('ul').append($('<li>').prop({ innerHTML: arr[i] }));
+                    }
+                </script>
+            </body>
+            </html>
+            ```
+1. 다양한 라이브러리와 플러그인 지원
+1. 타 프론트엔드 프레임워크 대비 큰 개발 커뮤니티
+    - 개발/운영간 이슈 발생 시, 다른 개발자들의 도움을 손쉽게 받을 수 있음
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#react)
 ## Rendering Process
 - React의 Rendering Process는 Render Phase와 Commit Phase로 이루어짐
 - Render: 새 가상 DOM을 생성하고 이전 가상 DOM이 있다면 새 가상 DOM과 비교하는 단계
@@ -25,8 +135,8 @@
 ## Reconciliation
 - Reconciliation이란 이전 가상 DOM과 새 가상 DOM을 비교하고 변경 사항을 실제 DOM에 업데이트하는 과정 (Render + Commit)
 - React는 이전 가상 DOM과 새 가상 DOM을 비교하기 위해 아래 2가지 가정을 기반한 시간 복잡도 O(n)의 Diffing 휴리스틱 알고리즘을 사용
-    1. 서로 다른 타입의 두 Elements는 서로 다른 Tree를 만들어낸다.
-    1. 개발자가 key prop을 통해, 여러 렌더링 사이에서 어떤 자식 Element가 변경되지 않아야 할 지 표시해 줄 수 있다.
+    1. 서로 다른 타입의 두 Elements는 서로 다른 Tree를 만들어냄
+    1. 개발자가 key prop을 통해, 여러 렌더링 사이에서 어떤 자식 Element가 변경되지 않아야 할 지 표시해 줄 수 있음
 - 비교 알고리즘 (Diffing Algorithm)
     - React가 두 개의 트리를 비교하는 시기: **state 또는 props가 업데이트**됐을 때
     - 가장 먼저 비교하는 것: 두 개의 **Root Elements**
@@ -55,7 +165,7 @@
                 useEffect(() => {
                     console.log('ChildComponent --> render');
 
-                    return (): void => {
+                    return () => {
                         console.log('ChildComponent --> unMount');
                     };
                 }, []);
@@ -92,7 +202,7 @@
                 useEffect(() => {
                     console.log('ChildComponent --> render');
 
-                    return (): void => {
+                    return () => {
                         console.log('ChildComponent --> unMount');
                     };
                 }, []);
@@ -158,7 +268,7 @@
 - 상태
     - Mount
         - Component가 렌더링되어 DOM을 조작할 수 있는 상태
-        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋다.
+        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋음
             ```tsx
             useEffect(() => {
                 // You can control DOM elements
@@ -166,7 +276,7 @@
             ```
     - Update
         - Component 내 props나 state값이 변경되면서 Component가 재렌더링되어 변경된 DOM을 조작할 수 있는 상태
-        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋다.
+        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋음
             ```tsx
             useEffect(() => {
                 // You can control new DOM elements
@@ -174,7 +284,7 @@
             ```
     - Unmount
         - Component가 페이지 상에서 사라진 상태
-        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋다.
+        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋음
             ```tsx
             useEffect(() => {
                 return () => {
@@ -223,7 +333,7 @@
         
         export default App;
         
-        // 화면에는 "another user"가 나오지만, 콘솔에는 "EmmanuelTheCoder"가 찍힌다.
+        // 화면에는 "another user"가 나오지만, 콘솔에는 "EmmanuelTheCoder"가 찍힘
         ```
 1. useMemo
     - Functional Component에서 값을 메모이제이션하기 위해서 사용되는 Hook
