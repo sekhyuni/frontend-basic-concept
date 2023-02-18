@@ -9,6 +9,9 @@
 1.  Prettier관련 .eslintrc.json 수정
     ```json
     {
+      "globals": {
+        "JSX": true
+      },
       "env": {
         "browser": true,
         "es2021": true,
@@ -19,7 +22,10 @@
         "next",
         "next/core-web-vitals",
         "plugin:prettier/recommended"
-      ]
+      ],
+      "rules": {
+        "no-unused-vars": "off"
+      }
     }
     ```
 1.  Prettier관련 .prettier.json 생성
