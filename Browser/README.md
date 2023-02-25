@@ -31,7 +31,75 @@
     - 본격적인 Cross Origin HTTP 요청 전에 **서버 측에서 그 요청의 메서드와 헤더에 대해 인식하고 있는지 체크**하는 것
     - 일반적으로 **브라우저에서 자동적으로 발생**하며, **OPTION 메서드**를 통해 HTTP 요청 헤더에 **Access-Control-Allow-Header, Access-Control-Allow-Methods, Origin** 정보를 담아서 요청
     - 사전 요청을 보냄으로써 **CORS를 인식할 수 없는 서버를 악성 요청으로부터 보호**할 수 있음
+- Frontend 개발 모드에서 자체적으로 CORS 이슈 우회하기
+    - proxy 설정 시, CORS 이슈를 우회할 Backend API Origin을 설정해야 함
+    - 실제 API 호출 시, baseURL에 Backend API Origin을 설정하지 않아야 함
+        1. React (setupProxy.js에서 http-proxy-middleware 라이브러리 사용)
+            ```javascript
+            // setupProxy.js
+            const { createProxyMiddleware } = require('http-proxy-middleware');
 
+            const proxy = {
+                target: 'http://{backendIP}:{backendPort}',
+            }
+
+            module.exports = app => {
+                app.use([
+                    '/a',
+                    '/b',
+                    '/c',
+                ],
+                    createProxyMiddleware(proxy)
+                );
+            };
+            ```
+            ```typescript
+            // index.ts
+            import Axios from 'axios';
+
+            const isProd = process.env.NODE_ENV === 'production';
+
+            export const backendAPIOrigin = 'http://{backendIP}:{backendPort}';
+
+            const axios = Axios.create({
+                baseURL: isProd ? backendAPIOrigin : '',
+            });
+
+            export default axios;
+            ```
+        1. Next.js (next.config.js에서 rewrite 함수 설정 사용)
+            ```javascript
+            // next.config.js
+            /** @type {import('next').NextConfig} */
+            const nextConfig = {
+                reactStrictMode: true,
+                async rewrites() {
+                    return [
+                        {
+                            source: '/:path*',
+                            destination: 'http://{backendIP}:{backendPort}/:path*',
+                        },
+                    ];
+                },
+            };
+
+            module.exports = nextConfig;
+            ```
+            ```typescript
+            // index.ts
+            import Axios from 'axios';
+
+            const isProd = process.env.NODE_ENV === 'production';
+
+            export const backendAPIOrigin = 'http://{backendIP}:{backendPort}';
+
+            const axios = Axios.create({
+                baseURL: isProd ? backendAPIOrigin : '',
+            });
+
+            export default axios;
+            ```
+            
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
 ## CSR vs SSR
