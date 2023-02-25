@@ -2,7 +2,6 @@
 
 * [display](#display)
 * [position](#position)
-* [flex](#flex)
 * [Layout Shift](#layout-shift)
 * [ETC](#etc)
 
@@ -39,6 +38,18 @@
 - inline-block
     - text 크기만큼 공간을 점유하고 있으며, 줄바꿈 발생하지 않음
     - width/height/padding/margin 스타일 적용 가능
+- flex
+    - 속성
+        ```css
+        display: flex;
+        flex-direction: row | column;
+        justify-content: start | center | end;
+        align-items: start | center | end;
+        flex-wrap: no-wrap | wrap;
+        ```
+    - flex-direction이 row인 경우 기본적으로 자식 요소의 width는 content만큼 적용되며, height는 상속을 받음
+    - flex-direction이 column인 경우 기본적으로 자식 요소의 width는 상속을 받으며, height는 content만큼 적용됨
+    - 자식 요소 css에 flex-grow: 1;을 적용하면, calc(100% - {anotherElementSize})와 같은 효과를 낼 수 있음
             
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)
@@ -56,18 +67,6 @@
         - 상위 레벨 Element 중 속성값이 relative 또는 absolute인 것이 없으면 최상위 Element 기준 위치 지정 
     - fixed: 스크롤과 상관없이 항상 문서 최좌측상단을 기준으로 좌표 고정
     - sticky: 평소에는 문서 내에서 static 속성값과 같이 일반적인 흐름을 따르지만 스크롤 위치가 임계치에 이르면 fixed 속성값과 같이 좌표 고정
-
-[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
-[맨 위로 가기](#css)
-## flex
-- 속성
-    ```css
-    display: flex;
-    flex-direction: row | column;
-    justify-content: start | center | end;
-    align-items: start | center | end;
-    flex-wrap: no-wrap | wrap;
-    ```
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)
