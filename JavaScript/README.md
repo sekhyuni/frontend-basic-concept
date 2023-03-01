@@ -46,7 +46,7 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Hoisting
-- JavaScript 엔진은 코드가 로드될 때 실행 컨텍스트를 생성하고, 그 안에 선언된 변수, 함수 또는 클래스를 실행 컨텍스트의 최상단으로 끌어올림
+- JavaScript 엔진이 코드가 로드될 때 실행 컨텍스트를 생성하고, 그 안에 선언된 변수, 함수 또는 클래스를 실행 컨텍스트의 최상단으로 끌어올리는 프로세스
 - 선언 키워드별 동작 방식
     - var: 선언+초기화, 할당이 각각 따로 실행
         ```javascript
