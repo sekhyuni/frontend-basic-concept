@@ -14,14 +14,21 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Execution Context
-- 단계
-    - 생성 단계
-        - 실행 컨텍스트를 생성
-    - 실행 단계
+- JavaScript 엔진의 코드 실행 프로세스
+    - Creation Phase
+        - 실행 컨텍스트를 생성하여 코드 실행에 필요한 환경을 구성
+    - Execution Phase
         - 실행 컨텍스트에서 코드를 실행
-- 구성: Variable Object, Scope Chain, this
+- Creation Phase에서 생성하는 실행 컨텍스트의 구성 요소: Variable Object, Scope Chain, this
+    - Variable Object
+        - 실행 컨텍스트 내에 선언된 변수, 함수가 저장되는 공간
+            - var 키워드를 통해 선언된 변수는 undefined 값으로 Variable Object 메모리에 저장됨
+            - function 키워드를 통해 선언된 함수는 Variable Object 메모리에 저장됨
     - Scope Chain
-        - Scope는 식별자(변수, 함수 등)를 찾아내기 위한 규칙
+        - Scope
+            - 변수, 함수에 접근 가능한 범위
+        - Lexical Scope
+            - 선언된 위치에 따라 변수, 함수에 접근 가능 여부가 결정되는 방식
     - this
         - this에 할당되는 값은 함수 호출 패턴에 의해 결정
         - this value가 결정되기 이전에 this는 전역 객체를 가리키고 있다가 함수 호출 패턴에 의해 this에 할당되는 값이 결정
@@ -46,7 +53,7 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Hoisting
-- JavaScript 엔진이 코드가 로드될 때 실행 컨텍스트를 생성하고, 그 안에 선언된 변수, 함수 또는 클래스를 실행 컨텍스트의 최상단으로 끌어올리는 프로세스
+- JavaScript 엔진이 코드가 로드될 때 실행 컨텍스트를 생성하고, 그 안에 선언된 변수, 함수를 해당 Scope의 최상단으로 끌어올리는 프로세스
 - 선언 키워드별 동작 방식
     - var: 선언+초기화, 할당이 각각 따로 실행
         ```javascript
