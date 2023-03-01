@@ -2,9 +2,10 @@
 
 * [Rendering Process](#rendering-process)
 * [Communication Process](#communication-process)
-* [Cache](#cache)
-* [CORS](#cors)
 * [CSR vs SSR](#csr-vs-ssr)
+* [Local Storage vs Session Storage vs Cookie](#local-storage-vs-session-storage-vs-cookie)
+* [CORS](#cors)
+* [Cache](#cache)
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
 
 ## Rendering Process
@@ -20,8 +21,17 @@
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
-## Cache
+## CSR vs SSR
 - Update later..
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#browser)
+## Local Storage vs Session Storage vs Cookie
+||capacity|storage space|expiration|automatically sent on http request|accessible|value type|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|Local Storage|10MB|both disk and browser memory|until manually cleared or deleted|X|all domains and subdomains|string|
+|Session Storage|5MB|only browser memory|until browser tab is closed|X|all domains and subdomains|string|
+|Cookie|4KB|only browser memory|until the set expiration time is over|O|all domains and subdomains|string|
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
@@ -102,7 +112,7 @@
             
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
-## CSR vs SSR
+## Cache
 - Update later..
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
