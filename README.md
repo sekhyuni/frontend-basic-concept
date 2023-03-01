@@ -21,11 +21,11 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [ ] ETC
 
 ## [JavaScript](https://github.com/sekhyuni/frontend-basic-concept/blob/main/JavaScript/README.md)
+- [ ] Prototype
 - [ ] Execution Context
 - [x] Hoisting
-- [x] Asynchronous Processing
-- [ ] Prototype
 - [x] Closure
+- [x] Asynchronous Processing
 - [x] Object vs Map
 
 ## [TypeScript](https://github.com/sekhyuni/frontend-basic-concept/blob/main/TypeScript/README.md)
