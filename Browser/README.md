@@ -36,19 +36,22 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
 ## CORS
-- 기본적으로 브라우저에서 서버의 응답을 받기 위해서는 Same Origin(Protocol, IP, Port)일 경우에만 가능했으나, Cross Origin Resource Sharing 정책이 등장하면서 Cross Origin인 경우에도 상호작용이 가능해졌음. CORS를 정석적으로 사용하기 위해서는 서버 HTTP 응답 헤더의 Access-Control-Allow-Origin에 클라이언트 Origin 정보를 추가해주면 되며, webpack-dev-server에 proxy 설정을 함으로써 서버측의 작업없이도 CORS 이슈를 우회하여 해결할 수 있음
+- 기본적으로 브라우저에서 서버의 응답을 받기 위해서는 Same Origin(Protocol, IP, Port)일 경우에만 가능했으나, Cross Origin Resource Sharing 정책이 등장하면서 Cross Origin인 경우에도 상호작용이 가능해졌음. CORS를 정석적으로 사용하기 위해서는 서버 HTTP 응답 헤더의 Access-Control-Allow-Origin에 클라이언트 Origin 정보를 추가해주면 되며, webpack-dev-server에 Proxy 설정을 함으로써 서버측의 작업없이도 CORS 이슈를 우회하여 해결할 수 있음
 - Preflight Request
     - 본격적인 Cross Origin HTTP 요청 전에 **서버 측에서 그 요청의 메서드와 헤더에 대해 인식하고 있는지 체크**하는 것
     - 일반적으로 **브라우저에서 자동적으로 발생**하며, **OPTION 메서드**를 통해 HTTP 요청 헤더에 **Access-Control-Allow-Header, Access-Control-Allow-Methods, Origin** 정보를 담아서 요청
     - 사전 요청을 보냄으로써 **CORS를 인식할 수 없는 서버를 악성 요청으로부터 보호**할 수 있음
-- Frontend 개발 모드에서 proxy 설정 시, CORS 이슈 우회 동작 원리
-    1. 브라우저에서 API 요청 시, proxy 서버로 요청을 날림
-    1. proxy 서버로 요청이 들어오면 해당 요청을 API 서버로 보냄
-    1. API 서버에서 요청 처리 후, 응답 헤더에 Access-Control-Allow-Origin 정보가 담긴 응답을 proxy 서버로 보냄
-    1. proxy 서버는 전달 받은 응답 헤더의 Access-Control-Allow-Origin 정보를 수정해서 브라우저로 보냄
-    1. 브라우저는 응답 헤더를 확인하여 CORS 설정이 잘 되어있다는 판단 하에 정상 처리
-- Frontend 개발 모드에서 자체적으로 CORS 이슈 우회하기
-    - proxy 설정 시, CORS 이슈를 우회할 API 서버의 Origin을 설정해야 함
+- 로컬 Frontend 개발 모드에서 Proxy 설정 시, CORS 이슈 우회 동작 원리
+    1. 브라우저에서 API 요청 시, Proxy 서버로 요청을 날림 **(클라이언트와 Proxy 서버는 Same Origin이므로 별도 설정없이 상호작용이 가능)**
+        - Proxy 서버는 로컬에서 실행되는 서버이며, Frontend App이 실행되는 서버와 Proxy 서버가 각각 실행되는 것이 아니라, Frontend App이 실행되는 서버가 Proxy 역할을 수행함. 따라서 Frontend App이 localhost:3000이라는 Host로 실행되면, Proxy 서버의 Host도 localhost:3000가 됨
+        - 만약 Proxy 서버가 Frontend App이 실행되는 서버와 다른 Host로 싫행된다고 해도 Proxy 서버에서 HTTP 응답 헤더의 Access-Control-Allow-Origin에 클라이언트 Origin 정보를 추가해주면 해결됨
+    1. Proxy 서버로 요청이 들어오면 해당 요청을 API 서버로 보냄
+        - **Proxy 서버에서 해당 요청을 API 서버로 보낼 수 있는 이유는 브라우저를 통하지 않는 상호작용이기 때문임**
+    1. API 서버에서 요청 처리 후, 응답을 Proxy 서버로 보냄
+    1. Proxy 서버는 전달 받은 **응답 헤더의 Access-Control-Allow-Origin에 클라이언트 Origin을 추가해서 브라우저로 보냄**
+    1. 브라우저는 응답 헤더를 확인하여 CORS 설정이 잘 되어있다는 판단 하에 정상 처리함
+- 로컬 Frontend 개발 모드에서 자체적으로 CORS 이슈 우회하기
+    - Proxy 설정 시, CORS 이슈를 우회할 API 서버의 Origin을 설정해야 함
     - axios 사용 시, baseURL에 API 서버의 Origin을 설정하지 않아야 함
         1. React (setupProxy.js에서 http-proxy-middleware 라이브러리 사용)
             ```javascript
