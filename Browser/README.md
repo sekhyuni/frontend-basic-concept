@@ -44,7 +44,7 @@
 - 로컬 Frontend 개발 모드에서 Proxy 설정 시, CORS 이슈 우회 동작 원리
     1. 브라우저에서 API 요청 시, Proxy 서버로 요청을 날림 **(클라이언트와 Proxy 서버는 Same Origin이므로 별도 설정없이 상호작용이 가능)**
         - Proxy 서버는 로컬에서 실행되는 서버이며, Frontend App이 실행되는 서버와 Proxy 서버가 각각 실행되는 것이 아니라, Frontend App이 실행되는 서버가 Proxy 역할을 수행함. 따라서 Frontend App이 localhost:3000이라는 Host로 실행되면, Proxy 서버의 Host도 localhost:3000가 됨
-        - 만약 Proxy 서버가 Frontend App이 실행되는 서버와 다른 Host로 싫행된다고 해도 Proxy 서버에서 HTTP 응답 헤더의 Access-Control-Allow-Origin에 클라이언트 Origin 정보를 추가해주면 해결됨
+        - 만약 Proxy 서버가 Frontend App이 실행되는 서버와 다른 Host로 실행된다고 해도 Proxy 서버에서 HTTP 응답 헤더의 Access-Control-Allow-Origin에 클라이언트 Origin 정보를 추가해주면 해결됨
     1. Proxy 서버로 요청이 들어오면 해당 요청을 API 서버로 보냄
         - **Proxy 서버에서 해당 요청을 API 서버로 보낼 수 있는 이유는 브라우저를 통하지 않는 상호작용이기 때문임**
     1. API 서버에서 요청 처리 후, 응답을 Proxy 서버로 보냄
