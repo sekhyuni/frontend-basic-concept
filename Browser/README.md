@@ -31,7 +31,7 @@
         - next/link의 Link 컴포넌트가 클릭됐을 때
         - next/router의 router.push 함수가 호출됐을 때
     - SSR
-        - 초기 페이지가 로딩됐을 때
+        - 초기 페이지가 로드됐을 때
         - 페이지가 리로드됐을 때
         - anchor 요소가 클릭됐을 때
 
