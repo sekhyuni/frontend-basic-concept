@@ -4,7 +4,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 ## [Browser](https://github.com/sekhyuni/frontend-basic-concept/blob/main/Browser/README.md)
 - [x] Rendering Process
 - [ ] Communication Process
-- [ ] CSR vs SSR
+- [x] CSR vs SSR
 - [x] Local Storage vs Session Storage vs Cookie
 - [x] CORS
 - [ ] Cache

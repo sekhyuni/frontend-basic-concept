@@ -22,16 +22,27 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
 ## CSR vs SSR
-- Update later..
+||Where|Initial Loading Speed|Page Reload|SEO Friendly|
+|:---:|:---:|:---:|:---:|:---:|
+|CSR|Browser|Slower than SSR|X|X|
+|SSR|Web Server (Node.js, Tomcat, etc.)|Fast than CSR|O|O|
+- Next.js에서의 Rendering은 CSR과 SSR이 혼합된 방식임
+    - CSR
+        - next/link의 Link 컴포넌트가 클릭됐을 때
+        - next/router의 router.push 함수가 호출됐을 때
+    - SSR
+        - 초기 페이지가 로딩됐을 때
+        - 페이지가 리로드됐을 때
+        - anchor 요소가 클릭됐을 때
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
 ## Local Storage vs Session Storage vs Cookie
-||capacity|storage space|expiration|automatically sent on http request|accessible|value type|
+||Capacity|Storage Space|Expiration|Automatically sent on http request|Accessible|Value Type|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|Local Storage|10MB|both disk and browser memory|until manually cleared or deleted|X|all domains and subdomains|string|
-|Session Storage|5MB|only browser memory|until browser tab is closed|X|all domains and subdomains|string|
-|Cookie|4KB|only browser memory|until the set expiration time is over|O|all domains and subdomains|string|
+|Local Storage|10MB|Both disk and browser memory|Until manually cleared or deleted|X|All domains and subdomains|string|
+|Session Storage|5MB|Only browser memory|Until browser tab is closed|X|All domains and subdomains|string|
+|Cookie|4KB|Only browser memory|Until the set expiration time is over|O|All domains and subdomains|string|
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
