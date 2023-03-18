@@ -189,7 +189,7 @@
     - Object의 key는 String 또는 Symbol 타입으로만 설정 가능
     - 빈번한 추가 및 제거 작업에서 Map보다 성능이 낮음
     - Serialization 또는 Parsing을 기본적으로 지원함
-    - V8 Engine에서 Object는 Hash Table로 구현되어 있지 않음
+    - V8 Engine에서 Object는 Fast Mode 형태(Hash Table로 구현되지 않음)와 Dictionary Mode 형태(Hash Table로 구현)를 가질 수 있으며, 최초 선언 시 Fast Mode 형태를 따르고, 이후 삭제 연산이 발생하면 Dictionary Mode 형태로 변경되는 것으로 알려져 있음
         ```javascript
             var obj = {};
             var obj = Object.create(null);
