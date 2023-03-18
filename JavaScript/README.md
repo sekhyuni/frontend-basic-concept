@@ -176,7 +176,7 @@
 [맨 위로 가기](#javascript)
 ## Asynchronous Processing
 - 기본적으로 JavaScript Engine은 Call Stack이 1개이므로 JavaScript 런타임상에서 모든 Task가 동기적으로 수행되어야 할 것 같지만, Browser 또는 Node.js 환경 내부에 존재하는 Web API, Event Queue, Event Loop를 통해서 비동기 처리가 가능
-    - Web API: setTimeout, setInterval, XMLHttpRequest, Promise, requestAnimationFrame 등의 실질적인 비동기 이벤트 처리 및 비동기 네트워크 통신 처리를 담당
+    - Web API: setTimeout, setInterval, XMLHttpRequest, Promise, requestAnimationFrame 등의 실질적인 비동기 이벤트 처리 및 비동기 네트워크 통신 처리를 담당하는 하나의 스레드
     - Event Queue: Task Queue, Microtask Queue, Animation Frames와 같이 Task가 Call Stack으로 옮겨지기 전에 대기하는 Queue를 일컬음
         - Call Stack으로 옮겨지는 순서: Microtask Queue -> Animation Frames -> Task Queue
     - Event Loop: 지속적으로 Call Stack과 Event Queue를 확인하여, Call Stack이 비워져 있는 경우 Event Queue에서 Task를 꺼내어 Call Stack으로 옮김
