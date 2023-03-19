@@ -94,7 +94,7 @@
 |styled-components|O|Higher than Tailwind CSS|Slower than Tailwind CSS|X|
 |Emotion|O|Higher than Tailwind CSS|Slower than Tailwind CSS|O|
 |Tailwind CSS|X|Lower than CSS-in-JS|Fast than CSS-in-JS|-|
-- styled-components와 Emotion은 SCSS 문법을 따름
+- styled-components와 Emotion은 SCSS 문법의 일부를 따름 (Variable, Nesting, Mixin)
 - styled-components와 Emotion의 기능은 전체적으로 비슷하나, Emotion에서는 CSS Props 기능을 추가로 지원함. 다만, 추가로 지원되는 기능이라고 해서 무조건적으로 장점만 있는 것은 아니라고 생각하며, 오히려 styled-components를 사용했을 때 코드 작성의 일관성을 유지할 수 있기 때문에 개인적으로는 코드의 예측성 측면에서 Emotion보다 styled-components를 더 선호하는 편임
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
