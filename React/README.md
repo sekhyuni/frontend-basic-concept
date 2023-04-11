@@ -313,6 +313,7 @@
     - 정의
         - DOM이 Mount(Commit Phase) 완료 후, Browser Painting까지 완료 후에 비동기적으로 호출되는 Hook
         - Component Tree 외부에 있는 것들을 props나 state에 따라 동기화하는 것
+        - 의존성 배열 내에는 props나 state뿐만 아니라 ref.current도 포함될 수 있음
     - 필요한 곳
         - 네트워크 요청, DOM 조작, 이벤트 리스너 추가, 타이머 추가, 로깅 등의 side effects를 유발하는 작업을 실행해야 할 때
     - 일반적으로 useEffect 내에서 해야하는 작업을 useEffect 외부에서 하면 안되는 이유
