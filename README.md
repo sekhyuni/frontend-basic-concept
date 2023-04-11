@@ -45,3 +45,4 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [x] Life-Cycle
 - [x] Hooks
 - [ ] Performance Optimization
+- [ ] React Query
