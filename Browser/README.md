@@ -135,20 +135,20 @@
 ## Cache
 ### 캐시란 무엇인가?
 - 자주 사용하는 데이터나 값을 미리 복사해 둔 임시 저장 공간
-### 브라우저에서 서버의 리소스를 캐싱하는 방식
+### 브라우저에서 서버의 리소스를 캐싱하는 방식  
 ![Web Cache](../assets/img/web-cache.png)
 - 브라우저는 **메모리** 또는 **디스크**에 리소스를 캐싱함
     - 브라우저가 캐싱할 장소를 정하는 방법은 내부 알고리즘에 의해 결정되며, 이 알고리즘은 브라우저에 따라 다르지만 일반적으로 **리소스의 크기, 사용 빈도, 최근에 액세스한 시간** 등을 고려하여 결정됨
-    - 메모리 캐시 vs 디스크 캐시 성능 비교    
+    - 메모리 캐시 vs 디스크 캐시 성능 비교  
         ![Memory Cache vs Disk Cache](../assets/img/memory-cache-vs-disk-cache.png)
-        - 메모리 캐시 (브라우저 내부에 존재, hashmap 구조) => 탐색하는데에 약 0ms 소요
+        - 메모리 캐시 (브라우저 내부에 존재, hashmap 구조) => 탐색하는데에 약 0ms 소요  
             ![Memory Cache](../assets/img/memory-cache.png)
-        - 디스크 캐시 (브라우저 외부에 존재) => 탐색하는데에 약 30ms ~ 300ms, 최대 1.4s 소요       
+        - 디스크 캐시 (브라우저 외부에 존재) => 탐색하는데에 약 30ms ~ 300ms, 최대 1.4s 소요  
             ![Disk Cache](../assets/img/disk-cache.png)
     - 실제로 리소스를 메모리와 디스크에 캐싱하는 예시
-        1. **캐시가 없는 상태**로 구글 메인 페이지에 접속하면, 모든 리소스를 **서버**에서 가져옴
+        1. **캐시가 없는 상태**로 구글 메인 페이지에 접속하면, 모든 리소스를 **서버**에서 가져옴  
             ![Resources From Cache](../assets/img/resources-from-cache.png)
-        1. 새로고침을 통해 **재접속**을 하면, 특정 리소스들은 **메모리** 또는 **디스크**에서 캐싱된 리소스를 가져옴
+        1. 새로고침을 통해 **재접속**을 하면, 특정 리소스들은 **메모리** 또는 **디스크**에서 캐싱된 리소스를 가져옴  
             ![Resources From Server](../assets/img/resources-from-server.png)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
