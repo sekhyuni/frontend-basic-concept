@@ -7,7 +7,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [x] CSR vs SSR
 - [x] Local Storage vs Session Storage vs Cookie
 - [x] CORS
-- [ ] Cache
+- [x] Cache
 - [x] Event Bubbling vs Event Capturing
 
 ## [HTML](https://github.com/sekhyuni/frontend-basic-concept/blob/main/HTML/README.md)
