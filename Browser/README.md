@@ -147,16 +147,16 @@
         ![Disk Cache](./assets/img/disk-cache.png)
     - 실제로 리소스를 메모리와 디스크에 캐싱하는 예시
         1. **캐시가 없는 상태**로 구글 메인 페이지에 접속하면, 모든 리소스를 **서버**에서 가져옴  
-        ![Resources From Cache](./assets/img/resources-from-cache.png)
-        1. 새로고침을 통해 **재접속**을 하면, 특정 리소스들은 **메모리** 또는 **디스크**에서 캐싱된 리소스를 가져옴  
         ![Resources From Server](./assets/img/resources-from-server.png)
+        1. 새로고침을 통해 **재접속**을 하면, 특정 리소스들은 **메모리** 또는 **디스크**에서 캐싱된 리소스를 가져옴  
+        ![Resources From Cache](./assets/img/resources-from-cache.png)
 - **리소스의 캐시 검증주기는** 응답 헤더의 **Cache-Control** 속성에 의해 결정되며, 속성값으로는 **max-age와 같은 캐시 유효성 만료시간**에 대한 정보를 설정할 수 있음. max-age가 지나기 전에는 서버에 리소스 요청을 하지 않고 메모리 또는 디스크에서 리소스를 가져옴. max-age가 지나면 서버에 재검증 요청을 보내어 캐시가 유효한지 확인하고, 유효하면 계속해서 캐시에 존재하는 리소스를 사용하는 방식으로 동작함  
 ![Cache-Control](./assets/img/cache-control.png)
-    1. 서버에서 Cache-Control 속성값으로 max-age={seconds}를 설정하면 {seconds}초만큼 클라이언트에서 캐시에 리소스를 저장함
-    1. {seconds}초가 지나면 캐시에 존재하는 리소스를 지우는 것이 아니라, 서버에 재검증 요청을 보냄
-        - 재검증은 클라이언트가 가지고 있던 리소스의 ETag값과 서버가 가지고 있는 ETag값이 일치하는지 확인하는 과정
-        - Nginx, Apache, Tomcat과 같은 대부분의 Web Server(or WAS)는 ETag값을 통해 캐시 유효성을 재검증하는 프로세스가 기본적으로 내장되어있음
-    1. 재검증 결과, 브라우저에서 가지고 있는 캐시가 유효하면 서버는 304 Not Modified 응답을 보내며, 캐시가 유효하지 않으면 서버는 200 Success 응답을 보내는 동시에 새로운 리소스에 대한 Cache-Control 속성값으로 max-age={seconds}를 갱신함
+    1. **서버에서 Cache-Control 속성값으로 max-age={seconds}를 설정**하면 {seconds}초만큼 클라이언트에서 캐시에 리소스를 저장함
+    1. **{seconds}초가 지나면** 캐시에 존재하는 리소스를 지우는 것이 아니라, **서버에 재검증 요청**을 보냄
+        - 재검증은 **클라이언트가 가지고 있던 리소스의 ETag값과 서버가 가지고 있는 ETag값이 일치하는지 확인**하는 과정
+        - Nginx, Apache, Tomcat과 같은 **대부분의 Web Server(or WAS)는 ETag값을 통해 캐시 유효성을 재검증하는 프로세스가 기본적으로 내장**되어있음
+    1. 재검증 결과, 브라우저에서 가지고 있는 **캐시가 유효**하면 서버는 **304 Not Modified** 응답을 보내며, **캐시가 유효하지 않으면** 서버는 **200 Success** 응답을 보내는 동시에 새로운 리소스에 대한 Cache-Control 속성값으로 max-age={seconds}를 갱신함
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
