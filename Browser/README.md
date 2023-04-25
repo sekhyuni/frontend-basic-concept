@@ -9,10 +9,22 @@
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
 
 ## Rendering Process
-1. HTML을 Parsing해서 **DOM Tree**를 생성하고, HTML에 CSS가 포함되어 있다면 **CSSOM Tree**도 함께 생성
-1. DOM Tree와 CSSOM Tree를 합쳐서 **Render Tree**를 생성
-1. Render Tree를 통해 **Layouting**
-1. **Painting**
+- 순서
+    1. HTML을 Parsing해서 **DOM Tree**를 생성하고, HTML에 CSS가 포함되어 있다면 **CSSOM Tree**도 함께 생성
+    1. DOM Tree와 CSSOM Tree를 합쳐서 **Render Tree**를 생성
+    1. Render Tree를 통해 **Layouting**
+    1. **Painting**
+- 렌더링 최적화
+    - Reflow와 Repaint
+        - Reflow가 일어나는 대표적인 속성: position, top, right, bottom, left, display, width, height, padding, border, margin, font-size, font-weight, etc.
+        - Repaint가 일어나는 대표적인 속성: visibility, border-radius, border-style, box-shadow, outline, text-decoration, color, background, etc. 
+        - Reflow와 Repaint 모두 일어나지 않는 대표적인 속성: transform, opacity, etc.
+    - 방법
+        1. 요소 숨기기
+            1. 사용하지 않는 요소에는 visibility: hidden보다 display: none 사용 (display: none으로 처리된 요소는 Reflow가 일어나지 않기 때문)
+            1. 사용/미사용이 가끔 변경되는 요소이나, 요소의 위치가 변하면 안되는 경우 visibility: hidden 사용 (display: none으로 처리된 요소는 document에서 완전히 사라지기 때문)
+            1. 사용/미사용이 자주 변경되는 요소에는 display: none보다 visibility: hidden 사용 (display 속성 변경으로 인해 Reflow가 일어나기 때문)
+            1. 사용/미사용이 자주 변경되는 요소에는 visibility: hidden보다 **가능하면** opacity: 0을 사용 (visibility 속성 변경으로 인해 Repaint가 일어나기 때문)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
