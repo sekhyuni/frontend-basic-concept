@@ -6,7 +6,6 @@
 * [Life-Cycle](#life-cycle)
 * [Hooks](#hooks)
 * [Performance Optimization](#performance-optimization)
-* [React Query](#react-query)
 
 ## Benefits of using React
 1. 페이지 이동 시, 앱을 사용하는 듯한 사용자 경험
@@ -564,24 +563,6 @@
 
         export default App;
         ```
-        
-[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
-[맨 위로 가기](#react)
-## React Query
-1. Life-Cycle
-    1. 컴포넌트 Mount 시, useQuery 인스턴스 Mount
-    1. 데이터 fetch 후, query key별로 데이터 캐싱
-    1. staleTime이 지난 뒤, 해당 데이터는 fresh 상태에서 stale 상태로 변경됨
-    1. 컴포넌트 Unmount 시, useQuery 인스턴스 Unmount
-    1. useQuery 인스턴스가 Unmount된 이후 cacheTime이 지나기 전에 다시 useQuery 인스턴스가 Mount되면 캐시된 데이터가 적용되며, 이와는 별개로 네트워크 요청은 보낸 뒤, 응답이 오면 fresh한 데이터로 교체됨
-1. Options
-    1. staleTime
-        - 기본값: 0ms
-        - 데이터 fetch 후, staleTime 동안 네트워크 요청 자체를 보내지 않음
-    1. cacheTime
-        - 기본값: 300,000ms(5min)
-        - useQuery 인스턴스가 Unmount된 이후 cacheTime이 지나면 캐시가 제거됨
-        - useQuery 인스턴스가 Unmount된 이후 cacheTime이 지나기 전에 다시 useQuery 인스턴스가 Mount되면 캐시된 데이터가 적용되며, 이와는 별개로 네트워크 요청은 보낸 뒤, 응답이 오면 fresh한 데이터로 교체됨
         
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
