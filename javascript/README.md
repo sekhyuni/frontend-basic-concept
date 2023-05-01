@@ -191,17 +191,17 @@
     - Serialization 또는 Parsing을 기본적으로 지원함
     - V8 Engine에서 Object는 Fast Mode 형태(Hash Table로 구현되지 않음)와 Dictionary Mode 형태(Hash Table로 구현되어 있음)를 가질 수 있으며, 최초 선언 시 Fast Mode 형태를 따르고, 이후 삭제 연산이 발생하면 Dictionary Mode 형태로 변경되는 것으로 알려져 있음
         ```javascript
-            var obj = {};
-            var obj = Object.create(null);
-            obj.key = 1;
-            obj.key += 10;
-            for (const k in obj) obj[k]++;
-            let sum = 0;
-            for (const v of Object.values(obj)) sum += v;
-            if ('key' in obj);
-            if (obj.hasOwnProperty('key'));
-            delete (obj.key);
-            Object.keys(obj).length;
+        var obj = {};
+        var obj = Object.create(null);
+        obj.key = 1;
+        obj.key += 10;
+        for (const k in obj) obj[k]++;
+        let sum = 0;
+        for (const v of Object.values(obj)) sum += v;
+        if ('key' in obj);
+        if (obj.hasOwnProperty('key'));
+        delete (obj.key);
+        Object.keys(obj).length;
         ```
 1. Map
     - Map은 iterable함
@@ -210,16 +210,16 @@
     - Serialization 또는 Parsing을 기본적으로 지원하지 않음
     - V8 Engine에서 Map은 Hash Table로 구현되어 있음
         ```javascript
-            const hashTable = new Map();
-            hashTable.set('key', 1);
-            hashTable.set('key', hashTable.get('key') + 10);
-            hashTable.foreach((k, v) => hashTable.set(k, hashTable.get(k) + 1));
-            for (const k of hashTable.keys()) hashTable.set(k, hashTable.get(k) + 1);
-            let sum = 0;
-            for (const v of hashTable.values()) sum += v;
-            if (hashTable.has('key'));
-            hashTable.delete('key');
-            hashTable.size();
+        const hashTable = new Map();
+        hashTable.set('key', 1);
+        hashTable.set('key', hashTable.get('key') + 10);
+        hashTable.foreach((k, v) => hashTable.set(k, hashTable.get(k) + 1));
+        for (const k of hashTable.keys()) hashTable.set(k, hashTable.get(k) + 1);
+        let sum = 0;
+        for (const v of hashTable.values()) sum += v;
+        if (hashTable.has('key'));
+        hashTable.delete('key');
+        hashTable.size();
         ```
         
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
