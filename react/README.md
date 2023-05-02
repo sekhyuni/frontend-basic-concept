@@ -264,7 +264,8 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
 ## Life-Cycle
-- 순서: Mount -> Update -> Unmount
+- 순서: Mount -> Update -> Unmount  
+![React Hook Flow Diagram](./assets/img/react-hook-flow-diagram.png)
 - 상태
     - Mount
         - DOM이 Mount(Commit Phase) 완료 후, Browser Painting까지 완료 후에 DOM을 조작할 수 있는 상태
@@ -283,6 +284,10 @@
                 // You can control new DOM elements
             }, [deps]);
             ```
+        - render, useLayoutEffect, useEffect 호출 순서
+            - render -> useLayoutEffect -> useEffect
+        - 부모-자식 컴포넌트상에서의 render, useLayoutEffect, useEffect 호출 순서
+            - parent render -> child render -> child useLayoutEffect -> parent useLayoutEffect -> child useEffect -> parent useEffect
     - Unmount
         - Component가 페이지 상에서 사라진 상태
         - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋음
