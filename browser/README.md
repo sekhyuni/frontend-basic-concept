@@ -7,6 +7,7 @@
 * [CORS](#cors)
 * [Cache](#cache)
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
+* [Authentication](#authentication)
 
 ## Rendering Process
 - 순서
@@ -361,5 +362,22 @@
     event.stopImmediatePropagation(); // 버블링 또는 캡처링 전파뿐만 아니라, 현재 실행중인 이벤트 핸들러 이후 어떤 이벤트 핸들러도 실행시키지 않고 싶을 때
     ```
     
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#browser)
+
+## Authentication
+### HttpOnly & SameSite Cookie를 통한 JWT 인증 방식  
+![Next.js API Routes](./assets/img/next.js-api-routes.png)
+1. 클라이언트에서 인증 서버에 JWT를 달라고 요청함
+1. Next.js API Routes를 통해 요청을 대신 받아서 인증 서버에 요청함
+1. 인증 서버로부터 Access Token, Refresh Token, Access Token Expires In, Refresh Token Expires In 값을 응답으로 받음
+1. Next.js API Routes에서 Access Token과 Refresh Token을 Cookie에 저장 후, 클라이언트에 응답함
+    1. HttpOnly, SameSite=Strict, Max-Age=Date.now() + {Access Token Expires In} * 1000을 적용하여 Access Token을 Cookie에 저장
+    1. HttpOnly, SameSite=Strict, Max-Age=Date.now() + {Refresh Token Expires In} * 1000을 적용하여 Refresh Token을 Cookie에 저장
+1. Middleware에서 모든 페이지 이동 또는 API 호출에 대해 Access Token과 Refresh Token의 만료 여부를 체크하여 각 조건에 맞게 분기 처리
+    1. Access Token만 만료된 경우 Refresh Token을 통해 Access Token과 Refresh Token을 재발급 받음
+    1. Access Token과 Refresh Token이 모두 만료된 경우 로그인 페이지로 Redirect
+1. 클라이언트에서 인증 서버에 로그아웃 요청 시, 마찬가지로 Next.js API Routes를 통해 해당 요청을 인증 서버에 보내고, 인증 서버로부터 응답을 받으면 기존에 있던 Access Token Cookie와 Refresh Token Cookie 속성에 Max-Age=0을 적용하여 클라이언트에 응답함
+
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)

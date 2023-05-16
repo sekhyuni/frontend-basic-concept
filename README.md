@@ -3,12 +3,13 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 
 ## [Browser](https://github.com/sekhyuni/frontend-basic-concept/blob/main/browser/README.md)
 - [x] Rendering Process
-- [ ] Communication Process
+- [x] Communication Process
 - [x] CSR vs SSR
 - [x] Local Storage vs Session Storage vs Cookie
 - [x] CORS
 - [x] Cache
 - [x] Event Bubbling vs Event Capturing
+- [x] Authentication
 
 ## [HTML](https://github.com/sekhyuni/frontend-basic-concept/blob/main/html/README.md)
 - [x] Semantic Tags
@@ -22,7 +23,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [ ] ETC
 
 ## [JavaScript](https://github.com/sekhyuni/frontend-basic-concept/blob/main/javascript/README.md)
-- [ ] Prototype
+- [x] Prototype
 - [x] Execution Context
 - [x] Hoisting
 - [x] Closure
