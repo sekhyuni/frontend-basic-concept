@@ -366,7 +366,7 @@
 [맨 위로 가기](#browser)
 
 ## Authentication
-### HttpOnly & SameSite Cookie를 통한 JWT 인증 방식  
+### HttpOnly & SameSite Cookie를 통한 JWT 인증 방식 (with Next.js API Routes)  
 ![Next.js API Routes](./assets/img/next.js-api-routes.png)
 1. 클라이언트에서 인증 서버에 JWT를 달라고 요청함
 1. Next.js API Routes를 통해 요청을 대신 받아서 인증 서버에 요청함
