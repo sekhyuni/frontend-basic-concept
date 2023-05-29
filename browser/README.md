@@ -51,11 +51,19 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
 ## Local Storage vs Session Storage vs Cookie
-||Capacity|Storage Space|Expiration|Automatically sent on http request|Accessible|Value Type|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|Local Storage|10MB|Both disk and browser memory|Until manually cleared or deleted|X|All domains and subdomains|string|
-|Session Storage|5MB|Only browser memory|Until browser tab is closed|X|All domains and subdomains|string|
-|Cookie|4KB|Only browser memory|Until the set expiration time is over|O|All domains and subdomains|string|
+||크기|수명|저장 장소|접근 가능한 곳|서버로 HTTP 요청 시, 자동 전송 여부|
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|Local Storage|5MB|수동으로 제거될 때까지|Disk/Browser Memory|Browser|X|
+|Session Storage|5MB|수동으로 제거되거나 브라우저 탭이 닫힐 때까지|Browser Memory|Browser|X|
+|Cookies|4KB|만료 시간이 지날 때까지|Browser Memory|Browser/Server|O|
+- Cookies에서 가능한 설정
+    - HttpOnly: 브라우저 접근 가능 여부 (기본값: false)
+    - SameSite: 전송 가능 범위 (기본값: None)
+        - None: Third-Party Cookies 전송 가능
+        - Lax: 몇가지 예외적인 요청(GET과 같이 안전하다고 판단되는)을 제외하고는 Third-Party Cookies 전송 불가
+        - Strict: 항상 First-Party Cookies만 전송 가능
+    - Secure: https가 적용된 요청만 전송 가능 여부 (기본값: false, chrome에서 도메인이 localhost인 경우는 예외처리됨)
+    - Domain: 도메인 (기본값: 쿠키를 설정한 서버 도메인)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
