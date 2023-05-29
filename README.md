@@ -5,7 +5,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [x] Rendering Process
 - [x] Communication Process
 - [x] CSR vs SSR
-- [x] Local Storage vs Session Storage vs Cookie
+- [x] Local Storage vs Session Storage vs Cookies
 - [x] CORS
 - [x] Cache
 - [x] Event Bubbling vs Event Capturing
