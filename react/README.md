@@ -260,6 +260,17 @@
 
             export default App;
             ```
+- 정리
+    1. Reconciliation
+        - 정의: 이전 가상 DOM가 새 가상 DOM을 비교하여 실제 DOM에 업데이트하는 과정
+        - 비교 방법: Diffing 휴리스틱 알고리즘이라는 시간 복잡도 O(n)의 비교 알고리즘 사용
+        - 시간 복잡도 O(n)을 만족시키기 위한 조건
+            - 서로 다른 타입의 두 Elements는 서로 다른 Tree를 생성하기 때문에 항상 같은 타입의 Elements가 렌더링되도록 구현해야 함
+            - 형제 노드 사이에서 재정렬이 발생하는 경우 어떤 노드가 변경되지 않아도 되는지 알려주기 위해 항상 unique한 key를 표시해야 함
+    1. React에서 key의 역할
+        - Reconciliation이 진행될 때, 형제 노드 사이에서 재정렬이 발생하는 경우 어떤 노드가 변경되지 않아도 되는지 알려주는 역할
+            - 각 노드의 key가 항상 unique한 경우 DOM Element의 속성 또는 Component Element의 props를 갱신하지 않아도 됨
+            - 각 노드의 key가 항상 unique하지 않을 경우 DOM Element의 속성 또는 Component Element의 props를 갱신하기 때문에 성능적으로 좋지 않음 (최악의 경우 모든 형제 노드의 속성 또는 props가 변경됨)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
