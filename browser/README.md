@@ -70,9 +70,10 @@
 ## CORS
 - 기본적으로 브라우저에서 서버의 응답을 받기 위해서는 Same Origin(Protocol, IP, Port)일 경우에만 가능했으나, Cross Origin Resource Sharing 정책이 등장하면서 Cross Origin인 경우에도 상호작용이 가능해졌음. CORS를 정석적으로 사용하기 위해서는 서버 HTTP 응답 헤더의 Access-Control-Allow-Origin에 클라이언트 Origin 정보를 추가해주면 되며, webpack-dev-server에 Proxy 설정을 함으로써 서버측의 작업없이도 CORS 이슈를 우회하여 해결할 수 있음
 - Preflight Request
-    - 본격적인 Cross Origin HTTP 요청 전에 **서버 측에서 그 요청의 메서드와 헤더에 대해 인식하고 있는지 체크**하는 것
-    - 일반적으로 **브라우저에서 자동적으로 발생**하며, **OPTION 메서드**를 통해 HTTP 요청 헤더에 **Access-Control-Allow-Header, Access-Control-Allow-Methods, Origin** 정보를 담아서 요청
-    - 사전 요청을 보냄으로써 **CORS를 인식할 수 없는 서버를 악성 요청으로부터 보호**할 수 있음
+    - 정의: 교차 출처 HTTP 요청 전에 서버 측에서 그 요청의 메서드와 헤더에 대해 인식하고 있는지를 체크하는 것
+    - 확인하는 것: Access-Control-Request-Headers, Access-Control-Request-Method, Origin
+    - 보내는 이유: 서버는 기본적으로 모든 요청에 대해 처리를 하기 때문에 수정이나 삭제와 같은 위험한 요청에 대해서는 먼저 유효성 검증을 한 뒤에 본 요청을 보낼지 말지 결정하기 위함
+    - 보내는 조건: 메서드가 GET, POST, HEAD가 아닌 모든 경우 (단, POST는 Content-Type이 application/x-www-form-urlencoded, multipart/form-data, text/plain 중 하나여야 함)
 - Frontend 서버에 Proxy 설정 시, CORS 이슈 우회 동작 원리
     1. 브라우저에서 API 요청 시, Proxy 서버로 요청을 날림 **(클라이언트와 Proxy 서버는 Same Origin이므로 별도 설정없이 상호작용이 가능)**
         - Proxy 서버는 로컬에서 실행되는 서버이며, Frontend App이 실행되는 서버와 Proxy 서버가 각각 실행되는 것이 아니라, Frontend App이 실행되는 서버가 Proxy 역할을 수행함. 따라서 Frontend App이 localhost:3000이라는 Host로 실행되면, Proxy 서버의 Host도 localhost:3000가 됨
