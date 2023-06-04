@@ -35,10 +35,13 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
 ## CSR vs SSR
-||Where|Initial Loading Speed|Page Reload|SEO Friendly|
-|:---:|:---:|:---:|:---:|:---:|
-|CSR|Browser|Slower than SSR|X|X|
-|SSR|Web Server (Node.js, Tomcat, etc.)|Fast than CSR|O|O|
+||처리하는 곳|서버 부하|초기 로딩 속도|페이지 리로드|검색엔진최적화 대응|
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|CSR|Browser|X|Slower than SSR|X|어려움|
+|SSR|Web Server (Node.js, Tomcat, etc.)|O|Fast than CSR|O|수월함|
+- CSR 방식에서도 meta 태그를 사용해서 어느 정도 SEO 대응이 가능함
+- CSR 방식에서도 Code Splitting을 사용해서 초기 로딩 속도를 빠르게 할 수 있음
+- Next.js에서의 SSR은 서버에서 정적 페이지를 생성한 뒤, 클라이언트에서 해당 페이지를 hydrate하는 방식으로 동작함
 - Next.js에서의 Rendering은 CSR과 SSR이 혼합된 방식임
     - CSR
         - next/link의 Link 컴포넌트가 클릭됐을 때
