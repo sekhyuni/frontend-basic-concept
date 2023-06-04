@@ -30,7 +30,11 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
 ## Communication Process
-- 먼저 www.naver.com의 IP를 찾기 위해 DNS 서버에서 해당 도메인 네임에 매핑된 IP를 얻어오고, 그 다음 해당 IP의 서버와 TCP 연결을 맺게 됩니다. 이후 HTTP 요청이 진행되고, 그에 맞는 HTTP 응답을 받아서 브라우저에 전달 후, 응답받은 페이지가 브라우저에 렌더링되는 순서로 진행되게 됩니다.
+1. 브라우저가 UDP 프로토콜을 통해 DNS에게 입력한 도메인 이름에 해당하는 IP 주소를 요청
+1. 응답받은 IP 주소를 토대로 서버와의 TCP 연결을 진행
+1. 브라우저가 생성한 HTTP 요청을 TCP 연결을 통해 서버로 전송
+1. 서버는 전달받은 HTTP 요청을 처리한 후, TCP 연결을 통해 HTTP 응답을 브라우저로 전송
+1. 브라우저는 전달받은 HTTP 응답을 처리하여 화면에 렌더링  
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
