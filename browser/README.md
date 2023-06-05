@@ -60,9 +60,9 @@
 ## Local Storage vs Session Storage vs Cookies
 ||크기|수명|저장 장소|접근 가능한 곳|서버로 HTTP 요청 시, 자동 전송 여부|
 |:---:|:---:|:---:|:---:|:---:|:---:|
-|Local Storage|5MB|수동으로 제거될 때까지|Disk/Browser Memory|Browser|X|
-|Session Storage|5MB|수동으로 제거되거나 브라우저 탭이 닫힐 때까지|Browser Memory|Browser|X|
-|Cookies|4KB|만료 시간이 지날 때까지|Browser Memory|Browser/Server|O|
+|Local Storage|전체 5MB|수동으로 제거될 때까지|Disk/Browser Memory|Browser|X|
+|Session Storage|전체 5MB|수동으로 제거되거나 브라우저 탭이 닫힐 때까지|Browser Memory|Browser|X|
+|Cookies|개당 4KB, 도메인당 최대 20개 저장 가능, 전체 80KB|만료 시간이 지날 때까지|Browser Memory|Browser/Server|O|
 - Cookies에서 가능한 설정
     - HttpOnly: 브라우저 접근 가능 여부 (기본값: false)
     - SameSite: 전송 가능 범위 (기본값: None)
