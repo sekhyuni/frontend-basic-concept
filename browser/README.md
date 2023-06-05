@@ -3,7 +3,7 @@
 * [Rendering Process](#rendering-process)
 * [Communication Process](#communication-process)
 * [CSR vs SSR](#csr-vs-ssr)
-* [Local Storage vs Session Storage vs Cookie](#local-storage-vs-session-storage-vs-cookie)
+* [Local Storage vs Session Storage vs Cookies](#local-storage-vs-session-storage-vs-cookies)
 * [CORS](#cors)
 * [Cache](#cache)
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
@@ -11,21 +11,21 @@
 
 ## Rendering Process
 - 순서
-    1. HTML을 Parsing해서 **DOM Tree**를 생성하고, HTML에 CSS가 포함되어 있다면 **CSSOM Tree**도 함께 생성
-    1. DOM Tree와 CSSOM Tree를 합쳐서 **Render Tree**를 생성
-    1. Render Tree를 통해 **Layouting**
-    1. **Painting**
+    1. HTML Parsing/CSS Parsing
+    1. DOM Tree/CSSOM Tree로 Render Tree 구축
+    1. Render Tree 배치
+    1. Painting
 - 렌더링 최적화
-    - Reflow와 Repaint
-        - Reflow가 일어나는 대표적인 속성: position, top, right, bottom, left, display, width, height, padding, border, margin, font-size, font-weight, etc.
-        - Repaint가 일어나는 대표적인 속성: visibility, border-radius, border-style, box-shadow, outline, text-decoration, color, background, etc. 
-        - Reflow와 Repaint 모두 일어나지 않는 대표적인 속성: transform, opacity, etc.
+    - reflow와 repaint
+        - reflow가 일어나는 대표적인 속성: position, top, right, bottom, left, display, width, height, padding, border, margin, font-size, font-weight, etc.
+        - repaint가 일어나는 대표적인 속성: visibility, border-radius, border-style, box-shadow, outline, text-decoration, color, background, etc. 
+        - reflow와 repaint 모두 일어나지 않는 대표적인 속성: transform, opacity, etc.
     - 방법
         1. 요소 숨기기
-            1. 사용하지 않는 요소에는 visibility: hidden보다 display: none 사용 (display: none으로 처리된 요소는 Reflow가 일어나지 않기 때문)
+            1. 사용하지 않는 요소에는 visibility: hidden보다 display: none 사용 (display: none으로 처리된 요소는 reflow가 일어나지 않기 때문)
             1. 사용/미사용이 가끔 변경되는 요소이나, 요소의 위치가 변하면 안되는 경우 visibility: hidden 사용 (display: none으로 처리된 요소는 document에서 완전히 사라지기 때문)
-            1. 사용/미사용이 자주 변경되는 요소에는 display: none보다 visibility: hidden 사용 (display 속성 변경으로 인해 Reflow가 일어나기 때문)
-            1. 사용/미사용이 자주 변경되는 요소에는 visibility: hidden보다 **가능하면** opacity: 0을 사용 (visibility 속성 변경으로 인해 Repaint가 일어나기 때문)
+            1. 사용/미사용이 자주 변경되는 요소에는 display: none보다 visibility: hidden 사용 (display 속성 변경으로 인해 reflow가 일어나기 때문)
+            1. 사용/미사용이 자주 변경되는 요소에는 visibility: hidden보다 **가능하면** opacity: 0을 사용 (visibility 속성 변경으로 인해 repaint가 일어나기 때문)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
@@ -191,7 +191,7 @@
 [맨 위로 가기](#browser)
 ## Event Bubbling vs Event Capturing
 1. 이벤트 버블링
-    - 특정 요소에서 이벤트가 발생했을 때 해당 이벤트가 **가장 하위에 있는 요소부터 최상위 요소인 html 요소까지** 점점 더 상위 요소들로 전달되어가는 특성
+    - 특정 요소에서 이벤트가 발생하면 최상위에 있는 html 요소까지 이벤트가 전파되어가는 특성
     - 대표적으로 버블링되는 이벤트: click, mousedown, mouseup, wheel, scroll, keydown, keyup
         ```html
         <html>
@@ -263,7 +263,7 @@
         ```
     - 이벤트 버블링을 활용한 예
         - Event Delegation
-            - 이벤트 버블링의 개념을 기반으로 하는 이벤트 처리 패턴
+            - 이벤트가 버블링되는 특성을 활용하여 이벤트 핸들링이 필요한 하위 요소들의 상위 요소가 하위 요소들의 이벤트를 처리하는 패턴
                 ```html
                 <div>
                     <section style="width: fit-content">
