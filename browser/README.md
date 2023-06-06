@@ -11,15 +11,17 @@
 
 ## Rendering Process
 - 순서
-    1. HTML Parsing/CSS Parsing
-    1. DOM Tree/CSSOM Tree로 Render Tree 구축
-    1. Render Tree 배치
-    1. Painting
+    1. HTML과 CSS를 Parsing하여 DOM Tree와 CSSOM Tree 생성 (Parsing)
+    1. DOM Tree와 CSSOM Tree로 Render Tree 구축 (Style)
+    1. Render Tree 배치 (Layout)
+    1. Painting (Paint)
 - 렌더링 최적화
     - reflow와 repaint
-        - reflow가 일어나는 대표적인 속성: position, top, right, bottom, left, display, width, height, padding, border, margin, font-size, font-weight, etc.
-        - repaint가 일어나는 대표적인 속성: visibility, border-radius, border-style, box-shadow, outline, text-decoration, color, background, etc. 
-        - reflow와 repaint 모두 일어나지 않는 대표적인 속성: transform, opacity, etc.
+        - reflow가 발생하는 대표적인 속성: position, top, right, bottom, left, display, width, height, padding, border, margin, font-size, font-weight, etc.
+        - repaint가 발생하는 대표적인 속성: visibility, border-radius, border-style, box-shadow, outline, text-decoration, color, background, etc. 
+        - reflow와 repaint 모두 발생하지 않는 대표적인 속성: transform, opacity, etc.
+            - 주의할 점
+                - opacity 값이 1에서 변경된 경우에는 reflow가 발생하며, 0.99에서 변경된 경우 별도의 paint layer를 구성하여 reflow와 repaint 모두 발생하지 않음
     - 방법
         1. 요소 숨기기
             1. 사용하지 않는 요소에는 visibility: hidden보다 display: none 사용 (display: none으로 처리된 요소는 reflow가 일어나지 않기 때문)
