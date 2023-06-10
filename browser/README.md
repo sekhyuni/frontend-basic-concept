@@ -67,8 +67,8 @@
 |Cookies|개당 4KB, 도메인당 최대 20개 저장 가능, 전체 80KB|만료 시간이 지날 때까지|Browser Memory|Browser/Server|O|
 - Cookies에서 가능한 설정
     - HttpOnly: 브라우저 접근 가능 여부 (기본값: false)
-    - SameSite: 전송 가능 범위 (기본값: None)
-        - None: Third-Party Cookies 전송 가능
+    - SameSite: 전송 가능 범위 (기본값: Lax)
+        - None: Third-Party Cookies 전송 가능 (단, Secure: true가 함께 적용되어야 함)
         - Lax: 몇가지 예외적인 요청(GET과 같이 안전하다고 판단되는)을 제외하고는 Third-Party Cookies 전송 불가
         - Strict: 항상 First-Party Cookies만 전송 가능
     - Secure: https가 적용된 요청만 전송 가능 여부 (기본값: false, chrome에서 도메인이 localhost인 경우는 예외처리됨)
