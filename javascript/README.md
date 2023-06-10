@@ -31,17 +31,17 @@
                 - This Binding
                     - Type이 Object인 경우: Global Object
                     - Type이 Declarative인 경우: Global Object or undefined
-            - Variable Environment
+            - Variable Environment: Lexical Environment의 일종이며, Environment Record를 제외한 나머지는 Lexical Environment와 동일
                 - Environment Record: 변수 선언이 저장되는 장소이며, Type은 Object와 Declarative로 나뉨
                     - var로 선언된 변수가 바인딩된 후 undefined로 초기화됨
-                - 나머지는 Lexical Environment와 동일
+            - Lexical Environment와 Variable Environment를 나눈 이유: 변수 선언 키워드별 호이스팅 동작을 일관성 있게 처리하기 위해
     1. 실행 단계
         - 실행 컨텍스트 내에서 코드를 실행
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Hoisting
-- JavaScript Engine이 코드가 로드될 때 실행 컨텍스트를 생성하고, 그 안에 선언된 변수, 함수를 해당 Scope의 최상단으로 끌어올리는 프로세스
+- JavaScript 실행 컨텍스트의 생성 단계에서 코드 구문 분석이 이루어지면서 변수 및 함수를 해당 Scope의 최상단으로 끌어올리는 프로세스 (논리적인 개념)
 - 모든 선언 키워드는 호이스팅되지만, 호이스팅으로 인해 선언문 전에서도 식별자에 접근 가능한 키워드는 var와 function밖에 없음
 - 선언 키워드별 동작 방식
     - var: 선언+초기화, 할당이 각각 따로 실행
@@ -87,7 +87,9 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Closure
-- 외부함수의 실행 컨텍스트가 소멸되어도 외부함수의 Scope에 접근할 수 있는 내부함수
+- 정의: 외부 함수의 실행 컨텍스트가 소멸되어도 해당 컨텍스트에서 생성되었던 Environment Record에 접근할 수 있는 내부 함수
+- 장점: 실행 컨텍스트가 소멸되어 Environment Record에 직접 접근할 수 없으므로 정보를 은닉할 수 있음
+- 단점: Environment Record가 남아있으므로 사용하지 않는 식별자의 양에 따라 메모리 누수가 발생할 수 있음
 - 클로저를 활용한 예
     - Debouncing vs Throttling
         1. 디바운씽
