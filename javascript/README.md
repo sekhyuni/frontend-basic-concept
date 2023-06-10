@@ -1,54 +1,42 @@
 # JavaScript
 
-* [Prototype](#prototype)
 * [Execution Context](#execution-context)
 * [Hoisting](#hoisting)
 * [Closure](#closure)
 * [Asynchronous Processing](#asynchronous-processing)
+* [Prototype](#prototype)
 * [Object vs Map](#object-vs-map)
 
-## Prototype
-- 부모 역할을 담당하는 객체
-- Prototype Chain: 특정 객체의 프로퍼티나 메소드에 접근하려고 할 때 해당 객체에 접근하려는 프로퍼티 또는 메소드가 없다면 자신의 부모 역할을 하는 Prototype 객체의 프로퍼티나 메소드를 차례대로 검색 
-
-[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
-[맨 위로 가기](#javascript)
 ## Execution Context
-- JavaScript 엔진의 코드 실행 프로세스
-    - Creation Phase
-        - 실행 컨텍스트를 생성하여 코드 실행에 필요한 환경을 구성
-    - Execution Phase
-        - 실행 컨텍스트에서 코드를 실행
-- Creation Phase에서 생성하는 실행 컨텍스트의 구성 요소: Variable Object, Scope Chain, this
-    - Variable Object
-        - 실행 컨텍스트 내에 선언된 변수, 함수가 저장되는 공간
-            - var 키워드를 통해 선언된 변수는 undefined 값으로 Variable Object 메모리에 저장됨
-            - function 키워드를 통해 선언된 함수는 Variable Object 메모리에 저장됨
-    - Scope Chain
-        - Scope
-            - 변수, 함수에 접근 가능한 범위
-        - Lexical Scope
-            - 선언된 위치에 따라 변수, 함수에 접근 가능 여부가 결정되는 방식
-    - this
-        - this에 할당되는 값은 함수 호출 패턴에 의해 결정
-        - this value가 결정되기 이전에 this는 전역 객체를 가리키고 있다가 함수 호출 패턴에 의해 this에 할당되는 값이 결정
-            ```javascript
-            function Test() {
-                setTimeout(function () { // Normal Function에서 this는 호출 패턴에 의해 결정
-                    console.log('In Normal Function');
-                    console.log(this);
-                });
-                setTimeout(() => { // Arrow Function에서 this는 Lexical Scope를 따름
-                    console.log('In Arrow Function');
-                    console.log(this);
-                });
-            }
-
-            new Test();
-
-            // In Normal Function에서는 Timeout 객체 출력
-            // In Arrow Function에서는 Test 객체 출력
-            ```
+![Execution Context](./assets/img/execution-context.png)
+- 정의: JavaScript Engine에 JavaScript 코드가 로드된 뒤에 코드의 구문을 분석하고 실행을 처리하는 환경이며, 전역 실행 컨텍스트, 함수 실행 컨텍스트, eval 함수 실행 컨텍스트로 구성됨
+- 실행 컨텍스트 관점에서 JavaScript 코드가 실행되는 순서
+    1. JavaScript Engine에 JavaScript 코드가 로드되면 전역 실행 컨텍스트를 생성하고 Call Stack에 push함
+    1. JavaScript Engine은 전역 실행 컨텍스트에서 코드 구문 분석을 진행하며, 이후 코드 맨 윗줄부터 차례대로 코드를 실행함
+    1. JavaScript Engine이 함수 호출을 발견하면 함수 실행 컨텍스트를 생성하고 Call Stack에 push함
+    1. JavaScript Engine은 함수 실행 컨텍스트에서 코드 구문 분석을 진행하며, 이후 코드 맨 윗줄부터 차례대로 코드를 실행함
+    1. JavaScript Engine은 함수 실행이 끝나면 Call Stack에서 함수 실행 컨텍스트를 pop함
+    1. JavaScript Engine은 전역 실행 컨텍스트에서 계속해서 코드를 실행하며, 더 이상 실행할 코드가 없다면 Call Stack에서 전역 실행 컨텍스트를 pop함
+- 생명 주기
+    1. 생성 단계
+        - JavaScript 코드의 구문을 분석하고 Lexical Environment와 Variable Environment를 생성
+            - Lexical Environment
+                - Environment Record: 변수 및 함수 선언이 저장되는 장소이며, Type은 Object와 Declarative로 나뉨
+                    - let, const로 선언된 변수가 바인딩되며, 초기화 및 할당은 되지 않음
+                    - function으로 선언된 함수가 바인딩된 후 함수 전체가 할당됨
+                    - Type이 Declarative인 경우: arguments 객체가 생성됨
+                - Reference to the outer environment: 외부 함수의 Lexical Environment에 대한 참조 값
+                    - Type이 Object인 경우: null
+                    - Type이 Declarative인 경우: GlobalLexicalEnvironment 혹은 OuterFunctionLexicalEnvironment
+                - This Binding
+                    - Type이 Object인 경우: Global Object
+                    - Type이 Declarative인 경우: Global Object or undefined
+            - Variable Environment
+                - Environment Record: 변수 선언이 저장되는 장소이며, Type은 Object와 Declarative로 나뉨
+                    - var로 선언된 변수가 바인딩된 후 undefined로 초기화됨
+                - 나머지는 Lexical Environment와 동일
+    1. 실행 단계
+        - 실행 컨텍스트 내에서 코드를 실행
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
@@ -181,6 +169,12 @@
     - Event Queue: Task Queue, Microtask Queue, Animation Frames와 같이 Task가 Call Stack으로 옮겨지기 전에 대기하는 Queue를 일컬음
         - Call Stack으로 옮겨지는 순서: Microtask Queue -> Animation Frames -> Task Queue
     - Event Loop: 지속적으로 Call Stack과 Event Queue를 확인하여, Call Stack이 비워져 있는 경우 Event Queue에서 Task를 꺼내어 Call Stack으로 옮김
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#javascript)
+## Prototype
+- 부모 역할을 담당하는 객체
+- Prototype Chain: 특정 객체의 프로퍼티나 메소드에 접근하려고 할 때 해당 객체에 접근하려는 프로퍼티 또는 메소드가 없다면 자신의 부모 역할을 하는 Prototype 객체의 프로퍼티나 메소드를 차례대로 검색 
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
