@@ -172,11 +172,17 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Asynchronous Processing
-- 기본적으로 JavaScript Engine은 Call Stack이 1개이므로 JavaScript 런타임상에서 모든 Task가 동기적으로 수행되어야 할 것 같지만, Browser 또는 Node.js 환경 내부에 존재하는 Web API, Event Queue, Event Loop를 통해서 비동기 처리가 가능
-    - Web API: setTimeout, setInterval, XMLHttpRequest, Promise, requestAnimationFrame 등의 실질적인 비동기 이벤트 처리 및 비동기 네트워크 통신 처리를 담당하는 하나의 스레드
-    - Event Queue: Task Queue, Microtask Queue, Animation Frames와 같이 Task가 Call Stack으로 옮겨지기 전에 대기하는 Queue를 일컬음
-        - Call Stack으로 옮겨지는 순서: Microtask Queue -> Animation Frames -> Task Queue
-    - Event Loop: 지속적으로 Call Stack과 Event Queue를 확인하여, Call Stack이 비워져 있는 경우 Event Queue에서 Task를 꺼내어 Call Stack으로 옮김
+- 방법: JavaScript Engine은 Call Stack이 1개이므로 싱글 스레드로 동작하지만, 브라우저 또는 Node.js 런타임 환경에 존재하는 Web API, Event Queue, Event Loop 덕분에 비동기 처리가 가능
+- 비동기 처리 과정
+    1. JavaScript Engine이 Call Stack에 있는 Task들을 순차적으로 실행하다가 setTimeout 함수를 만나게 되면 setTimeout 함수를 실행하고 Callback 함수를 Web API에 위임
+    1. Web API는 Callback 함수를 setTimeout에서 설정된 시간 동안 대기시킨 후, Event Queue로 전달
+    1. Event Loop는 주기적으로 Call Stack과 Event Queue를 확인하면서 Call Stack이 비었을 경우 Event Queue에 있는 Task들을 Call Stack으로 전달
+    1. Event Loop에 의해 Callback 함수가 Call Stack으로 이동되면 JavaScript Engine이 해당 Callback 함수를 실행
+- 브라우저 또는 Node.js 런타임 환경 내 존재하는 컴포넌트
+    - Web API: setTimeout, setInterval, XMLHttpRequest, Promise, requestAnimationFrame 등 실질적인 비동기 이벤트 처리 및 비동기 네트워크 통신을 관리
+    - Event Queue: 비동기 작업의 Callback 함수가 Call Stack으로 옮겨지기 전에 대기하는 Queue
+        - Task가 Call Stack으로 전달되는 순서: Microtask Queue -> Animation Frames -> Task Queue
+    - Event Loop: 주기적으로 Call Stack과 Event Queue를 확인하면서 Call Stack이 비었을 경우 Event Queue에 있는 Task들을 Call Stack으로 전달
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
