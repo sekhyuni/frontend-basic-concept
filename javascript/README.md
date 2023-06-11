@@ -180,7 +180,7 @@
     1. Event Loop는 주기적으로 Call Stack과 Event Queue를 확인하면서 Call Stack이 비었을 경우 Event Queue에 있는 Task들을 Call Stack으로 전달
     1. Event Loop에 의해 Callback 함수가 Call Stack으로 이동되면 JavaScript Engine이 해당 Callback 함수를 실행
 - 브라우저 또는 Node.js 런타임 환경 내 존재하는 컴포넌트
-    - Web API: setTimeout, setInterval, XMLHttpRequest, Promise, requestAnimationFrame 등 실질적인 비동기 이벤트 처리 및 비동기 네트워크 통신을 관리
+    - Web API: setTimeout, setInterval, XMLHttpRequest, Promise, requestAnimationFrame 등 실질적인 비동기 이벤트 처리 및 비동기 네트워크 통신을 담당
     - Event Queue: 비동기 작업의 Callback 함수가 Call Stack으로 옮겨지기 전에 대기하는 Queue
         - Task가 Call Stack으로 전달되는 순서: Microtask Queue -> Animation Frames -> Task Queue
     - Event Loop: 주기적으로 Call Stack과 Event Queue를 확인하면서 Call Stack이 비었을 경우 Event Queue에 있는 Task들을 Call Stack으로 전달
