@@ -28,9 +28,14 @@
                 - Reference to the outer environment: 외부 함수의 Lexical Environment에 대한 참조 값
                     - Type이 Object인 경우: null
                     - Type이 Declarative인 경우: GlobalLexicalEnvironment 혹은 OuterFunctionLexicalEnvironment
-                - This Binding
+                - This Binding: 함수 호출 방식에 의해 결정되는 값
                     - Type이 Object인 경우: Global Object
-                    - Type이 Declarative인 경우: Global Object or undefined
+                    - Type이 Declarative인 경우
+                        - 일반 함수 호출: Global Object 혹은 (strict mode에서) undefined
+                        - 메서드 호출: 해당 메서드를 호출한 객체
+                        - 생성자 함수 호출: new 키워드를 통해 새로 생성된 객체
+                        - apply/call/bind 호출: 첫 번째 인자로 전달된 객체
+                        - 화살표 함수 호출: 외부 함수의 This Binding
             - Variable Environment: Lexical Environment의 일종이며, Environment Record를 제외한 나머지는 Lexical Environment와 동일
                 - Environment Record: 변수 선언이 저장되는 장소이며, Type은 Object와 Declarative로 나뉨
                     - var로 선언된 변수가 바인딩된 후 undefined로 초기화됨
@@ -90,7 +95,7 @@
 - 정의: 외부 함수의 실행 컨텍스트가 소멸되어도 해당 컨텍스트에서 생성되었던 Lexical Environment에 접근할 수 있는 내부 함수
 - 클로저가 외부 함수의 Lexical Environment에 접근할 수 있는 이유: 클로저의 Lexical Environment에서 외부 함수의 Lexical Environment에 대한 참조 값을 가지고 있기 때문
 - 장점: 실행 컨텍스트가 소멸되어 Lexical Environment에 직접 접근할 수 없으므로 정보를 은닉할 수 있음
-- 단점: Lexical Environment가 남아있으므로 사용하지 않는 식별자의 양에 따라 메모리 누수가 발생할 수 있음
+- 단점: Lexical Environment가 남아있으므로 사용하지 않는 식별자의 양에 따라 그만큼 메모리 누수가 발생할 수 있음
 - 클로저를 활용한 예
     - Debouncing vs Throttling
         1. 디바운씽
