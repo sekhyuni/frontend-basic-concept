@@ -28,6 +28,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [x] Closure
 - [x] Asynchronous Processing
 - [x] Prototype
+- [x] First-class object
 - [x] Object vs Map
 
 ## [TypeScript](https://github.com/sekhyuni/frontend-basic-concept/blob/main/typescript/README.md)

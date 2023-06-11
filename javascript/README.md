@@ -5,6 +5,7 @@
 * [Closure](#closure)
 * [Asynchronous Processing](#asynchronous-processing)
 * [Prototype](#prototype)
+* [First-class object](#first-class-object)
 * [Object vs Map](#object-vs-map)
 
 ## Execution Context
@@ -187,8 +188,23 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Prototype
-- 부모 역할을 담당하는 객체
-- Prototype Chain: 특정 객체의 프로퍼티나 메소드에 접근하려고 할 때 해당 객체에 접근하려는 프로퍼티 또는 메소드가 없다면 자신의 부모 역할을 하는 Prototype 객체의 프로퍼티나 메소드를 차례대로 검색 
+- 정의: JavaScript의 모든 객체는 자신의 부모 역할을 담당하는 객체와 연결되어 있는데, 이 부모 역할을 담당하는 객체가 바로 프로토타입
+- 특징: JavaScript의 모든 객체는 프로토타입 체인을 통해 다른 객체로부터 상속받은 속성과 메서드를 사용할 수 있음
+- 프로토타입에 직접 접근하는 방법
+    - Object.getPrototypeOf 메서드 사용
+    - __proto__ 속성 사용
+- 클래스와 프로토타입의 차이
+    - 프로토타입은 동적으로 속성과 메서드를 추가, 수정, 삭제할 수 있음
+    - 프로토타입은 여러 개의 인스턴스가 속성과 메서드를 하나의 프로토타입으로부터 공유 받으므로 메모리 사용을 최소화할 수 있음
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#javascript)
+## First-class object
+- 정의: 다른 객체들에 일반적으로 적용 가능한 연산을 모두 지원하는 객체
+- 조건
+    - 변수에 할당 가능
+    - 매개변수로 전달 가능
+    - 반환값으로 사용 가능
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
