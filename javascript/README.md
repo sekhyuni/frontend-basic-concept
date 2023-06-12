@@ -93,7 +93,7 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Closure
-- 정의: 외부 함수의 실행 컨텍스트가 소멸되어도 해당 컨텍스트에서 생성되었던 Lexical Environment에 접근할 수 있는 내부 함수
+- 정의: 외부 함수의 실행 컨텍스트가 소멸되어도 해당 컨텍스트에서 생성되었던 Lexical Environment에 접근할 수 있는 내부 함수 (실행 컨텍스트는 Call Stack에서 사라지지만, Lexical Environment는 Memory 상에 남음)
 - 클로저가 외부 함수의 Lexical Environment에 접근할 수 있는 이유: 클로저의 Lexical Environment에서 외부 함수의 Lexical Environment에 대한 참조 값을 가지고 있기 때문
 - 장점: 실행 컨텍스트가 소멸되어 Lexical Environment에 직접 접근할 수 없으므로 정보를 은닉할 수 있음
 - 단점: Lexical Environment가 남아있으므로 사용하지 않는 식별자의 양에 따라 그만큼 메모리 누수가 발생할 수 있음
