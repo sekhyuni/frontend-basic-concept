@@ -1,6 +1,7 @@
 # JavaScript
 
 * [Execution Context](#execution-context)
+* [Scope](#scope)
 * [Hoisting](#hoisting)
 * [Closure](#closure)
 * [Asynchronous Processing](#asynchronous-processing)
@@ -43,6 +44,11 @@
             - Lexical Environment와 Variable Environment를 나눈 이유: 변수 선언 키워드별 호이스팅 동작을 일관성 있게 처리하기 위해
     1. 실행 단계
         - 실행 컨텍스트 내에서 코드를 실행
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#javascript)
+## Scope
+- 정의: 식별자를 찾아내기 위한 규칙으로 JavaScript에서 스코프는 전역 스코프, 함수 레벨 스코프, 블록 레벨 스코프로 구성됨
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)

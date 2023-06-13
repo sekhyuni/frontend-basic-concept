@@ -24,6 +24,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 
 ## [JavaScript](https://github.com/sekhyuni/frontend-basic-concept/blob/main/javascript/README.md)
 - [x] Execution Context
+- [x] Scope
 - [x] Hoisting
 - [x] Closure
 - [x] Asynchronous Processing
