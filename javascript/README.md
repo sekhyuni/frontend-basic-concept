@@ -28,11 +28,11 @@
                     - function으로 선언된 함수가 바인딩된 후 함수 전체가 할당됨
                     - Type이 Declarative인 경우: arguments 객체가 생성됨
                 - Reference to the outer environment: 외부 함수의 Lexical Environment에 대한 참조 값
-                    - Type이 Object인 경우: null
-                    - Type이 Declarative인 경우: GlobalLexicalEnvironment 혹은 OuterFunctionLexicalEnvironment
+                    - 전역 실행 컨텍스트인 경우: null
+                    - 함수 실행 컨텍스트인 경우: GlobalLexicalEnvironment 혹은 OuterFunctionLexicalEnvironment
                 - This Binding: 함수 호출 방식에 의해 결정되는 값
-                    - Type이 Object인 경우: Global Object
-                    - Type이 Declarative인 경우
+                    - 전역 실행 컨텍스트인 경우: Global Object
+                    - 함수 실행 컨텍스트인 경우
                         - 일반 함수 호출: Global Object 혹은 (strict mode에서) undefined
                         - 메서드 호출: 해당 메서드를 호출한 객체
                         - 생성자 함수 호출: new 키워드를 통해 새로 생성된 객체
