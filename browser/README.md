@@ -73,6 +73,9 @@
         - Strict: 항상 First-Party Cookies만 전송 가능
     - Secure: https가 적용된 요청만 전송 가능 여부 (기본값: false, chrome에서 도메인이 localhost인 경우는 예외처리됨)
     - Domain: 도메인 (기본값: 쿠키를 설정한 서버 도메인)
+- Cross Origin으로 Cookies를 전송하기 위한 설정
+        - 서버: HTTP Response Header의 Access-Control-Allow-Credentials 속성값을 true로 설정
+        - 클라이언트: XMLHttpRequest 또는 axios 사용 시, withCredentials 속성값을 true로 설정
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
