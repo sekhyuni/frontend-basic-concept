@@ -168,7 +168,20 @@
 [맨 위로 가기](#browser)
 ## Cache
 ### 캐시란 무엇인가?
-- 자주 사용하는 데이터나 값을 미리 복사해 둔 임시 저장 공간
+- 정의: 자주 사용되는 데이터를 저장해둔 저장소
+- 설정: 서버 측에서 HTTP Response Header의 Cache-Control 속성을 통해 설정
+    - no-store: 캐시에 데이터를 저장하지 않음
+    - no-cache: 캐시에 데이터를 저장하나, 매 요청마다 서버 측에서 유효성 검사를 해야 함
+    - max-age={cacheValidTime}: cacheValidTime 동안은 캐시에 저장된 데이터를 사용하며, cacheValidTime이 지나면 서버 측에서 유효성 검사를 해야 함
+    - public: 브라우저, 프록시 서버 등 어디에서든 캐시에 데이터를 저장 가능
+    - private: 브라우저에서만 캐시에 데이터를 저장 가능
+- 유효성 검사: 클라이언트 측에서 가지고 있던 If-None-Match 값과 서버 측에서 생성한 ETag 값을 비교
+- Frontend에서 서버 데이터 캐싱하는 방법
+    - React Query
+        - staleTime: staleTime 동안 캐시에 저장된 데이터를 사용함
+        - cacheTime: 쿼리가 inactive된 시점부터 cacheTime까지 캐시에 데이터를 저장함
+    - Next.js API Routes
+        - HTTP Response Header의 Cache-Control 속성을 통해 설정
 ### 브라우저에서 서버의 리소스를 캐싱하는 방식  
 ![Web Cache](./assets/img/web-cache.png)
 - 브라우저는 **메모리** 또는 **디스크**에 리소스를 캐싱함
