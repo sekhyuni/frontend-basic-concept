@@ -1,7 +1,7 @@
 # Browser
 
-* [Rendering Process](#rendering-process)
 * [Communication Process](#communication-process)
+* [Rendering Process](#rendering-process)
 * [CSR vs SSR](#csr-vs-ssr)
 * [Local Storage vs Session Storage vs Cookies](#local-storage-vs-session-storage-vs-cookies)
 * [CORS](#cors)
@@ -9,6 +9,15 @@
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
 * [Authentication](#authentication)
 
+## Communication Process
+1. 브라우저가 UDP 프로토콜을 통해 DNS에게 입력한 도메인 이름에 해당하는 IP 주소를 요청
+1. 응답받은 IP 주소를 토대로 서버와의 TCP 연결을 진행
+1. 브라우저가 생성한 HTTP 요청을 TCP 연결을 통해 서버로 전송
+1. 서버는 전달받은 HTTP 요청을 처리한 후, TCP 연결을 통해 HTTP 응답을 브라우저로 전송
+1. 브라우저는 전달받은 HTTP 응답을 처리하여 화면에 렌더링  
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#browser)
 ## Rendering Process
 - 순서
     1. HTML과 CSS를 Parsing하여 DOM Tree와 CSSOM Tree 생성 (Parsing)
@@ -28,15 +37,6 @@
             1. 사용/미사용이 가끔 변경되는 요소이나, 요소의 위치가 변하면 안되는 경우 visibility: hidden 사용 (display: none으로 처리된 요소는 document에서 완전히 사라지기 때문)
             1. 사용/미사용이 자주 변경되는 요소에는 display: none보다 visibility: hidden 사용 (display 속성 변경으로 인해 reflow가 일어나기 때문)
             1. 사용/미사용이 자주 변경되는 요소에는 visibility: hidden보다 **가능하면** opacity: 0을 사용 (visibility 속성 변경으로 인해 repaint가 일어나기 때문)
-
-[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
-[맨 위로 가기](#browser)
-## Communication Process
-1. 브라우저가 UDP 프로토콜을 통해 DNS에게 입력한 도메인 이름에 해당하는 IP 주소를 요청
-1. 응답받은 IP 주소를 토대로 서버와의 TCP 연결을 진행
-1. 브라우저가 생성한 HTTP 요청을 TCP 연결을 통해 서버로 전송
-1. 서버는 전달받은 HTTP 요청을 처리한 후, TCP 연결을 통해 HTTP 응답을 브라우저로 전송
-1. 브라우저는 전달받은 HTTP 응답을 처리하여 화면에 렌더링  
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
