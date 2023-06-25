@@ -175,6 +175,7 @@
     - max-age={cacheValidTime}: cacheValidTime 동안은 캐시에 저장된 데이터를 사용하며, cacheValidTime이 지나면 서버 측에서 유효성 검사를 해야 함
     - public: 브라우저, 프록시 서버 등 어디에서든 캐시에 데이터를 저장 가능
     - private: 브라우저에서만 캐시에 데이터를 저장 가능
+    - s-maxage={cacheValidTime}: 프록시 서버 등 중간 서버에서만 적용되는 속성으로 cacheValidTime 동안은 캐시에 저장된 데이터를 사용하며, cacheValidTime이 지나면 서버 측에서 유효성 검사를 해야 함
 - 유효성 검사: 클라이언트 측에서 가지고 있던 If-None-Match 값과 서버 측에서 생성한 ETag 값을 비교
 - Frontend에서 서버 데이터 캐싱하는 방법
     - React Query
