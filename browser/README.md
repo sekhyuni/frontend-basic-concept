@@ -38,7 +38,6 @@
         1. 사용하지 않는 요소에는 visibility: hidden보다 display: none 사용 (display: none으로 처리된 요소는 reflow가 일어나지 않기 때문)
         1. 사용/미사용이 가끔 변경되는 요소이나, 요소의 위치가 변하면 안 되는 경우 visibility: hidden 사용 (display: none으로 처리된 요소는 document에서 완전히 사라지기 때문)
         1. 사용/미사용이 자주 변경되는 요소에는 display: none보다 visibility: hidden 사용 (display 속성 변경으로 인해 reflow가 일어나기 때문)
-        1. 사용/미사용이 자주 변경되는 요소에는 visibility: hidden보다 가능하면 opacity: 0을 사용 (visibility 속성 변경으로 인해 repaint가 일어나기 때문)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
