@@ -24,19 +24,21 @@
     1. DOM Tree와 CSSOM Tree로 Render Tree 구축 (Style)
     1. Render Tree 배치 (Layout)
     1. Painting (Paint)
+- reflow와 repaint
+    - reflow
+        - 정의: 특정 요소의 속성값이 변경됨에 따라 Render Tree를 재배치하고 Painting 작업을 다시 진행하는 것
+        - 대표적인 속성: position, top, right, bottom, left, display, width, height, padding, border, margin, font-size, font-weight, etc.
+    - repaint
+        - 정의: 특정 요소의 속성값이 변경됨에 따라 Painting 작업을 다시 진행하는 것
+        - 대표적인 속성: visibility, border-radius, border-style, box-shadow, outline, text-decoration, color, background, etc.
+    - 참고
+        - opacity 값이 1이 아니면 요소를 새로운 stacking context에 배치하게 되며, 이에 따라 reflow는 발생하지 않고 repaint만 발생
 - 렌더링 최적화
-    - reflow와 repaint
-        - reflow가 발생하는 대표적인 속성: position, top, right, bottom, left, display, width, height, padding, border, margin, font-size, font-weight, etc.
-        - repaint가 발생하는 대표적인 속성: visibility, border-radius, border-style, box-shadow, outline, text-decoration, color, background, etc. 
-        - reflow와 repaint 모두 발생하지 않는 대표적인 속성: transform, opacity, etc.
-            - 주의할 점
-                - opacity 값이 1에서 변경된 경우에는 reflow가 발생하며, 0.99에서 변경된 경우 별도의 paint layer를 구성하여 reflow와 repaint 모두 발생하지 않음
-    - 방법
-        1. 요소 숨기기
-            1. 사용하지 않는 요소에는 visibility: hidden보다 display: none 사용 (display: none으로 처리된 요소는 reflow가 일어나지 않기 때문)
-            1. 사용/미사용이 가끔 변경되는 요소이나, 요소의 위치가 변하면 안되는 경우 visibility: hidden 사용 (display: none으로 처리된 요소는 document에서 완전히 사라지기 때문)
-            1. 사용/미사용이 자주 변경되는 요소에는 display: none보다 visibility: hidden 사용 (display 속성 변경으로 인해 reflow가 일어나기 때문)
-            1. 사용/미사용이 자주 변경되는 요소에는 visibility: hidden보다 **가능하면** opacity: 0을 사용 (visibility 속성 변경으로 인해 repaint가 일어나기 때문)
+    1. 요소 숨기기
+        1. 사용하지 않는 요소에는 visibility: hidden보다 display: none 사용 (display: none으로 처리된 요소는 reflow가 일어나지 않기 때문)
+        1. 사용/미사용이 가끔 변경되는 요소이나, 요소의 위치가 변하면 안 되는 경우 visibility: hidden 사용 (display: none으로 처리된 요소는 document에서 완전히 사라지기 때문)
+        1. 사용/미사용이 자주 변경되는 요소에는 display: none보다 visibility: hidden 사용 (display 속성 변경으로 인해 reflow가 일어나기 때문)
+        1. 사용/미사용이 자주 변경되는 요소에는 visibility: hidden보다 가능하면 opacity: 0을 사용 (visibility 속성 변경으로 인해 repaint가 일어나기 때문)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
@@ -45,17 +47,19 @@
 |:---:|:---:|:---:|:---:|:---:|:---:|
 |CSR|Browser|X|Slower than SSR|X|어려움|
 |SSR|Web Server (Node.js, Tomcat, etc.)|O|Fast than CSR|O|수월함|
-- CSR 방식에서도 meta 태그를 사용해서 어느 정도 SEO 대응이 가능함
-- CSR 방식에서도 Code Splitting을 사용해서 초기 로딩 속도를 빠르게 할 수 있음
-- Next.js에서의 SSR은 서버에서 정적 페이지를 생성한 뒤, 클라이언트에서 해당 페이지를 hydrate하는 방식으로 동작함
-- Next.js에서의 Rendering은 CSR과 SSR이 혼합된 방식임
-    - CSR
-        - next/link의 Link 컴포넌트가 클릭됐을 때
-        - next/router의 router.push 함수가 호출됐을 때
-    - SSR
-        - 초기 페이지가 로드됐을 때
-        - 페이지가 리로드됐을 때
-        - anchor 요소가 클릭됐을 때
+- 참고
+    - CSR 방식이 SSR 방식보다 SEO 대응에 불리한 이유: 검색엔진 크롤러가 특정 페이지를 서버에 요청했을 때, SSR 방식과 달리 CSR 방식은 응답 결과에 동적인 컨텐츠가 존재하지 않기 때문
+    - CSR 방식에서도 meta 태그를 사용해서 어느 정도 SEO 대응이 가능
+    - CSR 방식에서도 Code Splitting을 사용해서 초기 로딩 속도 개선 가능
+    - Next.js에서의 SSR은 서버에서 정적 페이지를 생성한 뒤, 클라이언트에서 해당 페이지를 hydrate 하는 방식으로 동작
+    - Next.js에서의 Rendering은 CSR과 SSR이 혼합된 방식
+        - CSR
+            - next/link의 Link 컴포넌트가 클릭됐을 때
+            - next/router의 router.push 함수가 호출됐을 때
+        - SSR
+            - 초기 페이지가 로드됐을 때
+            - 페이지가 리로드됐을 때
+            - anchor 요소가 클릭됐을 때
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
@@ -80,23 +84,25 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
 ## CORS
-- 기본적으로 브라우저에서 서버의 응답을 받기 위해서는 Same Origin(Protocol, IP, Port)일 경우에만 가능했으나, Cross Origin Resource Sharing 정책이 등장하면서 Cross Origin인 경우에도 상호작용이 가능해졌음. CORS를 정석적으로 사용하기 위해서는 서버 HTTP 응답 헤더의 Access-Control-Allow-Origin에 클라이언트 Origin 정보를 추가해주면 되며, webpack-dev-server에 Proxy 설정을 함으로써 서버측의 작업없이도 CORS 이슈를 우회하여 해결할 수 있음
+- 정의: CORS는 Cross Origin Resource Sharing의 약자이며, 클라이언트와 서버가 교차 출처임에도 서로 상호작용이 가능하도록 도와주는 브라우저의 정책
+- 역사: 기존에는 브라우저에서 서버의 응답을 받으려면 Same Origin(동일 출처)일 경우에만 가능했으나, 웹 생태계가 발전하고 서로 다른 Origin임에도 상호작용해야 할 상황들이 많아지면서 CORS 정책의 필요성이 대두되었고, 이에 따라 최초로는 2004년에 Tellme Networks라는 회사에서 도입을 제안한 뒤, 최종적으로는 2014년에 W3C에서 공식적으로 표준화
+- 설정: 서버 측에서 HTTP Response Header의 Access-Control-Allow-Origin 속성에 요청을 허용할 클라이언트 측 Origin을 등록
 - Preflight Request
     - 정의: 교차 출처 HTTP 요청 전에 서버 측에서 그 요청의 메서드와 헤더에 대해 인식하고 있는지를 체크하는 것
     - 확인하는 것: Access-Control-Request-Headers, Access-Control-Request-Method, Origin
     - 보내는 이유: 서버는 기본적으로 모든 요청에 대해 처리를 하기 때문에 수정이나 삭제와 같은 위험한 요청에 대해서는 먼저 유효성 검증을 한 뒤에 본 요청을 보낼지 말지 결정하기 위함
     - 보내는 조건: 메서드가 GET, POST, HEAD가 아닌 모든 경우 (단, POST는 Content-Type이 application/x-www-form-urlencoded, multipart/form-data, text/plain 중 하나여야 함)
-- Frontend 서버에 Proxy 설정 시, CORS 이슈 우회 동작 원리
-    1. 브라우저에서 API 요청 시, Proxy 서버로 요청을 날림 **(클라이언트와 Proxy 서버는 Same Origin이므로 별도 설정없이 상호작용이 가능)**
-        - Proxy 서버는 로컬에서 실행되는 서버이며, Frontend App이 실행되는 서버와 Proxy 서버가 각각 실행되는 것이 아니라, Frontend App이 실행되는 서버가 Proxy 역할을 수행함. 따라서 Frontend App이 localhost:3000이라는 Host로 실행되면, Proxy 서버의 Host도 localhost:3000가 됨
-        - 만약 Proxy 서버가 Frontend App이 실행되는 서버와 다른 Host로 실행된다고 해도 Proxy 서버에서 HTTP 응답 헤더의 Access-Control-Allow-Origin에 클라이언트 Origin 정보를 추가해주면 해결됨
+- Frontend 서버에 Proxy 환경을 구성함으로써 CORS Errors를 우회하는 원리
+    1. 브라우저에서 API 요청 시, Proxy 서버로 요청을 보냄 (클라이언트와 Proxy 서버는 Same Origin이므로 별도 설정 없이 상호작용이 가능)
+        - Proxy 서버는 로컬에서 실행되는 서버이며, Frontend App이 실행되는 서버와 Proxy 서버가 각각 실행되는 것이 아니라, Frontend App이 실행되는 서버가 Proxy 역할을 수행함. 따라서 Frontend App이 localhost:3000이라는 Host로 실행되면, Proxy 서버의 Host도 localhost:3000가 되는 것임
+        - 만약 Proxy 서버가 Frontend App이 실행되는 서버와 다른 Host로 실행된 경우, Proxy 서버에서 응답 헤더의 Access-Control-Allow-Origin 속성에 클라이언트 측 Origin 정보를 등록하면 됨
     1. Proxy 서버로 요청이 들어오면 해당 요청을 API 서버로 보냄
-        - **Proxy 서버에서 해당 요청을 API 서버로 보낼 수 있는 이유는 브라우저를 통하지 않는 상호작용이기 때문임**
+        - Proxy 서버에서 해당 요청을 API 서버로 보낼 수 있는 이유는 브라우저를 통하지 않는 상호작용이기 때문임
     1. API 서버에서 요청 처리 후, 응답을 Proxy 서버로 보냄
-    1. Proxy 서버는 전달 받은 **응답 헤더의 Access-Control-Allow-Origin에 클라이언트 Origin을 추가해서 브라우저로 보냄**
-    1. 브라우저는 응답 헤더를 확인하여 CORS 설정이 잘 되어있다는 판단 하에 정상 처리함
-- 클라이언트에서 자체적으로 CORS 이슈 우회하기
-    - Proxy 설정 시, CORS 이슈를 우회할 API 서버의 Origin을 설정해야 함
+    1. Proxy 서버에서 응답을 브라우저로 보냄
+        - 만약 Proxy 서버가 Frontend App이 실행되는 서버와 다른 Host로 실행된 경우, 브라우저는 응답 헤더를 확인하여 CORS 설정이 잘 되어있다는 판단 하에 정상 처리
+- 클라이언트에서 자체적으로 CORS Errors 우회하기
+    - Proxy 설정 시, API 서버의 Origin을 설정해야 함
     - axios 사용 시, baseURL에 API 서버의 Origin을 설정하지 않아야 함
         1. React (setupProxy.js에서 http-proxy-middleware 라이브러리 사용) -> 개발 모드만 가능
             ```javascript
@@ -105,7 +111,7 @@
 
             const proxy = {
                 target: 'http://{apiServerIP}:{apiServerPort}',
-            }
+            };
 
             module.exports = app => {
                 app.use([
