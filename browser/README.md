@@ -44,8 +44,8 @@
 ## CSR vs SSR
 ||처리하는 곳|서버 부하|초기 로딩 속도|페이지 리로드|검색엔진최적화 대응|
 |:---:|:---:|:---:|:---:|:---:|:---:|
-|CSR|Browser|X|Slower than SSR|X|어려움|
-|SSR|Web Server (Node.js, Tomcat, etc.)|O|Fast than CSR|O|수월함|
+|CSR|Browser|X|상대적으로 느림|X|어려움|
+|SSR|Web Server (Node.js, Tomcat, etc.)|O|상대적으로 빠름|O|수월함|
 - 참고
     - CSR 방식이 SSR 방식보다 SEO 대응에 불리한 이유: 검색엔진 크롤러가 특정 페이지를 서버에 요청했을 때, SSR 방식과 달리 CSR 방식은 응답 결과에 동적인 컨텐츠가 존재하지 않기 때문
     - CSR 방식에서도 meta 태그를 사용해서 어느 정도 SEO 대응이 가능
