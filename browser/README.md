@@ -91,6 +91,80 @@
     - 확인하는 것: Access-Control-Request-Headers, Access-Control-Request-Method, Origin
     - 보내는 이유: 서버는 기본적으로 모든 요청에 대해 처리를 하기 때문에 수정이나 삭제와 같은 위험한 요청에 대해서는 먼저 유효성 검증을 한 뒤에 본 요청을 보낼지 말지 결정하기 위함
     - 보내는 조건: 메서드가 GET, POST, HEAD가 아닌 모든 경우 (단, POST는 Content-Type이 application/x-www-form-urlencoded, multipart/form-data, text/plain 중 하나여야 함)
+- Simple Request
+    - 정의: Preflight Request를 생략하고 곧장 서버로 본 요청을 보내는 것
+    - 보내는 조건: 메서드가 GET, POST, HEAD인 경우 (단, POST는 Content-Type이 application/x-www-form-urlencoded, multipart/form-data, text/plain 중 하나여야 함)
+    - 프로세스: 요청 자체는 무조건 서버로 보내며, 서버 측에서 HTTP Response Header의 Access-Control-Allow-Origin 속성에 클라이언트 측 Origin이 등록되어 있는지의 여부에 따라 브라우저에서 응답을 차단할지 말지 정함
+- Frontend에서 CORS Errors를 우회하는 방법
+    - axios 사용 시, baseURL에 API 서버의 Origin을 설정하지 않아야 함 (클라이언트에서 API 서버가 아니라, Proxy 역할을 하는 Frontend 서버로 요청해야 한다는 뜻)
+    - Proxy 설정 시, API 서버의 Origin을 설정해야 함 (Proxy 역할을 하는 Frontend 서버에서 API 서버로 요청해야 한다는 뜻)
+        1. React
+            - setupProxy.js에서 http-proxy-middleware 라이브러리를 사용하여 Proxy 환경 구성 (dev에서만 가능)
+                ```javascript
+                // setupProxy.js
+                const { createProxyMiddleware } = require('http-proxy-middleware');
+
+                const proxy = {
+                    target: 'http://{apiServerIP}:{apiServerPort}',
+                };
+
+                module.exports = app => {
+                    app.use([
+                        '/a',
+                        '/b',
+                        '/c',
+                    ],
+                        createProxyMiddleware(proxy)
+                    );
+                };
+                ```
+                ```typescript
+                // index.ts
+                import Axios from 'axios';
+
+                const isProd = process.env.NODE_ENV === 'production';
+
+                export const apiServerOrigin = 'http://{apiServerIP}:{apiServerPort}';
+
+                const axios = Axios.create({
+                    baseURL: isProd ? apiServerOrigin : '',
+                });
+
+                export default axios;
+                ```
+        1. Next.js
+            - next.config.js 파일에 rewrite 설정을 함으로써 Proxy 환경 구성 또는 API Routes를 통해 Proxy 환경 구성 (dev, prod 둘 다 가능)
+                ```javascript
+                // next.config.js
+                /** @type {import('next').NextConfig} */
+                const nextConfig = {
+                    reactStrictMode: true,
+                    async rewrites() {
+                        return [
+                            {
+                                source: '/:path*',
+                                destination: 'http://{apiServerIP}:{apiServerPort}/:path*',
+                            },
+                        ];
+                    },
+                };
+
+                module.exports = nextConfig;
+                ```
+                ```typescript
+                // index.ts
+                import Axios from 'axios';
+
+                const isProd = process.env.NODE_ENV === 'production';
+
+                export const apiServerOrigin = 'http://{apiServerIP}:{apiServerPort}';
+
+                const axios = Axios.create({
+                    baseURL: isProd ? apiServerOrigin : '',
+                });
+
+                export default axios;
+                ```
 - Frontend 서버에 Proxy 환경을 구성함으로써 CORS Errors를 우회하는 원리
     1. 브라우저에서 API 요청 시, Proxy 서버로 요청을 보냄 (클라이언트와 Proxy 서버는 Same Origin이므로 별도 설정 없이 상호작용이 가능)
         - Proxy 서버는 로컬에서 실행되는 서버이며, Frontend App이 실행되는 서버와 Proxy 서버가 각각 실행되는 것이 아니라, Frontend App이 실행되는 서버가 Proxy 역할을 수행함. 따라서 Frontend App이 localhost:3000이라는 Host로 실행되면, Proxy 서버의 Host도 localhost:3000가 되는 것임
@@ -100,74 +174,6 @@
     1. API 서버에서 요청 처리 후, 응답을 Proxy 서버로 보냄
     1. Proxy 서버에서 응답을 브라우저로 보냄
         - 만약 Proxy 서버가 Frontend App이 실행되는 서버와 다른 Host로 실행된 경우, 브라우저는 응답 헤더를 확인하여 CORS 설정이 잘 되어있다는 판단 하에 정상 처리
-- 클라이언트에서 자체적으로 CORS Errors 우회하기
-    - Proxy 설정 시, API 서버의 Origin을 설정해야 함
-    - axios 사용 시, baseURL에 API 서버의 Origin을 설정하지 않아야 함
-        1. React (setupProxy.js에서 http-proxy-middleware 라이브러리 사용) -> 개발 모드만 가능
-            ```javascript
-            // setupProxy.js
-            const { createProxyMiddleware } = require('http-proxy-middleware');
-
-            const proxy = {
-                target: 'http://{apiServerIP}:{apiServerPort}',
-            };
-
-            module.exports = app => {
-                app.use([
-                    '/a',
-                    '/b',
-                    '/c',
-                ],
-                    createProxyMiddleware(proxy)
-                );
-            };
-            ```
-            ```typescript
-            // index.ts
-            import Axios from 'axios';
-
-            const isProd = process.env.NODE_ENV === 'production';
-
-            export const apiServerOrigin = 'http://{apiServerIP}:{apiServerPort}';
-
-            const axios = Axios.create({
-                baseURL: isProd ? apiServerOrigin : '',
-            });
-
-            export default axios;
-            ```
-        1. Next.js (next.config.js에서 rewrite 함수 설정 사용) -> 개발, 운영 모드 둘다 가능
-            ```javascript
-            // next.config.js
-            /** @type {import('next').NextConfig} */
-            const nextConfig = {
-                reactStrictMode: true,
-                async rewrites() {
-                    return [
-                        {
-                            source: '/:path*',
-                            destination: 'http://{apiServerIP}:{apiServerPort}/:path*',
-                        },
-                    ];
-                },
-            };
-
-            module.exports = nextConfig;
-            ```
-            ```typescript
-            // index.ts
-            import Axios from 'axios';
-
-            const isProd = process.env.NODE_ENV === 'production';
-
-            export const apiServerOrigin = 'http://{apiServerIP}:{apiServerPort}';
-
-            const axios = Axios.create({
-                baseURL: isProd ? apiServerOrigin : '',
-            });
-
-            export default axios;
-            ```
             
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
