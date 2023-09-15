@@ -1,5 +1,5 @@
 # frontend-basic-concept
-Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer로서 갖추어야 할 기본적인 Frontend 지식을 정리해둔 공간입니다.
+Browser, HTML, CSS, JavaScript, TypeScript, React, Architecture 등 Frontend Software Engineer로서 갖추어야 할 기본적인 Frontend 지식을 정리해둔 공간입니다.
 
 ## [Browser](https://github.com/sekhyuni/frontend-basic-concept/blob/main/browser/README.md)
 - [x] Communication Process
@@ -48,6 +48,9 @@ Browser, HTML, CSS, JavaScript, TypeScript, React 등 Frontend Software Engineer
 - [x] Life-Cycle
 - [x] Hooks
 - [ ] Performance Optimization
+
+## [Architecture](https://github.com/sekhyuni/frontend-basic-concept/blob/main/architecture/README.md)
+- [x] Clean Architecture
 
 ## [React Query](https://github.com/sekhyuni/frontend-basic-concept/blob/main/react-query/README.md)
 - [x] Life-Cycle
