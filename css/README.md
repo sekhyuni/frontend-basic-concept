@@ -2,6 +2,7 @@
 
 * [display](#display)
 * [position](#position)
+* [overflow](#overflow)
 * [Layout Shift](#layout-shift)
 * [styled-components vs Emotion vs Tailwind CSS](#styled-components-vs-emotion-vs-tailwind-css)
 * [ETC](#etc)
@@ -68,6 +69,26 @@
         - 상위 레벨 Element 중 속성값이 relative 또는 absolute인 것이 없으면 최상위 Element 기준 위치 지정 
     - fixed: 스크롤과 상관없이 항상 문서 최좌측상단을 기준으로 좌표 고정
     - sticky: 평소에는 문서 내에서 static 속성값과 같이 일반적인 흐름을 따르지만 스크롤 위치가 임계치에 이르면 fixed 속성값과 같이 좌표 고정
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#css)
+## overflow
+- 속성
+    ```css
+    overflow: visible | hidden | clip | scroll | auto;
+    ```
+- 값
+    - visible: 콘텐츠를 자르지 않으며 안쪽 여백 상자 밖에도 그릴 수 있음
+    - hidden: 콘텐츠를 안쪽 여백 상자에 맞춰 잘라내며, 스크롤바를 제공하지 않고, 스크롤 할 방법(드래그, 마우스 휠 등)도 지원하지 않음
+        - 코드를 사용해 스크롤 할 수는 있음 (Element.scrollLeft)
+    - clip: hidden과 마찬가지로, 콘텐츠를 안쪽 여백 상자에 맞춰 잘라냄
+        - 코드를 사용해도 스크롤 할 수 없음
+    - scroll: 콘텐츠를 안쪽 여백 상자에 맞춰 잘라내며, 콘텐츠를 실제로 잘라냈는가에 상관없이 항상 스크롤바를 노출
+    - auto: 콘텐츠가 안쪽 여백 상자에 들어간다면 visible과 동일하게 보이지만, 콘텐츠가 넘칠 때는 스크롤바를 노출
+- overflow-x와 overflow-y의 관계
+    - [W3C CSS Overflow Module Level 3](https://www.w3.org/TR/css-overflow-3/)를 따르면, "The visible/clip values of overflow compute to auto/hidden (respectively) if one of overflow-x or overflow-y is neither visible nor clip."이라고 함
+        - overflow-x에 visible을 사용하고 overflow-y에는 visible/clip 이외의 값을 사용하는 경우, overflow-x의 값은 auto로 계산됨
+        - overflow-x에 clip을 사용하고 overflow-y에는 visible/clip 이외의 값을 사용하는 경우, overflow-y의 값은 hidden으로 계산됨
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)

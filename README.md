@@ -18,6 +18,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React, Architecture 등 Frontend Sof
 ## [CSS](https://github.com/sekhyuni/frontend-basic-concept/blob/main/css/README.md)
 - [x] display
 - [x] position
+- [x] overflow
 - [ ] Layout Shift
 - [x] styled-components vs Emotion vs Tailwind CSS
 - [ ] ETC
