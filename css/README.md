@@ -73,22 +73,25 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)
 ## overflow
+- 역할: 콘텐츠가 요소의 상자를 벗어났을 때 어떻게 표시되어야 하는지를 결정
 - 속성
     ```css
     overflow: visible | hidden | clip | scroll | auto;
     ```
 - 값
-    - visible: 콘텐츠를 자르지 않으며 안쪽 여백 상자 밖에도 그릴 수 있음
-    - hidden: 콘텐츠를 안쪽 여백 상자에 맞춰 잘라내며, 스크롤바를 제공하지 않고, 스크롤 할 방법(드래그, 마우스 휠 등)도 지원하지 않음
-        - 코드를 사용해 스크롤 할 수는 있음 (Element.scrollLeft)
-    - clip: hidden과 마찬가지로, 콘텐츠를 안쪽 여백 상자에 맞춰 잘라냄
-        - 코드를 사용해도 스크롤 할 수 없음
-    - scroll: 콘텐츠를 안쪽 여백 상자에 맞춰 잘라내며, 콘텐츠를 실제로 잘라냈는가에 상관없이 항상 스크롤바를 노출
-    - auto: 콘텐츠가 안쪽 여백 상자에 들어간다면 visible과 동일하게 보이지만, 콘텐츠가 넘칠 때는 스크롤바를 노출
+    - visible: 콘텐츠를 자르지 않으며 요소의 상자 밖에도 그릴 수 있음
+    - hidden: 콘텐츠를 요소의 상자에 맞춰 잘라내며, 스크롤바를 제공하지 않고, 스크롤 할 방법(드래그, 마우스 휠 등)도 지원하지 않음. 다만, 코드를 사용해 스크롤 할 수는 있음 (Element.scrollTop, Element.scrollLeft)
+    - clip: hidden과 마찬가지로, 콘텐츠를 요소의 상자에 맞춰 잘라내며, 스크롤바를 제공하지 않고, 스크롤 할 방법(드래그, 마우스 휠 등)도 지원하지 않음. hidden과 다르게, 코드를 사용해도 스크롤 할 수 없음
+    - scroll: 콘텐츠를 요소의 상자에 맞춰 잘라내며, 콘텐츠를 실제로 잘라냈는가에 상관없이 항상 스크롤바를 노출
+    - auto: 콘텐츠가 요소의 상자에 들어간다면 visible과 동일하게 보이지만, 콘텐츠가 넘칠 때는 스크롤바를 노출
 - overflow-x와 overflow-y의 관계
-    - [W3C CSS Overflow Module Level 3](https://www.w3.org/TR/css-overflow-3/)를 따르면, "The visible/clip values of overflow compute to auto/hidden (respectively) if one of overflow-x or overflow-y is neither visible nor clip."이라고 함
-        - overflow-x에 visible을 사용하고 overflow-y에는 visible/clip 이외의 값을 사용하는 경우, overflow-x의 값은 auto로 계산됨
-        - overflow-x에 clip을 사용하고 overflow-y에는 visible/clip 이외의 값을 사용하는 경우, overflow-y의 값은 hidden으로 계산됨
+    - [W3C CSS Overflow Module Level 3](https://www.w3.org/TR/css-overflow-3/)를 따르면, "The visible/clip values of overflow compute to auto/hidden (respectively) if one of overflow-x or overflow-y is neither visible nor clip."이라고 함. 다시 말해, overflow-x에 visible을 지정하고 overflow-y에는 visible/clip 이외의 값을 지정하는 경우, overflow-x의 값은 auto로 계산되고, overflow-x에 clip을 지정하고 overflow-y에는 visible/clip 이외의 값을 지정하는 경우, overflow-y의 값은 hidden으로 계산됨
+        - overflow-x: visible, overflow-y: auto -> overflow-x: auto, overflow-y: auto
+        - overflow-x: visible, overflow-y: scroll -> overflow-x: auto, overflow-y: scroll
+        - overflow-x: visible, overflow-y: hidden -> overflow-x: auto, overflow-y: hidden
+        - overflow-x: clip, overflow-y: auto -> overflow-x: hidden, overflow-y: auto
+        - overflow-x: clip, overflow-y: scroll -> overflow-x: hidden, overflow-y: scroll
+        - overflow-x: clip, overflow-y: hidden -> overflow-x: hidden, overflow-y: hidden
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#css)
