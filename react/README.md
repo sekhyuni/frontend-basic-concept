@@ -297,8 +297,8 @@
             1. Update
             2. UnMount
         - Cleanup 과정
-            1. Update: Component 내 props나 state 값이 변경 -> Render (변경된 state를 보고 있음) -> Cleanup LayoutEffects (변경되기 전 state를 보고 있음) -> Run LayoutEffects (변경된 state를 보고 있음) -> Cleanup Effects (변경되기 전 state를 보고 있음) -> Run Effects (변경된 state를 보고 있음)
-            2. UnMount: Component가 페이지 상에서 사라짐 -> Cleanup LayoutEffects (변경되기 전 state를 보고 있음) -> Cleanup Effects (변경되기 전 state를 보고 있음)
+            1. Update: Component 내 props나 state 값이 변경 -> Render (최신 state를 보고 있음) -> Cleanup LayoutEffects (이전 렌더링에서 들고 있던 state를 보고 있음) -> Run LayoutEffects (최신 state를 보고 있음) -> Cleanup Effects (이전 렌더링에서 들고 있던 state를 보고 있음) -> Run Effects (최신 state를 보고 있음)
+            2. UnMount: Component가 페이지 상에서 사라짐 -> Cleanup LayoutEffects (이전 렌더링에서 들고 있던 state를 보고 있음) -> Cleanup Effects (이전 렌더링에서 들고 있던 state를 보고 있음)
         - Cleanup이 필요없는 effect: 네트워크 요청, DOM 조작, 로깅 등
         - Cleanup이 필요한 effect: 이벤트 리스너 추가, 타이머 추가 등
             - Cleanup을 하지 않았을 때 발생 가능한 버그: 예를 들어 특정 페이지에서만 사용할 목적으로 window에 Event Listener 설정 후 Cleanup을 하지 않고 다른 페이지로 넘어가면, 해당 Event 발생 시 Event Handler 함수가 호출됨
