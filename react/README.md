@@ -279,41 +279,29 @@
 ![React Hook Flow Diagram](./assets/img/react-hook-flow-diagram.png)
 - 상태
     - Mount
-        - DOM이 Mount(Commit Phase) 완료 후, Browser Painting까지 완료 후에 DOM을 조작할 수 있는 상태
-        - Class Component에서의 componentDidMount는 Browser Painting 완료 후 동기적으로 호출되지만, Functional Component에서의 useEffect는 Browser Painting 완료 후 비동기적으로 호출됨
-        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋음
-            ```tsx
-            useEffect(() => {
-                // You can control DOM elements
-            }, []);
-            ```
+        - 정의: Component가 최초 렌더링 되어 DOM을 조작할 수 있는 상태 
+        - 순서: Run lazy initializers -> Render -> React updates DOM -> Run LayoutEffects -> Browser paints screen -> Run Effects
+        - 특징
+            - Class Component에서의 componentDidMount는 Browser Painting 완료 후 동기적으로 호출되지만, Functional Component에서의 useEffect는 Browser Painting 완료 후 비동기적으로 호출됨
     - Update
-        - Component 내 props나 state값이 변경되면서 Component가 리렌더링되어 변경된 DOM을 조작할 수 있는 상태
-        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋음
-            ```tsx
-            useEffect(() => {
-                // You can control new DOM elements
-            }, [deps]);
-            ```
-        - render, useLayoutEffect, useEffect 호출 순서
-            - render -> useLayoutEffect -> useEffect
-        - 부모-자식 컴포넌트상에서의 render, useLayoutEffect, useEffect 호출 순서
-            - parent render -> child render -> child useLayoutEffect -> parent useLayoutEffect -> child useEffect -> parent useEffect
+        - 정의: Component 내 props나 state 값이 변경되면서 Component가 리렌더링 되어 변경된 DOM을 조작할 수 있는 상태
+        - 순서: Render -> React updates DOM -> Cleanup LayoutEffects -> Run LayoutEffects -> Browser paints screen -> Cleanup Effects -> Run Effects
+        - 특징
+            - Parent-Child Component상에서의 호출 순서: Parent Render -> Child Render -> Child Cleanup LayoutEffects -> Parent Cleanup LayoutEffects -> Child Run LayoutEffects -> Parent Run LayoutEffects -> Child Cleanup Effects -> Parent Cleanup Effects -> Child Run Effects -> Parent Run Effects
     - Unmount
-        - Component가 페이지 상에서 사라진 상태
-        - Functional Component에서 아래와 같이 구현. but, useEffect는 매 렌더링마다 동기화를 하는 개념으로 이해하면 좋음
-            ```tsx
-            useEffect(() => {
-                return () => {
-                    // You can clean up event listeners, clearTimeout, etc.
-                };
-            }, []);
-            ```
-        - clean up
-            - clean up 과정: props나 state값이 변경 -> Component 리렌더링 -> 이전 side effects clean up -> 새로운 side effects 발생
-            - clean up이 필요없는 effect: 네트워크 요청, DOM 조작, 로깅 등
-            - clean up이 필요한 effect: 이벤트 리스너 추가, 타이머 추가 등
-                - clean up을 하지 않았을 때 발생 가능한 버그: 예를 들어 특정 페이지에서만 사용할 목적으로 window에 Event Listener 설정 후 clean up을 하지 않고 다른 페이지로 넘어가면, 해당 Event 발생 시 Event Handler 함수가 호출됨
+        - 정의: Component가 페이지 상에서 사라진 상태
+        - 순서: Cleanup LayoutEffects -> Cleanup Effects
+- 부가 개념
+    - Cleanup
+        - Cleanup Trigger 조건
+            1. Update
+            2. UnMount
+        - Cleanup 과정
+            1. Update: Component 내 props나 state 값이 변경 -> Render (변경된 state를 보고 있음) -> Cleanup LayoutEffects (변경되기 전 state를 보고 있음) -> Run LayoutEffects (변경된 state를 보고 있음) -> Cleanup Effects (변경되기 전 state를 보고 있음) -> Run Effects (변경된 state를 보고 있음)
+            2. UnMount: Component가 페이지 상에서 사라짐 -> Cleanup LayoutEffects (변경되기 전 state를 보고 있음) -> Cleanup Effects (변경되기 전 state를 보고 있음)
+        - Cleanup이 필요없는 effect: 네트워크 요청, DOM 조작, 로깅 등
+        - Cleanup이 필요한 effect: 이벤트 리스너 추가, 타이머 추가 등
+            - Cleanup을 하지 않았을 때 발생 가능한 버그: 예를 들어 특정 페이지에서만 사용할 목적으로 window에 Event Listener 설정 후 Cleanup을 하지 않고 다른 페이지로 넘어가면, 해당 Event 발생 시 Event Handler 함수가 호출됨
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
