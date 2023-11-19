@@ -317,14 +317,14 @@
         - 값이 업데이트되면서 화면이 새로 바뀌어야 할 때
 1. useEffect
     - 정의
-        - DOM이 Mount(Commit Phase) 완료 후, Browser Painting까지 완료 후에 비동기적으로 호출되는 Hook
+        - Mount 또는 Update 시, Browser Painting 완료 후 DOM에 접근할 수 있는 상태에서 비동기적으로 호출되는 Hook
         - Component Tree 외부에 있는 것들을 props나 state에 따라 동기화하는 것
         - 의존성 배열 내에는 props나 state뿐만 아니라 ref.current도 포함될 수 있음
     - 필요한 곳
         - 네트워크 요청, DOM 조작, 이벤트 리스너 추가, 타이머 추가, 로깅 등의 side effects를 유발하는 작업을 실행해야 할 때
     - 일반적으로 useEffect 내에서 해야하는 작업을 useEffect 외부에서 하면 안되는 이유
         - 네트워크 요청 후 응답 데이터를 통해 상태 업데이트를 하려는 경우, 렌더링 프로세스가 정상적으로 진행되지 않을 것이기 때문
-        - DOM을 조작하려는 경우, DOM이 Mount되기 전이므로 DOM에 접근할 수 없을 것이기 때문
+        - DOM을 조작하려는 경우, Life-Cycle 상 React updates DOM 전이므로 DOM에 접근할 수 없을 것이기 때문
 1. useRef
     - 정의
         - DOM 요소 접근 또는 특정 값을 담기 위한 객체를 반환하는 Hook
@@ -463,7 +463,7 @@
         - 메모이제이션함으로써 추가적인 메모리를 더 사용해야 하고, 이전 렌더링에서의 함수 참조값과 새 렌더링에서의 함수 참조값을 비교하는 추가적인 복잡도가 존재한다는 점을 고려해야 함
 1. useLayoutEffect
     - 정의
-        - DOM이 Mount(Commit Phase) 완료 후, Browser Painting하기 전에 동기적으로 호출되는 Hook
+        - Mount 또는 Update 시, Browser Painting 완료 전 DOM에 접근할 수 있는 상태에서 동기적으로 호출되는 Hook
     - 필요한 곳
         - Browser Local Storage에 들어있는 로그인 상태값를 가져와서 그에 맞는 화면에 보여주는 등 Browser Painting하기 전에 값을 가져올 수 있을 때
             ```tsx
