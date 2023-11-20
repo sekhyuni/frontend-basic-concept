@@ -280,12 +280,12 @@
 - 상태
     - Mount
         - 정의: Component가 최초 렌더링 되어 DOM을 조작할 수 있는 상태 
-        - 순서: Run lazy initializers -> Render -> React updates DOM -> Run LayoutEffects -> Browser paints screen -> Run Effects
+        - 순서: Run lazy initializers -> Render -> React updates DOM(Commit) -> Run LayoutEffects -> Browser paints screen -> Run Effects
         - 특징
             - Class Component에서의 componentDidMount는 Browser Painting 완료 후 동기적으로 호출되지만, Functional Component에서의 useEffect는 Browser Painting 완료 후 비동기적으로 호출됨
     - Update
         - 정의: Component 내 props나 state 값이 변경되면서 Component가 리렌더링 되어 변경된 DOM을 조작할 수 있는 상태
-        - 순서: Render -> React updates DOM -> Cleanup LayoutEffects -> Run LayoutEffects -> Browser paints screen -> Cleanup Effects -> Run Effects
+        - 순서: Render -> React updates DOM(Commit) -> Cleanup LayoutEffects -> Run LayoutEffects -> Browser paints screen -> Cleanup Effects -> Run Effects
         - 특징
             - Parent-Child Component상에서의 호출 순서: Parent Render -> Child Render -> Child Cleanup LayoutEffects -> Parent Cleanup LayoutEffects -> Child Run LayoutEffects -> Parent Run LayoutEffects -> Child Cleanup Effects -> Parent Cleanup Effects -> Child Run Effects -> Parent Run Effects
     - Unmount
@@ -324,7 +324,7 @@
         - 네트워크 요청, DOM 조작, 이벤트 리스너 추가, 타이머 추가, 로깅 등의 side effects를 유발하는 작업을 실행해야 할 때
     - 일반적으로 useEffect 내에서 해야하는 작업을 useEffect 외부에서 하면 안되는 이유
         - 네트워크 요청 후 응답 데이터를 통해 상태 업데이트를 하려는 경우, 렌더링 프로세스가 정상적으로 진행되지 않을 것이기 때문
-        - DOM을 조작하려는 경우, Life-Cycle 상 React updates DOM 전이므로 DOM에 접근할 수 없을 것이기 때문
+        - DOM을 조작하려는 경우, Life-Cycle 상 React updates DOM(Commit) 전이므로 DOM에 접근할 수 없을 것이기 때문
 1. useRef
     - 정의
         - DOM 요소 접근 또는 특정 값을 담기 위한 객체를 반환하는 Hook
