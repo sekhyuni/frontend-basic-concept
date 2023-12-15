@@ -118,7 +118,7 @@
 [맨 위로 가기](#react)
 ## Rendering Process
 - React의 Rendering Process는 Render Phase와 Commit Phase로 이루어짐
-- Render: 새 가상 DOM을 생성하고 이전 가상 DOM이 있다면 새 가상 DOM과 비교하는 단계
+- Render Phase: 새 가상 DOM을 생성하고 이전 가상 DOM이 있다면 새 가상 DOM과 비교하는 단계
     1. React App이 최초 실행된 경우
         1. Component가 parsing되고 JSX가 React.createElement를 통해 React Element로 변환되고 메모리에 저장
         1. React Element를 통해 새 가상 DOM을 생성
@@ -127,17 +127,19 @@
         1. Component와 하위 Component들이 parsing되고 JSX가 React.createElement를 통해 React Element로 변환되고 메모리에 저장
         1. React Element를 통해 새 가상 DOM을 생성
         1. Diffing 알고리즘을 통해 이전 가상 DOM과 새 가상 DOM을 비교
-- Commit: 새 가상 DOM 또는 변경 사항을 실제 DOM에 업데이트하는 단계
+- Commit Phase: 새 가상 DOM 또는 변경 사항을 실제 DOM에 업데이트하는 단계
     1. React DOM 라이브러리를 사용하여 새 가상 DOM 또는 변경 사항을 실제 DOM에 업데이트
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
 ## Reconciliation
-- Reconciliation이란 이전 가상 DOM과 새 가상 DOM을 비교하고 변경 사항을 실제 DOM에 업데이트하는 과정 (Render + Commit)
-- React는 이전 가상 DOM과 새 가상 DOM을 비교하기 위해 아래 2가지 가정을 기반한 시간 복잡도 O(n)의 Diffing 휴리스틱 알고리즘을 사용
+- 정의: 이전 가상 DOM과 새 가상 DOM을 비교하고 변경 사항을 실제 DOM에 업데이트하는 과정 (Render Phase + Commit Phase)
+- 비교 방법: 시간 복잡도 O(n)의 Diffing 휴리스틱 비교 알고리즘을 사용 (아래 2가지 가정을 기반)
     1. 서로 다른 타입의 두 Elements는 서로 다른 Tree를 만들어냄
-    1. 개발자가 key prop을 통해, 여러 렌더링 사이에서 어떤 자식 Element가 변경되지 않아야 할 지 표시해 줄 수 있음
-- 비교 알고리즘 (Diffing Algorithm)
+        - 성능을 해치지 않기 위해 개발자가 항상 같은 타입의 Elements가 렌더링 되도록 구현해야 함
+    1. 형제 노드 사이에서 Element의 key prop을 확인하여 어떤 노드를 변경하지 않아도 되는지 구분할 수 있음
+        - 성능을 해치지 않기 위해 개발자가 형제 노드 사이에서 재정렬이 발생하는 경우를 대비하여 Element에 항상 unique한 key prop을 할당해야 함 (key prop을 할당하지 않으면 기본적으로 형제 노드 기준 index를 사용함)
+- Diffing 휴리스틱 비교 알고리즘
     - React가 두 개의 트리를 비교하는 시기: **state 또는 props가 업데이트**됐을 때
     - 가장 먼저 비교하는 것: 두 개의 **Root Elements**
     1. 다른 타입의 Elements
@@ -146,31 +148,33 @@
             import { useState, useEffect } from 'react';
 
             const App = (): JSX.Element => {
-                const [tagName, setTagName] = useState<string>('div');
-                const TagName = tagName as keyof JSX.IntrinsicElements;
+                const [tagName, setTagName] = useState<keyof JSX.IntrinsicElements>('div');
+                const TagName = tagName;
 
                 return (
                     <TagName>
-                        <button onClick={() => {
-                            setTagName('article');
-                        }}>
-                            Change Tag Name to destroy ChildComponent
-                        </button>
                         <ChildComponent />
+                        <button
+                            onClick={() => {
+                                setTagName('article');
+                            }}
+                        >
+                            Update tagName
+                        </button>
                     </TagName>
                 );
             };
 
             const ChildComponent = (): JSX.Element => {
                 useEffect(() => {
-                    console.log('ChildComponent --> render');
+                    console.log('ChildComponent --> Mounted');
 
                     return () => {
-                        console.log('ChildComponent --> unMount');
+                        console.log('ChildComponent --> Unmounted');
                     };
                 }, []);
 
-                return <div></div>;
+                return <></>;
             };
 
             export default App;
@@ -182,34 +186,39 @@
             import { useState, useEffect } from 'react';
 
             const App = (): JSX.Element => {
-                const [isBefore, setIsBefore] = useState<boolean>(true);
+                const [state, setState] = useState('before');
 
                 return (
                     <div
-                        className={isBefore ? 'before' : 'after'}
-                        style={{ color: isBefore ? 'red' : 'green', fontWeight: 'bold' }}
-                        title='stuff'
+                        style={{
+                            backgroundColor: state === 'before' ? 'red' : 'green',
+                        }}
                     >
-                        <button onClick={() => {
-                            setIsBefore(false);
-                        }}>Press me to update attributes</button>
                         <ChildComponent />
+                        <button
+                            style={{ backgroundColor: 'inherit' }}
+                            onClick={() => {
+                                setState('after');
+                            }}
+                        >
+                            Update State
+                        </button>
                     </div>
                 );
             };
 
             const ChildComponent = (): JSX.Element => {
                 useEffect(() => {
-                    console.log('ChildComponent --> render');
+                    console.log('ChildComponent --> Mounted');
 
                     return () => {
-                        console.log('ChildComponent --> unMount');
+                        console.log('ChildComponent --> Unmounted');
                     };
                 }, []);
 
-                return <div></div>;
+                return <></>;
             };
-            
+
             export default App;
             ```
     1. 같은 타입의 Component Elements
@@ -245,9 +254,9 @@
             };
 
             const ChildComponent = (props: { text: number }): JSX.Element => {
-                const [state] = useState<number>(props.text);
+                const [state] = useState(props.text);
 
-                console.log('ChildComponent --> re-render');
+                console.log('ChildComponent --> Rendered');
 
                 return (
                     <li>
@@ -260,17 +269,81 @@
 
             export default App;
             ```
-- 정리
-    1. Reconciliation
-        - 정의: 이전 가상 DOM가 새 가상 DOM을 비교하여 실제 DOM에 업데이트하는 과정
-        - 비교 방법: Diffing 휴리스틱 알고리즘이라는 시간 복잡도 O(n)의 비교 알고리즘 사용
-        - 시간 복잡도 O(n)을 만족시키기 위한 조건
-            - 서로 다른 타입의 두 Elements는 서로 다른 Tree를 생성하기 때문에 항상 같은 타입의 Elements가 렌더링되도록 구현해야 함
-            - 형제 노드 사이에서 재정렬이 발생하는 경우 어떤 노드가 변경되지 않아도 되는지 알려주기 위해 항상 unique한 key를 표시해야 함
-    1. React에서 key의 역할
-        - Reconciliation이 진행될 때, 형제 노드 사이에서 재정렬이 발생하는 경우 어떤 노드가 변경되지 않아도 되는지 알려주는 역할
-            - 각 노드의 key가 항상 unique한 경우 DOM Element의 속성 또는 Component Element의 props를 갱신하지 않아도 됨
-            - 각 노드의 key가 항상 unique하지 않을 경우 DOM Element의 속성 또는 Component Element의 props를 갱신하기 때문에 성능적으로 좋지 않음 (최악의 경우 모든 형제 노드의 속성 또는 props가 변경됨)
+- key prop의 역할
+    1. Reconciliation이 진행될 때, 형제 노드 사이에서 재정렬이 발생하는 경우 어떤 노드가 변경되지 않아도 되는지 알려주는 역할
+        - 각 Element의 key prop이 항상 unique한 경우 DOM Element의 속성 또는 Component Element의 props를 갱신하지 않아도 됨
+        - 각 Element의 key prop이 항상 unique하지 않을 경우 DOM Element의 속성 또는 Component Element의 props를 갱신하기 때문에 성능적으로 좋지 않음 (최악의 경우 모든 형제 노드의 속성 또는 props가 변경됨)
+    1. Reconciliation이 진행될 때, 특정 Element의 key prop이 이전 형제 노드의 어떤 key prop과도 동일하지 않은 key prop으로 변경된 경우 DOM Element 또는 Component Element를 다시 생성하게 할 수 있음
+        - DOM Element
+            ```tsx
+            import { useState, useEffect } from 'react';
+
+            const App = (): JSX.Element => {
+                const [state, setState] = useState('before');
+
+                return (
+                    <div key={state}>
+                        <ChildComponent />
+                        <button
+                            onClick={() => {
+                                setState('after');
+                            }}
+                        >
+                            Update State
+                        </button>
+                    </div>
+                );
+            };
+
+            const ChildComponent = (): JSX.Element => {
+                useEffect(() => {
+                    console.log('ChildComponent --> Mounted');
+
+                    return () => {
+                        console.log('ChildComponent --> Unmounted');
+                    };
+                }, []);
+
+                return <></>;
+            };
+
+            export default App;
+            ```
+        - Component Element
+            ```tsx
+            import { useState, useEffect } from 'react';
+
+            const App = (): JSX.Element => {
+                const [state, setState] = useState('before');
+
+                return (
+                    <>
+                        <ChildComponent key={state} />
+                        <button
+                            onClick={() => {
+                                setState('after');
+                            }}
+                        >
+                            Update State
+                        </button>
+                    </>
+                );
+            };
+
+            const ChildComponent = (): JSX.Element => {
+                useEffect(() => {
+                    console.log('ChildComponent --> Mounted');
+
+                    return () => {
+                        console.log('ChildComponent --> Unmounted');
+                    };
+                }, []);
+
+                return <></>;
+            };
+
+            export default App;
+            ```
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
