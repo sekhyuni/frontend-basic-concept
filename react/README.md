@@ -226,7 +226,7 @@
         - 다음으로 render() 메서드가 호출되고 비교 알고리즘이 이전 결과와 새로운 결과를 재귀적으로 처리
     1. 자식에 대한 재귀적 처리
         - DOM 노드의 자식들을 재귀적으로 처리할 때, React는 기본적으로 **동시에 두 리스트를 순회하고 차이점이 있으면 변경을 생성**
-        - 자식들이 key를 가지고 있다면, React는 **key를 통해 이전 Tree와 새로운 Tree의 자식들이 일치하는지 확인**함. 예를 들어, 아래 예시에서 ChildComponentMemo에 key를 추가하여 Tree의 변환 작업이 효율적으로 수행되도록 수정할 수 있음
+        - 자식들이 key prop을 가지고 있다면, React는 **key prop을 통해 이전 Tree와 새로운 Tree의 자식들이 일치하는지 확인**함. 예를 들어, 아래 예시에서 ChildComponentMemo에 key prop을 추가하여 Tree의 변환 작업이 효율적으로 수행되도록 수정할 수 있음
             ```tsx
             import React, { useState } from 'react';
 
@@ -242,10 +242,10 @@
                         </button>
                         <ul>
                             {counts.map((item: number) => (
-                                // key를 넣지 않은 경우
+                                // key prop을 넣지 않은 경우
                                 // <ChildComponentMemo text={item} />
 
-                                // key를 넣은 경우
+                                // key prop을 넣은 경우
                                 <ChildComponentMemo key={item} text={item} />
                             ))}
                         </ul>
