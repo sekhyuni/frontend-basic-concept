@@ -117,11 +117,12 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
 ## Rendering Process
-- 정의: Component가 화면에 그려지기 전, 가상 DOM을 생성하고 실제 DOM에 업데이트하는 과정
-- 순서: Render -> Commit
-- Trigger 조건
-    1. React App이 최초 실행된 경우
-        - Render: 새 가상 DOM을 생성
+- 정의: Component가 화면에 그려지기 전, 새 가상 DOM을 생성하고 실제 DOM에 업데이트하는 과정
+- 순서: Render -> Commit  
+![Virtual DOM](./assets/img/virtual-dom.png)
+- Trigger 조건에 따른 프로세스
+    - React App이 최초 실행된 경우
+        1. Render: 새 가상 DOM을 생성
             1. Root Component를 호출하여 React Element 반환
                 - render 함수 호출
             1. current FiberNode를 재사용하여 workInProgress FiberNode를 생성할 수 있는지 확인 (React Element의 key, type을 비교)
@@ -130,9 +131,9 @@
                 - createFiberFromElement 함수 호출
             1. workInProgress FiberNode를 통해 DOM Element 생성 후, workInProgress FiberNode의 stateNode에 기록
                 - completeWork 함수 호출
-        - Commit: 새 가상 DOM을 실제 DOM에 업데이트
-    1. state가 업데이트된 경우
-        - Render: 새 가상 DOM을 생성하거나, 이전 가상 DOM과 새 가상 DOM을 비교하여 변경 사항을 기록
+        1. Commit: 새 가상 DOM을 실제 DOM에 업데이트
+    - state가 업데이트된 경우
+        1. Render: 새 가상 DOM을 생성하거나, 새 가상 DOM을 생성 후 이전 가상 DOM과 새 가상 DOM을 비교하여 변경 사항을 기록
             - 공통 프로세스
                 1. state 업데이트를 trigger한 Component를 호출하여 React Element 반환
                     - renderWithHooks 함수 호출
@@ -149,7 +150,7 @@
                         - useFiber -> createWorkInProgress 함수 호출
                     1. current FiberNode와 workInProgress FiberNode를 비교하여 변경 사항을 workInProgress FiberNode의 updateQueue에 기록
                         - completeWork 함수 호출
-        - Commit: 새 가상 DOM 또는 변경 사항을 실제 DOM에 업데이트
+        1. Commit: 새 가상 DOM 또는 변경 사항을 실제 DOM에 업데이트
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
