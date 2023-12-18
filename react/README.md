@@ -13,7 +13,7 @@
 1. 높은 렌더링 효율 (feat. 가상 DOM)
     - 변경 사항이 있을 때, 업데이트를 여러 번 하지 않고 한 번만 수행
         - Observable Pattern을 사용하여 약 16ms 버퍼 후, 한 번에 업데이트
-    - 이전 가상 DOM과 새 가상 DOM을 비교하고, 실제 DOM에는 변경 사항만 업데이트
+    - 이전 가상 DOM과 새 가상 DOM을 비교하여 실제 DOM에는 변경 사항만 업데이트
         - HTML & Vanilla JavaScript만 사용한 경우 실제 DOM의 요소가 변경되면 해당 요소와 모든 자식 요소가 업데이트
         - HTML & Vanilla JavaScript
             ```html
@@ -117,23 +117,44 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
 ## Rendering Process
-- React의 Rendering Process는 Render Phase와 Commit Phase로 이루어짐
-- Render Phase: 새 가상 DOM을 생성하고 이전 가상 DOM이 있다면 새 가상 DOM과 비교하는 단계
+- 정의: Component가 화면에 그려지기 전, 가상 DOM을 생성하고 실제 DOM에 업데이트하는 과정
+- 순서: Render -> Commit
+- Trigger 조건
     1. React App이 최초 실행된 경우
-        1. Component가 parsing되고 JSX가 React.createElement를 통해 React Element로 변환되고 메모리에 저장
-        1. React Element를 통해 새 가상 DOM을 생성
-    1. state 또는 props가 업데이트된 경우
-        1. 상태 변경을 트리거한 Component에 플래그를 지정
-        1. Component와 하위 Component들이 parsing되고 JSX가 React.createElement를 통해 React Element로 변환되고 메모리에 저장
-        1. React Element를 통해 새 가상 DOM을 생성
-        1. Diffing 알고리즘을 통해 이전 가상 DOM과 새 가상 DOM을 비교
-- Commit Phase: 새 가상 DOM 또는 변경 사항을 실제 DOM에 업데이트하는 단계
-    1. React DOM 라이브러리를 사용하여 새 가상 DOM 또는 변경 사항을 실제 DOM에 업데이트
+        - Render: 새 가상 DOM을 생성
+            1. Root Component를 호출하여 React Element 반환
+                - render 함수 호출
+            1. current FiberNode를 재사용하여 workInProgress FiberNode를 생성할 수 있는지 확인 (React Element의 key, type을 비교)
+                - reconcileChildren -> reconcileChildFibers -> reconcileSingleElement 함수 호출
+            1. current FiberNode가 없으므로 React Element를 통해 workInProgress FiberNode 생성
+                - createFiberFromElement 함수 호출
+            1. workInProgress FiberNode를 통해 DOM Element 생성 후, workInProgress FiberNode의 stateNode에 기록
+                - completeWork 함수 호출
+        - Commit: 새 가상 DOM을 실제 DOM에 업데이트
+    1. state가 업데이트된 경우
+        - Render: 새 가상 DOM을 생성하거나, 이전 가상 DOM과 새 가상 DOM을 비교하여 변경 사항을 기록
+            - 공통 프로세스
+                1. state 업데이트를 trigger한 Component를 호출하여 React Element 반환
+                    - renderWithHooks 함수 호출
+                1. current FiberNode를 재사용하여 workInProgress FiberNode를 생성할 수 있는지 확인 (React Element의 key, type을 비교)
+                    - reconcileChildren -> reconcileChildFibers -> reconcileSingleElement/reconcileChildrenArray 함수 호출
+            - current FiberNode 재사용 가능 여부에 따른 분기
+                - 불가능
+                    1. React Element를 통해 workInProgress FiberNode 생성
+                        - createFiberFromElement 함수 호출
+                    1. workInProgress FiberNode를 통해 DOM Element 생성하여 workInProgress FiberNode의 stateNode에 기록
+                        - completeWork 함수 호출
+                - 가능
+                    1. current FiberNode를 재사용하여 workInProgress FiberNode 생성
+                        - useFiber -> createWorkInProgress 함수 호출
+                    1. current FiberNode와 workInProgress FiberNode를 비교하여 변경 사항을 workInProgress FiberNode의 updateQueue에 기록
+                        - completeWork 함수 호출
+        - Commit: 새 가상 DOM 또는 변경 사항을 실제 DOM에 업데이트
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#react)
 ## Reconciliation
-- 정의: 이전 가상 DOM과 새 가상 DOM을 비교하고 변경 사항을 실제 DOM에 업데이트하는 과정 (Render Phase + Commit Phase)
+- 정의: 이전 가상 DOM과 새 가상 DOM을 비교하여 변경 사항을 실제 DOM에 업데이트하는 과정
 - 비교 방법: 시간 복잡도 O(n)의 Diffing 휴리스틱 비교 알고리즘을 사용 (아래 2가지 가정을 기반)
     1. 서로 다른 타입의 두 Elements는 서로 다른 Tree를 만들어냄
         - 성능을 해치지 않기 위해 개발자가 항상 같은 타입의 Elements가 렌더링 되도록 구현해야 함
