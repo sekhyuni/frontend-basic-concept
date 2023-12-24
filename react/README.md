@@ -158,7 +158,7 @@
 - 정의: 이전 가상 DOM과 새 가상 DOM을 비교하여 변경 사항을 실제 DOM에 업데이트하는 과정
 - 비교 방법: 시간 복잡도 O(n)의 Diffing 휴리스틱 비교 알고리즘을 사용 (아래 2가지 가정을 기반)
     1. 서로 다른 타입의 두 Elements는 서로 다른 Tree를 만들어냄
-        - 성능을 해치지 않기 위해 개발자가 항상 같은 타입의 Elements가 렌더링 되도록 구현해야 함
+        - 성능을 해치지 않기 위해 개발자가 항상 같은 타입의 Elements가 렌더링되도록 구현해야 함
     1. 형제 노드 사이에서 각 Element의 key prop을 확인하여 어떤 노드를 변경하지 않아도 되는지 구분할 수 있음
         - 성능을 해치지 않기 위해 개발자가 형제 노드 사이에서 재정렬이 발생하는 경우를 대비하여 각 Element에 형제 노드 사이 기준 항상 unique한 key prop을 할당해야 함 (key prop을 할당하지 않으면 기본적으로 형제 노드 기준 index를 사용함)
 - Diffing 휴리스틱 비교 알고리즘
@@ -374,12 +374,12 @@
 ![React Hook Flow Diagram](./assets/img/react-hook-flow-diagram.png)
 - 상태
     - Mount
-        - 정의: Component가 최초 렌더링 되어 DOM을 조작할 수 있는 상태 
+        - 정의: Component가 최초 렌더링되어 DOM을 조작할 수 있는 상태 
         - 순서: Run lazy initializers -> Render -> React updates DOM(Commit) -> Run LayoutEffects -> Browser paints screen -> Run Effects
         - 특징
             - Class Component에서의 componentDidMount는 Browser Painting 완료 후 동기적으로 호출되지만, Functional Component에서의 useEffect는 Browser Painting 완료 후 비동기적으로 호출됨
     - Update
-        - 정의: Component 내 props나 state 값이 변경되면서 Component가 리렌더링 되어 변경된 DOM을 조작할 수 있는 상태
+        - 정의: Component 내 props나 state 값이 변경되면서 Component가 리렌더링되어 변경된 DOM을 조작할 수 있는 상태
         - 순서: Render -> React updates DOM(Commit) -> Cleanup LayoutEffects -> Run LayoutEffects -> Browser paints screen -> Cleanup Effects -> Run Effects
         - 특징
             - Parent-Child Component상에서의 호출 순서: Parent Render -> Child Render -> Child Cleanup LayoutEffects -> Parent Cleanup LayoutEffects -> Child Run LayoutEffects -> Parent Run LayoutEffects -> Child Cleanup Effects -> Parent Cleanup Effects -> Child Run Effects -> Parent Run Effects

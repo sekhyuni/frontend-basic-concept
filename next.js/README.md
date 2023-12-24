@@ -5,7 +5,7 @@
 
 ## Rendering
 1. Server Components
-    - 정의: 서버에서 렌더링 되며 캐싱이 가능한 컴포넌트
+    - 정의: 서버에서 렌더링되며 캐싱이 가능한 컴포넌트
     - 이점
         - Data Fetching
         - Security
@@ -20,7 +20,7 @@
     - Update later..
 
 ## Caching
-1. Request Memoization: 특정 페이지 내에서 같은 URL과 같은 options의 fetch API를 사용하는 경우, 페이지가 렌더링 되는 동안 해당 요청은 캐싱되며 페이지 렌더링이 완료되면 캐싱되어 있던 모든 요청은 삭제됨  
+1. Request Memoization: 특정 페이지 내에서 같은 URL과 같은 options의 fetch API를 사용하는 경우, 페이지가 렌더링되는 동안 해당 요청은 캐싱되며 페이지 렌더링이 완료되면 캐싱되어 있던 모든 요청은 삭제됨  
 ![Request Memoization](./assets/img/request-memoization.avif)
     - React 기능
     - GET 요청만 가능
