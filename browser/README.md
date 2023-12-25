@@ -186,41 +186,51 @@
 ### 캐시란 무엇인가?
 - 정의: 자주 사용되는 데이터를 저장해둔 저장소
 - 설정: 서버 측에서 HTTP Response Header의 Cache-Control 속성을 통해 설정
-    - no-store: 캐싱하지 않음
-    - no-cache: 캐싱하긴 하지만, 매 요청마다 서버 측에서 유효성 검사를 해야 함
-    - max-age={cacheValidTime}: cacheValidTime 동안은 캐싱된 데이터를 사용하며, cacheValidTime이 지나면 서버 측에서 유효성 검사를 해야 함
-    - public: 브라우저, 프록시 서버 등 어디에서든 캐싱 가능
-    - private: 브라우저에서만 캐싱 가능
-    - s-maxage={cacheValidTime}: 프록시 서버 등 중간 서버에서만 적용되는 속성으로 cacheValidTime 동안은 캐싱된 데이터를 사용하며, cacheValidTime이 지나면 서버 측에서 유효성 검사를 해야 함
-- 유효성 검사: 클라이언트 측에서 가지고 있던 If-None-Match 값과 서버 측에서 생성한 ETag 값을 비교
-- Frontend에서 서버 데이터 캐싱하는 방법
+    - no-store: 데이터를 캐싱하지 않음
+    - no-cache: 데이터를 캐싱하긴 하지만, 매 요청마다 서버 측에서 유효성 검사를 해야 함
+    - max-age={seconds}: {seconds} 동안은 캐싱된 데이터를 사용하며, {seconds}가 지나면 서버 측에서 유효성 검사를 해야 함
+    - public: 브라우저, 프록시 서버 등 어디에서든 데이터를 캐싱 가능
+    - private: 브라우저에서만 데이터를 캐싱 가능
+    - s-maxage={seconds}: 프록시 서버 등 중간 서버에서만 적용되는 속성으로 {seconds} 동안은 캐싱된 데이터를 사용하며, {seconds}가 지나면 서버 측에서 유효성 검사를 해야 함
+- 유효성 검사: 클라이언트 측에서 가지고 있던 캐싱된 데이터의 If-None-Match 값과 서버 측에서 생성한 ETag 값을 비교
+- Frontend에서 서버의 데이터를 캐싱하는 방법
     - React Query
         - staleTime: staleTime 동안 캐싱된 데이터를 사용함
-        - cacheTime: 쿼리가 inactive된 시점부터 cacheTime까지 캐싱함
+        - cacheTime: 쿼리가 inactive된 시점부터 cacheTime까지 데이터를 캐싱함
     - Next.js API Routes
         - HTTP Response Header의 Cache-Control 속성을 통해 설정
-### 브라우저에서 서버의 리소스를 캐싱하는 방식  
+### 브라우저에서 서버의 데이터를 캐싱하는 방식  
 ![Web Cache](./assets/img/web-cache.png)
-- 브라우저는 **메모리** 또는 **디스크**에 리소스를 캐싱함
-    - 브라우저가 캐싱할 장소를 정하는 방법은 내부 알고리즘에 의해 결정되며, 이 알고리즘은 브라우저에 따라 다르지만 일반적으로 **리소스의 크기, 사용 빈도, 최근에 액세스한 시간** 등을 고려하여 결정됨
+- 브라우저가 데이터를 캐싱하는 장소: 메모리 또는 디스크
+    - 브라우저가 데이터를 캐싱할 장소를 정하는 방법: 내부 알고리즘에 의해 결정되며, 이 알고리즘은 브라우저에 따라 다르지만 일반적으로 데이터의 크기, 사용 빈도, 최근에 액세스한 시간 등을 고려하여 결정됨
     - 메모리 캐시 vs 디스크 캐시 성능 비교  
     ![Memory Cache vs Disk Cache](./assets/img/memory-cache-vs-disk-cache.png)
         - 메모리 캐시 (브라우저 내부에 존재, hashmap 구조) => 탐색하는데에 약 0ms 소요  
         ![Memory Cache](./assets/img/memory-cache.png)
         - 디스크 캐시 (브라우저 외부에 존재) => 탐색하는데에 약 30ms ~ 300ms, 최대 1.4s 소요  
         ![Disk Cache](./assets/img/disk-cache.png)
-    - 실제로 리소스를 메모리와 디스크에 캐싱하는 예시
-        1. **캐시가 없는 상태**로 구글 메인 페이지에 접속하면, 모든 리소스를 **서버**에서 가져옴  
-        ![Resources From Server](./assets/img/resources-from-server.png)
-        1. 새로고침을 통해 **재접속**을 하면, 특정 리소스들은 **메모리** 또는 **디스크**에서 캐싱된 리소스를 가져옴  
-        ![Resources From Cache](./assets/img/resources-from-cache.png)
-- **리소스의 캐시 검증주기는** 응답 헤더의 **Cache-Control** 속성에 의해 결정되며, 속성값으로는 **max-age와 같은 캐시 유효성 만료시간**에 대한 정보를 설정할 수 있음. max-age가 지나기 전에는 서버에 리소스 요청을 하지 않고 메모리 또는 디스크에서 리소스를 가져옴. max-age가 지나면 서버에 재검증 요청을 보내어 캐시가 유효한지 확인하고, 유효하면 계속해서 캐싱된 리소스를 사용하는 방식으로 동작함  
+    - 실제로 데이터를 메모리와 디스크에 캐싱하는 예시
+        1. 캐싱된 데이터가 없는 상태로 구글 메인 페이지에 접속하면, 모든 데이터를 서버에서 가져옴  
+        ![Data From Server](./assets/img/data-from-server.png)
+        1. 새로고침을 통해 재접속을 하면, 특정 데이터들은 메모리 또는 디스크에서 가져옴  
+        ![Data From Cache](./assets/img/data-from-cache.png)
+- 캐싱된 데이터의 유효성 검사 주기를 정하는 방법: 서버에서 응답 헤더의 Cache-Control 속성값으로 max-age={seconds}을 설정  
 ![Cache-Control](./assets/img/cache-control.png)
-    1. **서버에서 Cache-Control 속성값으로 max-age={seconds}를 설정**하면 {seconds}초만큼 클라이언트에서 캐싱함
-    1. **{seconds}초가 지나면** 캐싱된 리소스를 지우는 것이 아니라, **서버에 재검증 요청**을 보냄
-        - 재검증은 **클라이언트가 가지고 있던 리소스의 ETag값과 서버가 가지고 있는 ETag값이 일치하는지 확인**하는 과정
-        - Nginx, Apache, Tomcat과 같은 **대부분의 Web Server(or WAS)는 ETag값을 통해 캐시 유효성을 재검증하는 프로세스가 기본적으로 내장**되어있음
-    1. 재검증 결과, 브라우저에서 가지고 있는 **캐시가 유효**하면 서버는 **304 Not Modified** 응답을 보내며, **캐시가 유효하지 않으면** 서버는 **200 Success** 응답을 보내는 동시에 새로운 리소스에 대한 Cache-Control 속성값으로 max-age={seconds}를 갱신함
+    ```typescript
+    // Express.js Server Example
+    const app = express();
+
+    app.get('/api/endpoint', (_, res) => {
+        res.set('Cache-Control', 'max-age=3600');
+
+        res.status(200).json({ message: 'success' });
+    });
+    ```
+    1. {seconds}가 지나기 전에는 서버에 데이터 요청을 하지 않고 메모리 또는 디스크에서 캐싱된 데이터를 가져옴
+    1. {seconds}가 지나면 캐싱된 데이터를 지우는 것이 아니라, 서버에 유효성 검사 요청을 보냄
+        - 유효성 검사는 클라이언트 측에서 가지고 있던 캐싱된 데이터의 If-None-Match 값과 서버 측에서 생성한 ETag 값이 일치하는지 확인하는 과정
+        - Nginx, Apache, Tomcat과 같은 대부분의 Web Server(or WAS)는 ETag 값을 통해 캐싱된 데이터의 유효성을 검사하는 프로세스가 기본적으로 내장되어 있음
+    1. 유효성 검사 결과, 브라우저에서 가지고 있는 캐싱된 데이터가 유효하면 서버는 304 Not Modified 응답을 보내며, 캐싱된 데이터가 유효하지 않으면 서버는 200 Success 응답을 보내는 동시에 새로운 데이터에 대한 Cache-Control 속성값으로 max-age={seconds}를 갱신함
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
@@ -334,7 +344,7 @@
                 1. 이벤트 위임을 사용하려면 이벤트가 반드시 버블링되어야 하는데, 몇몇 이벤트는 버블링 되지 않음
                 1. 컨테이너에 할당된 핸들러가 모든 하위 요소에서 발생하는 이벤트에 응답해야 하므로 CPU 작업 부하가 늘어날 수 있으나, 이런 부하는 무시할만한 수준이므로 실제로는 잘 고려하지 않음
 1. 이벤트 캡처링
-    - 특정 요소에서 이벤트가 발생했을 때 해당 이벤트가 **최상위 요소인 html 요소부터 가장 하위에 있는 요소까지** 점점 더 하위 요소들로 전달되어가는 특성
+    - 특정 요소에서 이벤트가 발생했을 때 해당 이벤트가 최상위 요소인 html 요소부터 가장 하위에 있는 요소까지 점점 더 하위 요소들로 전달되어가는 특성
         ```html
         <html>
             <head>
