@@ -186,17 +186,17 @@
 ### 캐시란 무엇인가?
 - 정의: 자주 사용되는 데이터를 저장해둔 저장소
 - 설정: 서버 측에서 HTTP Response Header의 Cache-Control 속성을 통해 설정
-    - no-store: 캐시에 데이터를 저장하지 않음
-    - no-cache: 캐시에 데이터를 저장하나, 매 요청마다 서버 측에서 유효성 검사를 해야 함
-    - max-age={cacheValidTime}: cacheValidTime 동안은 캐시에 저장된 데이터를 사용하며, cacheValidTime이 지나면 서버 측에서 유효성 검사를 해야 함
-    - public: 브라우저, 프록시 서버 등 어디에서든 캐시에 데이터를 저장 가능
-    - private: 브라우저에서만 캐시에 데이터를 저장 가능
-    - s-maxage={cacheValidTime}: 프록시 서버 등 중간 서버에서만 적용되는 속성으로 cacheValidTime 동안은 캐시에 저장된 데이터를 사용하며, cacheValidTime이 지나면 서버 측에서 유효성 검사를 해야 함
+    - no-store: 캐싱하지 않음
+    - no-cache: 캐싱하긴 하지만, 매 요청마다 서버 측에서 유효성 검사를 해야 함
+    - max-age={cacheValidTime}: cacheValidTime 동안은 캐싱된 데이터를 사용하며, cacheValidTime이 지나면 서버 측에서 유효성 검사를 해야 함
+    - public: 브라우저, 프록시 서버 등 어디에서든 캐싱 가능
+    - private: 브라우저에서만 캐싱 가능
+    - s-maxage={cacheValidTime}: 프록시 서버 등 중간 서버에서만 적용되는 속성으로 cacheValidTime 동안은 캐싱된 데이터를 사용하며, cacheValidTime이 지나면 서버 측에서 유효성 검사를 해야 함
 - 유효성 검사: 클라이언트 측에서 가지고 있던 If-None-Match 값과 서버 측에서 생성한 ETag 값을 비교
 - Frontend에서 서버 데이터 캐싱하는 방법
     - React Query
-        - staleTime: staleTime 동안 캐시에 저장된 데이터를 사용함
-        - cacheTime: 쿼리가 inactive된 시점부터 cacheTime까지 캐시에 데이터를 저장함
+        - staleTime: staleTime 동안 캐싱된 데이터를 사용함
+        - cacheTime: 쿼리가 inactive된 시점부터 cacheTime까지 캐싱함
     - Next.js API Routes
         - HTTP Response Header의 Cache-Control 속성을 통해 설정
 ### 브라우저에서 서버의 리소스를 캐싱하는 방식  
@@ -214,10 +214,10 @@
         ![Resources From Server](./assets/img/resources-from-server.png)
         1. 새로고침을 통해 **재접속**을 하면, 특정 리소스들은 **메모리** 또는 **디스크**에서 캐싱된 리소스를 가져옴  
         ![Resources From Cache](./assets/img/resources-from-cache.png)
-- **리소스의 캐시 검증주기는** 응답 헤더의 **Cache-Control** 속성에 의해 결정되며, 속성값으로는 **max-age와 같은 캐시 유효성 만료시간**에 대한 정보를 설정할 수 있음. max-age가 지나기 전에는 서버에 리소스 요청을 하지 않고 메모리 또는 디스크에서 리소스를 가져옴. max-age가 지나면 서버에 재검증 요청을 보내어 캐시가 유효한지 확인하고, 유효하면 계속해서 캐시에 존재하는 리소스를 사용하는 방식으로 동작함  
+- **리소스의 캐시 검증주기는** 응답 헤더의 **Cache-Control** 속성에 의해 결정되며, 속성값으로는 **max-age와 같은 캐시 유효성 만료시간**에 대한 정보를 설정할 수 있음. max-age가 지나기 전에는 서버에 리소스 요청을 하지 않고 메모리 또는 디스크에서 리소스를 가져옴. max-age가 지나면 서버에 재검증 요청을 보내어 캐시가 유효한지 확인하고, 유효하면 계속해서 캐싱된 리소스를 사용하는 방식으로 동작함  
 ![Cache-Control](./assets/img/cache-control.png)
-    1. **서버에서 Cache-Control 속성값으로 max-age={seconds}를 설정**하면 {seconds}초만큼 클라이언트에서 캐시에 리소스를 저장함
-    1. **{seconds}초가 지나면** 캐시에 존재하는 리소스를 지우는 것이 아니라, **서버에 재검증 요청**을 보냄
+    1. **서버에서 Cache-Control 속성값으로 max-age={seconds}를 설정**하면 {seconds}초만큼 클라이언트에서 캐싱함
+    1. **{seconds}초가 지나면** 캐싱된 리소스를 지우는 것이 아니라, **서버에 재검증 요청**을 보냄
         - 재검증은 **클라이언트가 가지고 있던 리소스의 ETag값과 서버가 가지고 있는 ETag값이 일치하는지 확인**하는 과정
         - Nginx, Apache, Tomcat과 같은 **대부분의 Web Server(or WAS)는 ETag값을 통해 캐시 유효성을 재검증하는 프로세스가 기본적으로 내장**되어있음
     1. 재검증 결과, 브라우저에서 가지고 있는 **캐시가 유효**하면 서버는 **304 Not Modified** 응답을 보내며, **캐시가 유효하지 않으면** 서버는 **200 Success** 응답을 보내는 동시에 새로운 리소스에 대한 Cache-Control 속성값으로 max-age={seconds}를 갱신함
