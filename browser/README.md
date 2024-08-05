@@ -6,6 +6,7 @@
 * [Local Storage vs Session Storage vs Cookies](#local-storage-vs-session-storage-vs-cookies)
 * [CORS](#cors)
 * [Cache](#cache)
+* [Web Vitals](#web-vitals)
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
 * [Authentication](#authentication)
 
@@ -231,6 +232,23 @@
         - 유효성 검사는 클라이언트 측에서 가지고 있던 캐싱된 데이터의 If-None-Match 값과 서버 측에서 생성한 ETag 값이 일치하는지 확인하는 과정
         - Nginx, Apache, Tomcat과 같은 대부분의 Web Server(or WAS)는 ETag 값을 통해 캐싱된 데이터의 유효성을 검사하는 프로세스가 기본적으로 내장되어 있음
     1. 유효성 검사 결과, 브라우저에서 가지고 있는 캐싱된 데이터가 유효하면 서버는 304 Not Modified 응답을 보내며, 캐싱된 데이터가 유효하지 않으면 서버는 200 Success 응답을 보내는 동시에 새로운 데이터에 대한 Cache-Control 속성값으로 max-age={seconds}를 갱신함
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#browser)
+## Web Vitals
+1. Core
+    1. LCP(Largest Contentful Paint)
+        - 사용자가 처음 페이지로 이동한 시점을 기준으로 표시 영역에 표시되는 가장 큰 이미지 또는 텍스트 블록의 렌더링 시간
+    1. INP(Interaction to Next Paint)
+    1. CLS(Cumulative Layout Shift)
+        - 페이지의 전체 수명 주기 동안 발생하는 모든 예상치 못한 레이아웃 변경에 대한 최대 버스트의 레이아웃 변경 점수
+1. Etc
+    1. TTFB(Time to First Byte)
+        - 리소스에 대한 요청과 응답의 첫 번째 바이트가 도착하기 시작하는 시점 사이의 시간
+    1. FCP(First Contentful Paint)
+        - 사용자가 페이지를 처음 탐색한 시점부터 페이지 콘텐츠의 일부가 화면에 렌더링된 시점까지의 시간
+    1. TBT(Total Blocking Time)
+    1. TTI(Time to Interactive)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
