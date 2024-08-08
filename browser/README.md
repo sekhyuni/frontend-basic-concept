@@ -8,6 +8,7 @@
 * [Cache](#cache)
 * [Web Vitals](#web-vitals)
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
+* [Script](#script)
 * [Authentication](#authentication)
 
 ## Communication Process
@@ -443,7 +444,29 @@
     
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
+## Script
+1. default
+    - 동작: 브라우저의 렌더링 엔진이 HTML을 Parsing하다가 script 태그를 만나면 (외부 script의 경우 다운로드 후) 실행한 뒤, 남은 HTML을 Parsing함
+    - 문제
+        - script 태그 아래에 있는 HTML element에 접근할 수 없기 때문에 HTML element에 이벤트 핸들러를 추가하는 것과 같은 여러 행위를 할 수 없음
+        - script 태그가 HTML 상단부에 위치할 경우, (외부 script의 경우 다운로드 후) script를 실행하는 동안 script 태그 하단부에 있는 남은 HTML을 Parsing할 수 없음
+    - 해결 방법
+        - 단적으로 script 태그를 HTML 하단부에 위치시키면 되지만, HTML 용량이 매우 큰 경우, script 다운로드를 시작하는데에 너무 오랜 시간이 걸린다.
+        - defer 또는 async 속성을 사용하면 백그라운드에서 script 다운로드를 시작할 수 있다. 
+1. defer
+    - 특징
+        - script 다운로드를 하는 동안 HTML parsing을 멈추지 않음
+        - 다른 script와 동시에 다운로드할 수 있음
+        - HTML parsing이 끝난 후, DOMContentLoaded 이벤트 발생 전에 script를 실행함
+1. async
+    - 특징
+        - script 다운로드를 하는 동안 HTML parsing을 멈추지 않음
+        - 다른 script와 동시에 다운로드할 수 있음
+        - HTML parsing이 끝난 후 script를 실행할 수도 있고, 끝나기 전에 script를 실행할 수도 있음
+        - DOMContentLoaded 이벤트 발생 후 script를 실행할 수도 있고, 발생 전에 script를 실행할 수도 있음
 
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#browser)
 ## Authentication
 ### HttpOnly & SameSite Cookie를 통한 JWT 인증 방식 (with Next.js API Routes)  
 ![Next.js API Routes](./assets/img/next.js-api-routes.png)
