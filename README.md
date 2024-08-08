@@ -8,7 +8,9 @@ Browser, HTML, CSS, JavaScript, TypeScript, React, Next.js 등 Frontend Software
 - [x] Local Storage vs Session Storage vs Cookies
 - [x] CORS
 - [x] Cache
+- [ ] Web Vitals
 - [x] Event Bubbling vs Event Capturing
+- [x] Script
 - [x] Authentication
 
 ## [HTML](https://github.com/sekhyuni/frontend-basic-concept/blob/main/html/README.md)
