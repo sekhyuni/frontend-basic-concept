@@ -444,7 +444,8 @@
     
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
-## Script
+## Script  
+![Script](./assets/img/script.png)
 1. default
     - 동작: 브라우저의 렌더링 엔진이 HTML을 Parsing하다가 script 태그를 만나면 (외부 script의 경우 다운로드 후) 실행한 뒤, 남은 HTML을 Parsing함
     - 문제
@@ -457,13 +458,15 @@
     - 특징
         - script 다운로드를 하는 동안 HTML parsing을 멈추지 않음
         - 다른 script와 동시에 다운로드할 수 있음
-        - HTML parsing이 끝난 후, DOMContentLoaded 이벤트 발생 전에 script를 실행함
+        - HTML parsing 완료 -> script 실행 -> DOMContentLoaded 이벤트 발생
+        - 여러 개의 스크립트가 있는 경우 선언된 순서대로 실행 (의존성 있는 스크립트군에 적합)
 1. async
     - 특징
         - script 다운로드를 하는 동안 HTML parsing을 멈추지 않음
         - 다른 script와 동시에 다운로드할 수 있음
-        - HTML parsing이 끝난 후 script를 실행할 수도 있고, 끝나기 전에 script를 실행할 수도 있음
-        - DOMContentLoaded 이벤트 발생 후 script를 실행할 수도 있고, 발생 전에 script를 실행할 수도 있음
+        - HTML parsing 완료, script 실행 순서 간에 의존성 없음
+        - DOMContentLoaded 이벤트 발생, script 실행 순서 간에 의존성 없음
+        - 여러 개의 스크립트가 있는 경우 응답받은 순서대로 실행 (의존성 없는 스크립트군에 적합)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
