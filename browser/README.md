@@ -6,7 +6,7 @@
 * [Local Storage vs Session Storage vs Cookies](#local-storage-vs-session-storage-vs-cookies)
 * [CORS](#cors)
 * [Cache](#cache)
-* [Web Vitals](#web-vitals)
+* [Web Performance Metrics](#web-performance-metrics)
 * [Event Bubbling vs Event Capturing](#event-bubbling-vs-event-capturing)
 * [Script](#script)
 * [Authentication](#authentication)
@@ -236,20 +236,14 @@
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
-## Web Vitals
-1. Core
-    1. LCP(Largest Contentful Paint)
-        - 사용자가 처음 페이지로 이동한 시점을 기준으로 표시 영역에 표시되는 가장 큰 이미지 또는 텍스트 블록의 렌더링 시간
-    1. INP(Interaction to Next Paint)
-    1. CLS(Cumulative Layout Shift)
-        - 페이지의 전체 수명 주기 동안 발생하는 모든 예상치 못한 레이아웃 변경에 대한 최대 버스트의 레이아웃 변경 점수
-1. Etc
-    1. TTFB(Time to First Byte)
-        - 리소스에 대한 요청과 응답의 첫 번째 바이트가 도착하기 시작하는 시점 사이의 시간
-    1. FCP(First Contentful Paint)
-        - 사용자가 페이지를 처음 탐색한 시점부터 페이지 콘텐츠의 일부가 화면에 렌더링된 시점까지의 시간
-    1. TBT(Total Blocking Time)
-    1. TTI(Time to Interactive)
+## Web Performance Metrics
+1. 페인트 관련 지표
+    - FP(First Paint): 픽셀(배경색 등)을 처음 렌더링한 시점
+    - FCP(First Contentful Paint): 의미있는 컨텐츠(텍스트, 이미지 등)를 처음 렌더링한 시점
+    - LCP(Largest Contentful Paint): 가장 크고 의미있는 컨텐츠(텍스트, 이미지)를 렌더링한 시점
+1. 로딩 관련 지표
+    - DCL(DOMContentLoaded): HTML 파싱이 완료된 후, 스크립트(+defer 속성이 적용된)의 실행이 완료된 시점
+    - L(LOAD): 웹 페이지에 있는 모든 리소스(스크립트, 스타일시트, 이미지, 기타 미디어 파일 등)의 로드가 완료된 시점
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
