@@ -236,7 +236,8 @@
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
-## Web Performance Metrics
+## Web Performance Metrics  
+![Web Performance Metrics](./assets/img/web-performance-metrics.png)
 1. 페인트 관련 지표
     - FP(First Paint): 픽셀(배경색 등)을 처음 렌더링한 시점
     - FCP(First Contentful Paint): 의미있는 컨텐츠(텍스트, 이미지 등)를 처음 렌더링한 시점
