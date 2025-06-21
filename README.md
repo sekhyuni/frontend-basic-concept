@@ -67,3 +67,6 @@ Browser, HTML, CSS, JavaScript, TypeScript, React, Next.js 등 Frontend Software
 
 ## [Architecture](https://github.com/sekhyuni/frontend-basic-concept/blob/main/architecture/README.md)
 - [x] Clean Architecture
+
+## [Infrastructure](https://github.com/sekhyuni/frontend-basic-concept/blob/main/infrastructure/README.md)
+- [x] CDN
