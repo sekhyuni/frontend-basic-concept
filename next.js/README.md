@@ -2,6 +2,7 @@
 
 * [Rendering](#rendering)
 * [Caching](#caching)
+* [Image](#image)
 
 ## Rendering
 1. Server Components
@@ -44,6 +45,9 @@
 1. Router Cache
     - Update later..
 ![Router Cache](./assets/img/router-cache.avif)
+
+## Image
+- Next.js의 `<Image>` 컴포넌트는 image optimizer를 통해 PNG, JPEG 등을 WebP 등으로 변환하고 리사이징하여 이미지 용량을 자동으로 최적화하며, on-demand 캐싱으로 반복 요청 시 성능을 향상시킴
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#nextjs-app-router)

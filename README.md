@@ -55,6 +55,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React, Next.js 등 Frontend Software
 ## [Next.js](https://github.com/sekhyuni/frontend-basic-concept/blob/main/next.js/README.md)
 - [ ] Rendering
 - [ ] Caching
+- [x] Image
 
 ## [React Query](https://github.com/sekhyuni/frontend-basic-concept/blob/main/react-query/README.md)
 - [x] Life-Cycle
