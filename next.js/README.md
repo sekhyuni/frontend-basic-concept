@@ -2,7 +2,7 @@
 
 * [Rendering](#rendering)
 * [Caching](#caching)
-* [Image](#image)
+* [Image Optimization](#image-optimization)
 
 ## Rendering
 1. Server Components
@@ -20,6 +20,8 @@
 1. Composition Patterns
     - Update later..
 
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#next.js)
 ## Caching
 1. Request Memoization: 특정 페이지 내에서 같은 URL과 같은 options의 fetch API를 사용하는 경우, 페이지가 렌더링되는 동안 해당 요청은 캐싱되며 페이지 렌더링이 완료되면 캐싱되어 있던 모든 요청은 삭제됨  
 ![Request Memoization](./assets/img/request-memoization.avif)
@@ -46,8 +48,13 @@
     - Update later..
 ![Router Cache](./assets/img/router-cache.avif)
 
-## Image
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#next.js)
+## Image Optimization
+### Next.js Image Optimizer
 - Next.js의 `<Image>` 컴포넌트는 image optimizer를 통해 PNG, JPEG 등을 WebP 등으로 변환하고 리사이징하여 이미지 용량을 자동으로 최적화하며, on-demand 캐싱으로 반복 요청 시 성능을 향상시킴
+### CDN + Custom Image Optimizer
+- 이미지가 대량이거나 트래픽이 많은 경우 Next.js Image Optimizer보다 성능상 유리할 수 있음
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#nextjs-app-router)

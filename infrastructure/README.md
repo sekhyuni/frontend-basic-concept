@@ -20,7 +20,7 @@
 		1. 브라우저에서 이미지를 요청하면, 가장 가까운 Edge Server가 응답
 		1. CDN에 캐싱된 데이터가 없을 경우 요청이 Load Balancer를 거쳐 Image Optimizer로 전달됨
 		1. Image Optimizer는 원본 이미지를 Storage Bucket에서 가져와 WebP, AVIF 등으로 변환 및 리사이징
-		1. 변환된 이미지는 다시 CDN에 캐싱되어, 다음 요청 시 빠르게 응답 가능
+		1. 변환된 이미지는 on-demand로 CDN에 캐싱되어, 다음 요청 시 빠르게 응답 가능
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#infrastructure)
