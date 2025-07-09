@@ -3,6 +3,7 @@
 * [Rendering](#rendering)
 * [Caching](#caching)
 * [Image Optimization](#image-optimization)
+* [Font Optimization](#font-optimization)
 
 ## Rendering
 1. Server Components
@@ -55,6 +56,12 @@
 - Next.js의 `<Image>` 컴포넌트는 image optimizer를 통해 PNG, JPEG 등을 WebP 등으로 변환하고 리사이징하여 이미지 용량을 자동으로 최적화하며, on-demand 캐싱으로 반복 요청 시 성능을 향상시킴
 ### CDN + Custom Image Optimizer
 - 이미지가 대량이거나 트래픽이 많은 경우 Next.js Image Optimizer보다 성능상 유리할 수 있음
+
+[메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
+[맨 위로 가기](#nextjs)
+## Font Optimization
+- `next/font/local`은 빌드 타임에 `<link rel="preload" href="/_next/static/media/ff840cfebfb63b0c-s.p.woff2" as="font" crossorigin="" type="font/woff2">`와 같은 preload 태그를 HTML `<head>`에 삽입하여 @font-face가 선언된 css 파일과 함께 font 파일이 병렬적으로 로드되게 함으로써 FOUT이 발생할 가능성을 낮춤 (일반적으로는 @font-face가 선언된 css 파일이 로드된 후 순차적으로 font 파일이 로드됨)
+- `next/font/google`은 빌드 타임에 google font 파일을 가져와 정적 자산화한 뒤 `next/font/local`이 수행하는 작업을 동일하게 수행함
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#nextjs)

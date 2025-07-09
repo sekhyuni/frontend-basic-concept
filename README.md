@@ -56,6 +56,7 @@ Browser, HTML, CSS, JavaScript, TypeScript, React, Next.js 등 Frontend Software
 - [ ] Rendering
 - [ ] Caching
 - [x] Image Optimization
+- [x] Font Optimization
 
 ## [React Query](https://github.com/sekhyuni/frontend-basic-concept/blob/main/react-query/README.md)
 - [x] Life-Cycle
