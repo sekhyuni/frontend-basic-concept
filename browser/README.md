@@ -73,11 +73,14 @@
 - Cookies에서 가능한 설정
     - HttpOnly: 브라우저 접근 가능 여부 (기본값: false)
     - SameSite: 전송 가능 범위 (기본값: Lax)
-        - None: Third-Party Cookies 전송 가능 (단, Secure: true가 함께 적용되어야 함)
-        - Lax: 몇가지 예외적인 요청(GET과 같이 안전하다고 판단되는)을 제외하고는 Third-Party Cookies 전송 불가
-        - Strict: 항상 First-Party Cookies만 전송 가능
+        - None: 모든 경우에서 Cookies 전송 가능 (단, Secure: true가 함께 적용되어야 함)
+        - Lax
+            - SameSite인 경우 Cookies 전송 가능
+            - CrossSite인 경우 `<a href="...">`와 같이 최상위 탐색을 유발하는 GET 요청에만 Cookies 전송
+        - Strict: SameSite인 경우에만 Cookies 전송 가능
     - Secure: https가 적용된 요청만 전송 가능 여부 (기본값: false, chrome에서 도메인이 localhost인 경우는 예외처리됨)
     - Domain: 도메인 (기본값: 쿠키를 설정한 서버 도메인)
+        - eTLD+1을 Domain에 지정하면 그 하위 도메인끼리는 Cookies 공유 가능 (eTLD는 [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat)에 등록된 정보를 따름)
 - Cross Origin으로 Cookies를 전송하기 위한 설정
     - 조건: 브라우저와 서버 간의 통신에만 해당되며, 서버와 서버 간의 통신에는 해당되지 않음
     - 방법
