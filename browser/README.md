@@ -88,8 +88,8 @@
 |Session Storage|전체 5MB|수동으로 제거되거나 브라우저 탭이 닫힐 때까지|Browser Memory|Browser|X|
 |Cookies|개당 4KB, 도메인당 최대 50~180개 (브라우저마다 상이, Chrome: 180개)|Session Cookies (Expires/Max-Age 미설정): 브라우저 종료 시까지, Persistent Cookies (Expires/Max-Age 설정): 만료 시간까지|Disk/Browser Memory|Browser/Server|O|
 - 저장 장소에 대한 부연 설명
-    - Local Storage와 Persistent Cookies는 기본적으로 Disk에 저장되며, 브라우저 최초 로딩 시 빠른 접근을 위해 메모리로 캐싱됨
-    - Session Cookies는 브라우저 종료 시 삭제되어야 하므로 메모리에만 저장됨
+    - Local Storage와 Persistent Cookies는 기본적으로 Disk에 저장되며, 브라우저 최초 로딩 시 빠른 접근을 위해 Browser Memory로 캐싱됨
+    - Session Cookies는 브라우저 종료 시 삭제되어야 하므로 Browser Memory에만 저장됨
 - Cookies에서 가능한 설정
     - HttpOnly: 브라우저 접근 가능 여부 (기본값: false)
     - SameSite: 전송 가능 범위 (기본값: Lax)
