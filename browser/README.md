@@ -22,6 +22,18 @@
 1. 브라우저가 생성한 HTTP 요청을 TCP 연결을 통해 서버로 전송
 1. 서버는 전달받은 HTTP 요청을 처리한 후, TCP 연결을 통해 HTTP 응답을 브라우저로 전송
 1. 브라우저는 전달받은 HTTP 응답을 처리하여 화면에 렌더링
+1. TCP 연결 해제 (4-way handshake)
+    - HTTP/1.0: 매 요청/응답 후 즉시 연결 종료
+    - HTTP/1.1: Keep-Alive가 기본 활성화되어 연결 재사용
+        - `Connection: keep-alive` 헤더와 `Keep-Alive: timeout=N, max=M` 헤더로 설정
+        - timeout 시간 동안 요청이 없거나, max 횟수만큼 요청을 처리하면 연결 종료
+        - timeout 기본값: Nginx 75초, Node.js 5초
+        - 도메인당 여러 TCP 연결을 Connection Pool 방식으로 관리
+            - 초기 2개 권장에서 브라우저들이 6개로 확대 (HTTP 레벨의 HOL Blocking 현상 개선)
+    - HTTP/2: 멀티플렉싱을 통해 하나의 TCP 연결로 여러 요청 동시 처리 가능 (HTTP 레벨의 HOL Blocking 해결)
+        - PING 프레임으로 연결 상태 확인, GOAWAY 프레임으로 연결 종료 알림
+        - idle timeout 설정에 따라 유휴 연결 종료
+        - idle timeout 기본값: Nginx: 180초, Node.js 무제한
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
