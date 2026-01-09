@@ -12,11 +12,16 @@
 * [Authentication](#authentication)
 
 ## Communication Process
-1. 브라우저가 UDP 프로토콜을 통해 DNS에게 입력한 도메인 이름에 해당하는 IP 주소를 요청
-1. 응답받은 IP 주소를 토대로 서버와의 TCP 연결을 진행
+1. DNS 조회를 통해 도메인 이름에 해당하는 IP 주소를 획득
+    1. 브라우저 DNS 캐시 확인
+    1. OS DNS 캐시 확인
+    1. hosts 파일 확인 (로컬에 직접 설정한 도메인-IP 매핑)
+    1. 위에서 찾지 못한 경우, DNS 서버에 요청 (Application Layer: DNS protocol, Transport Layer: UDP protocol)
+1. 응답받은 IP 주소를 토대로 서버와의 TCP 연결을 진행 (3-way handshake, 1.5 RTT)
+    - HTTPS인 경우, TLS handshake 추가 진행 (TLS 1.3 기준 1 RTT)
 1. 브라우저가 생성한 HTTP 요청을 TCP 연결을 통해 서버로 전송
 1. 서버는 전달받은 HTTP 요청을 처리한 후, TCP 연결을 통해 HTTP 응답을 브라우저로 전송
-1. 브라우저는 전달받은 HTTP 응답을 처리하여 화면에 렌더링  
+1. 브라우저는 전달받은 HTTP 응답을 처리하여 화면에 렌더링
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
