@@ -44,6 +44,7 @@
     1. DOM Tree와 CSSOM Tree로 Render Tree 구축 (Style)
     1. Render Tree 배치 (Layout)
     1. Painting (Paint)
+    1. Composite
 - reflow와 repaint
     - reflow
         - 정의: 특정 요소의 속성값이 변경됨에 따라 Render Tree를 재배치하고 Painting 작업을 다시 진행하는 것
