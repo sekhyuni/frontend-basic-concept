@@ -43,8 +43,8 @@
     1. HTML과 CSS를 Parsing하여 DOM Tree와 CSSOM Tree 생성 (Parsing)
     1. DOM Tree와 CSSOM Tree로 Render Tree 구축 (Style)
     1. Render Tree 배치 (Layout)
-    1. Layout 결과물을 바탕으로 Paint Records를 생성하며, z-index, position, opacity, transform, filter 등 독립적인 제어가 필요한 요소들은 별도의 레이어를 생성 (Paint)
-    1. 분리된 레이어들을 픽셀화하고 (합성 레이어의 경우 GPU가 transform/opacity 변경 처리), 하나로 합쳐서 최종 화면을 출력 (Composite)
+    1. Layout 결과물을 바탕으로 Paint Records를 생성하며, z-index, position, transform, opacity, filter 등 독립적인 제어가 필요한 요소들은 별도의 레이어를 생성 (Paint)
+    1. 분리된 레이어들을 픽셀화하고 (합성 레이어의 경우 GPU가 transform/opacity/filter 변경 처리), 하나로 합쳐서 최종 화면을 출력 (Composite)
 - reflow와 repaint
     - reflow
         - 정의: 특정 요소의 속성값이 변경됨에 따라 Render Tree를 재배치하고 Painting 작업을 다시 진행하는 것
@@ -55,7 +55,7 @@
     - 참고
         - 렌더링 비용: reflow (CPU 처리) > repaint (CPU 처리) > composite (GPU 처리)
         - 일반 레이어 (CPU 처리)
-            - z-index, position, opacity < 1, transform (2D/3D 모두), filter 등의 속성이 적용된 요소에 생성
+            - z-index, position, 2D transform, opacity < 1, filter 등의 속성이 적용된 요소에 생성
         - 합성 레이어 (GPU 처리)
             - 자동 승격: 3D transform, video/canvas 요소
             - 명시적 승격: 2D transform/opacity/filter + will-change
