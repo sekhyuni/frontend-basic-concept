@@ -19,9 +19,9 @@
     1. 위에서 찾지 못한 경우, DNS 서버에 요청 (Application Layer: DNS protocol, Transport Layer: UDP protocol)
 1. 응답받은 IP 주소를 토대로 서버와의 TCP 연결을 진행 (3-way handshake, 1.5 RTT)
     - HTTPS인 경우, TLS handshake 추가 진행 (TLS 1.3 기준 1 RTT)
-1. 브라우저가 생성한 HTTP 요청을 TCP 연결을 통해 서버로 전송
-1. 서버는 전달받은 HTTP 요청을 처리한 후, TCP 연결을 통해 HTTP 응답을 브라우저로 전송
-1. 브라우저는 전달받은 HTTP 응답을 처리하여 화면에 렌더링
+1. 브라우저가 생성한 HTTP 요청 메시지를 TCP 연결을 통해 서버로 전송
+1. 서버는 전달받은 HTTP 요청 메시지를 처리한 후, TCP 연결을 통해 HTTP 응답 메시지를 브라우저로 전송
+1. 브라우저는 전달받은 HTTP 응답 메시지를 처리하여 화면에 렌더링
 1. TCP 연결 해제 (4-way handshake)
     - HTTP/1.0: 매 요청/응답 후 즉시 연결 종료
     - HTTP/1.1: Keep-Alive가 기본 활성화되어 연결 재사용
