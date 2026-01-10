@@ -58,7 +58,7 @@
             - z-index, position, 2D transform, opacity < 1, filter 등의 속성이 적용된 요소에 생성
         - 합성 레이어 (GPU 처리)
             - 자동 승격: 3D transform, video/canvas 요소
-            - 명시적 승격: 2D transform/opacity/filter + will-change
+            - 명시적 승격: 2D transform/opacity/filter + will-change (opacity는 animation/transition 적용 시 임시로 자동 승격)
 - 렌더링 최적화
     1. DOM 조작 최소화
         1. 여러 DOM 변경은 DocumentFragment 등을 활용하여 배치 처리 (매 변경마다 reflow가 발생하는 것을 방지)
