@@ -66,11 +66,9 @@
     1. 애니메이션 최적화
         1. 애니메이션에는 top, left, width, height 대신 transform 사용 (레이아웃과 페인트 단계를 건너뛰고 composite만 발생하여 GPU 가속을 받을 수 있기 때문)
     1. 합성 레이어 승격
-        1. transform/opacity/filter가 자주 변경되는 요소에는 will-change 또는 transform: translateZ(0) 적용하여 합성 레이어로 승격 (단, 과도한 레이어 생성은 메모리 사용량 증가로 이어지므로 주의)
+        1. 2D transform/opacity/filter가 자주 변경되는 요소에는 will-change 또는 transform: translateZ(0) 적용하여 합성 레이어로 승격 (단, 과도한 레이어 생성은 메모리 사용량 증가로 이어지므로 주의)
     1. 요소 숨기기
-        1. 초기 렌더링 시 불필요한 요소에는 display: none 사용 (렌더 트리에서 완전히 제외되어 초기 렌더링 비용을 줄일 수 있기 때문)
-        1. 사용/미사용이 가끔 변경되는 요소이나, 요소의 위치가 변하면 안 되는 경우 visibility: hidden 사용 (display: none으로 처리된 요소는 document에서 완전히 사라지기 때문)
-        1. 사용/미사용이 자주 변경되는 요소에는 display: none보다 visibility: hidden 사용 (display 속성 변경으로 인해 reflow가 일어나기 때문)
+        - 토글 효율: opacity: 0 + pointer-events: none + will-change: opacity (composite) > visibility: hidden (repaint) > display: none (reflow)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
