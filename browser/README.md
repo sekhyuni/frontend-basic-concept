@@ -22,15 +22,16 @@
 1. 브라우저가 생성한 HTTP 요청 메시지를 TCP 연결을 통해 서버로 전송
 1. 서버는 전달받은 HTTP 요청 메시지를 처리한 후, TCP 연결을 통해 HTTP 응답 메시지를 브라우저로 전송
 1. 브라우저는 전달받은 HTTP 응답 메시지를 처리하여 화면에 렌더링
-1. TCP 연결 해제 (4-way handshake)
+1. TCP 연결 수명 관리 (해제 시, 4-way handshake)
     - HTTP/1.0: 매 요청/응답 후 즉시 연결 종료
-    - HTTP/1.1: Keep-Alive가 기본 활성화되어 연결 재사용
+    - HTTP/1.1: `Connection: keep-alive` 헤더가 기본 활성화되어 연결을 재사용하며, `Keep-Alive` 헤더를 통해 수명을 관리하고, 도메인당 최대 6개의 연결을 유지하는 Connection Pool 방식으로 HTTP 레벨의 HOL Blocking 현상을 개선
         - `Connection: keep-alive` 헤더와 `Keep-Alive: timeout=N, max=M` 헤더로 설정
         - timeout 시간 동안 요청이 없거나, max 횟수만큼 요청을 처리하면 연결 종료
         - timeout 기본값: Nginx 75초, Node.js 5초
         - 도메인당 여러 TCP 연결을 Connection Pool 방식으로 관리
             - 초기 2개 권장에서 브라우저들이 6개로 확대 (HTTP 레벨의 HOL Blocking 현상 개선)
-    - HTTP/2: 멀티플렉싱을 통해 하나의 TCP 연결로 여러 요청 동시 처리 가능 (HTTP 레벨의 HOL Blocking 해결)
+    - HTTP/2: 멀티플렉싱을 통해 하나의 TCP 연결로 여러 요청 동시 처리 가능하며, HTTP 레벨의 HOL Blocking 현상을 해결
+        - 멀티플렉싱: 하나의 TCP 연결을 여러 개의 독립적인 스트림(Stream)으로 나누어 데이터를 주고받는 기술
         - PING 프레임으로 연결 상태 확인, GOAWAY 프레임으로 연결 종료 알림
         - idle timeout 설정에 따라 유휴 연결 종료
         - idle timeout 기본값: Nginx: 180초, Node.js 무제한
