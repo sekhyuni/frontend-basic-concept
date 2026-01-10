@@ -43,8 +43,8 @@
     1. HTML과 CSS를 Parsing하여 DOM Tree와 CSSOM Tree 생성 (Parsing)
     1. DOM Tree와 CSSOM Tree로 Render Tree 구축 (Style)
     1. Render Tree 배치 (Layout)
-    1. Painting (Paint)
-    1. Composite
+    1. Layout 결과물을 바탕으로 Paint Records를 생성하며, 독립적인 제어가 필요한 요소들은 별도의 레이어로 분리하여 관리 (Paint)
+    1. 분리된 레이어들을 픽셀화하고 하나로 합쳐서, 사용자가 보는 최종 화면을 출력 (Composite)
 - reflow와 repaint
     - reflow
         - 정의: 특정 요소의 속성값이 변경됨에 따라 Render Tree를 재배치하고 Painting 작업을 다시 진행하는 것
