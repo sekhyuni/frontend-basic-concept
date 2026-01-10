@@ -43,8 +43,8 @@
     1. HTML과 CSS를 Parsing하여 DOM Tree와 CSSOM Tree 생성 (Parsing)
     1. DOM Tree와 CSSOM Tree로 Render Tree 구축 (Style)
     1. Render Tree 배치 (Layout)
-    1. Layout 결과물을 바탕으로 Paint Records를 생성하며, transform, opacity, z-index 등 독립적인 제어가 필요한 요소들은 별도의 레이어로 분리하여 관리 (Paint)
-    1. 분리된 레이어들을 픽셀화하고 하나로 합쳐서, 사용자가 보는 최종 화면을 출력 (Composite)
+    1. Layout 결과물을 바탕으로 Paint Records를 생성하며, z-index, position, opacity, transform, filter 등 독립적인 제어가 필요한 요소들은 별도의 레이어를 생성 (Paint)
+    1. 분리된 레이어들을 픽셀화하고 (합성 레이어의 경우 GPU가 transform/opacity 변경 처리), 하나로 합쳐서 최종 화면을 출력 (Composite)
 - reflow와 repaint
     - reflow
         - 정의: 특정 요소의 속성값이 변경됨에 따라 Render Tree를 재배치하고 Painting 작업을 다시 진행하는 것
@@ -53,10 +53,22 @@
         - 정의: 특정 요소의 속성값이 변경됨에 따라 Painting 작업을 다시 진행하는 것
         - 대표적인 속성: visibility, border-radius, border-style, box-shadow, outline, text-decoration, color, background, etc.
     - 참고
-        - opacity 값이 1이 아니면 요소를 새로운 stacking context에 배치하게 되며, 이에 따라 reflow는 발생하지 않고 repaint만 발생
+        - 렌더링 비용: reflow (CPU 처리) > repaint (CPU 처리) > composite (GPU 처리)
+        - 일반 레이어 (CPU 처리)
+            - z-index, position, opacity < 1, transform (2D/3D 모두), filter 등의 속성이 적용된 요소에 생성
+        - 합성 레이어 (GPU 처리)
+            - 자동 승격: 3D transform, video/canvas 요소
+            - 명시적 승격: 2D transform/opacity/filter + will-change
 - 렌더링 최적화
+    1. DOM 조작 최소화
+        1. 여러 DOM 변경은 DocumentFragment 등을 활용하여 배치 처리 (매 변경마다 reflow가 발생하는 것을 방지)
+        1. 브라우저는 스타일 변경을 바로 적용하지 않고 다음 프레임에 모아서 배치 처리 (60fps 기준 약 16.67ms 주기)하지만, 스타일 변경 후 offsetHeight, scrollTop 등 레이아웃 속성을 읽으면 강제로 reflow가 발생하므로 읽기와 쓰기를 분리
+    1. 애니메이션 최적화
+        1. 애니메이션에는 top, left, width, height 대신 transform 사용 (레이아웃과 페인트 단계를 건너뛰고 composite만 발생하여 GPU 가속을 받을 수 있기 때문)
+    1. 합성 레이어 승격
+        1. transform/opacity/filter가 자주 변경되는 요소에는 will-change 또는 transform: translateZ(0) 적용하여 합성 레이어로 승격 (단, 과도한 레이어 생성은 메모리 사용량 증가로 이어지므로 주의)
     1. 요소 숨기기
-        1. 사용하지 않는 요소에는 visibility: hidden보다 display: none 사용 (display: none으로 처리된 요소는 reflow가 일어나지 않기 때문)
+        1. 초기 렌더링 시 불필요한 요소에는 display: none 사용 (렌더 트리에서 완전히 제외되어 초기 렌더링 비용을 줄일 수 있기 때문)
         1. 사용/미사용이 가끔 변경되는 요소이나, 요소의 위치가 변하면 안 되는 경우 visibility: hidden 사용 (display: none으로 처리된 요소는 document에서 완전히 사라지기 때문)
         1. 사용/미사용이 자주 변경되는 요소에는 display: none보다 visibility: hidden 사용 (display 속성 변경으로 인해 reflow가 일어나기 때문)
 
