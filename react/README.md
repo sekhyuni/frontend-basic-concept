@@ -377,7 +377,7 @@
         - 정의: Component가 최초 렌더링되어 DOM을 조작할 수 있는 상태 
         - 순서: Run lazy initializers -> Render -> React updates DOM(Commit) -> Run LayoutEffects -> Browser paints screen -> Run Effects
         - 특징
-            - Class Component에서의 componentDidMount는 Browser Painting 완료 후 동기적으로 호출되지만, Functional Component에서의 useEffect는 Browser Painting 완료 후 비동기적으로 호출됨
+            - Class Component에서의 componentDidMount는 Browser Paint 완료 후 동기적으로 호출되지만, Functional Component에서의 useEffect는 Browser Paint 완료 후 비동기적으로 호출됨
     - Update
         - 정의: Component 내 props나 state 값이 변경되면서 Component가 리렌더링되어 변경된 DOM을 조작할 수 있는 상태
         - 순서: Render -> React updates DOM(Commit) -> Cleanup LayoutEffects -> Run LayoutEffects -> Browser paints screen -> Cleanup Effects -> Run Effects
@@ -412,7 +412,7 @@
         - 값이 업데이트되면서 화면이 새로 바뀌어야 할 때
 1. useEffect
     - 정의
-        - Mount 또는 Update 시, Browser Painting 완료 후 DOM에 접근할 수 있는 상태에서 비동기적으로 호출되는 Hook
+        - Mount 또는 Update 시, Browser Paint 완료 후 DOM에 접근할 수 있는 상태에서 비동기적으로 호출되는 Hook
         - Component Tree 외부에 있는 것들을 props나 state에 따라 동기화하는 것
         - 의존성 배열 내에는 props나 state뿐만 아니라 ref.current도 포함될 수 있음
     - 필요한 곳
@@ -558,9 +558,9 @@
         - 메모이제이션함으로써 추가적인 메모리를 더 사용해야 하고, 이전 렌더링에서의 함수 참조값과 새 렌더링에서의 함수 참조값을 비교하는 추가적인 복잡도가 존재한다는 점을 고려해야 함
 1. useLayoutEffect
     - 정의
-        - Mount 또는 Update 시, Browser Painting 완료 전 DOM에 접근할 수 있는 상태에서 동기적으로 호출되는 Hook
+        - Mount 또는 Update 시, Browser Paint 완료 전 DOM에 접근할 수 있는 상태에서 동기적으로 호출되는 Hook
     - 필요한 곳
-        - Browser Local Storage에 들어있는 로그인 상태값를 가져와서 그에 맞는 화면에 보여주는 등 Browser Painting하기 전에 값을 가져올 수 있을 때
+        - Browser Local Storage에 들어있는 로그인 상태값를 가져와서 그에 맞는 화면에 보여주는 등 Browser Paint하기 전에 값을 가져올 수 있을 때
             ```tsx
             import { useState, useEffect, useLayoutEffect } from 'react';
 
