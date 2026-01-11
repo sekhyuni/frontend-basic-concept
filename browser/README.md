@@ -84,7 +84,7 @@
     - CSR 방식이 SSR 방식보다 SEO 대응에 불리한 이유: 검색엔진 크롤러가 특정 페이지를 서버에 요청했을 때, SSR 방식과 달리 CSR 방식은 응답 결과에 동적인 컨텐츠가 존재하지 않기 때문
     - CSR 방식에서도 meta 태그를 사용해서 어느 정도 SEO 대응이 가능
     - CSR 방식에서도 Code Splitting을 사용해서 초기 로딩 속도 개선 가능
-    - Next.js에서의 SSR은 서버에서 정적 페이지를 생성한 뒤, 클라이언트에서 해당 페이지를 hydrate 하는 방식으로 동작
+    - Next.js에서의 SSR은 서버에서 정적 페이지를 생성한 뒤, 클라이언트에서 해당 페이지를 hydrate(서버가 만든 HTML에 JavaScript를 결합하는 작업) 하는 방식으로 동작
     - Next.js에서의 Rendering은 CSR과 SSR이 혼합된 방식
         - CSR
             - next/link의 Link 컴포넌트가 클릭됐을 때
