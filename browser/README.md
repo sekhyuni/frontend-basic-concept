@@ -60,15 +60,18 @@
             - 자동 승격: 3D transform, video/canvas 요소
             - 명시적 승격: 2D transform/opacity/filter + will-change (opacity는 animation/transition 적용 시 임시로 자동 승격)
 - 렌더링 최적화
-    1. DOM 조작 최소화
-        1. 여러 DOM 변경은 DocumentFragment 등을 활용하여 배치 처리 (매 변경마다 reflow가 발생하는 것을 방지)
-        1. 브라우저는 스타일 변경을 바로 적용하지 않고 다음 프레임에 모아서 배치 처리 (60fps 기준 약 16.67ms 주기)하지만, 스타일 변경 후 offsetHeight, scrollTop 등 레이아웃 속성을 읽으면 강제로 reflow가 발생하므로 읽기와 쓰기를 분리
-    1. 애니메이션 최적화
-        1. 애니메이션에는 top, left, width, height 대신 transform 사용 (레이아웃과 페인트 단계를 건너뛰고 composite만 발생하여 GPU 가속을 받을 수 있기 때문)
-    1. 합성 레이어 승격
-        1. 2D transform/opacity/filter가 자주 변경되는 요소에는 will-change 또는 transform: translateZ(0) 적용하여 합성 레이어로 승격 (단, 과도한 레이어 생성은 메모리 사용량 증가로 이어지므로 주의)
-    1. 요소 숨기기
-        - 토글 효율: opacity: 0 + pointer-events: none + will-change: opacity (composite) > visibility: hidden (repaint) > display: none (reflow)
+    - 최대한 reflow와 repaint를 줄이는 방향으로 최적화
+        - reflow 횟수 최소화
+            - 여러 개의 DOM을 변경해야 할 때, DocumentFragment를 활용해서 메모리에서 조작 후 마지막에 한 번만 반영
+            - 스타일 변경과 레이아웃 속성 조회가 반복될 때 발생하는 강제 동기 레이아웃 현상을 막기 위해, 레이아웃 속성 조회를 먼저 수행하고 그다음 쓰기 로직을 수행하는 방식을 채택할 수 있음 (브라우저는 스타일 변경을 바로 적용하지 않고 다음 프레임에 모아서 배치 처리를 하는데, 레이아웃 속성 조회를 하면 강제로 reflow가 발생하므로)
+        - reflow 또는 repaint 대신 composite 단계만 거치게 하기
+            - 애니메이션을 구현할 때, top, left, width, height 대신 transform 속성을 사용
+            - 특정 요소를 숨길 때, display 또는 visibility 대신 opacity와 will-change 조합을 사용
+    - 참고
+        - 합성 레이어 승격
+            - 2D transform/opacity/filter가 자주 변경되는 요소에는 will-change 또는 transform: translateZ(0) 적용하여 합성 레이어로 승격 (단, 과도한 레이어 생성은 GPU 메모리 사용량 증가로 이어지므로 주의)
+        - 요소 숨기기
+            - 토글 효율: opacity: 0 + pointer-events: none + will-change: opacity (composite) > visibility: hidden (repaint) > display: none (reflow)
 
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
