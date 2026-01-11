@@ -48,10 +48,10 @@
 - reflow와 repaint
     - reflow
         - 정의: 특정 요소의 속성값이 변경됨에 따라 Layout, Paint, Composite 단계를 다시 거치는 것
-        - 대표적인 속성: position, top, right, bottom, left, display, width, height, padding, border, margin, font-size, font-weight, etc.
+        - 대표적인 속성: position, top, right, bottom, left, display, width, height, padding, border-width, margin, font-size, font-weight, etc.
     - repaint
         - 정의: 특정 요소의 속성값이 변경됨에 따라 Paint, Composite 단계를 다시 거치는 것
-        - 대표적인 속성: visibility, border-radius, border-style, box-shadow, outline, text-decoration, color, background, etc.
+        - 대표적인 속성: visibility, border-style, border-color, border-radius, box-shadow, outline, text-decoration, color, background, etc.
     - 참고
         - 렌더링 비용: reflow (CPU 처리) > repaint (CPU 처리) > composite (GPU 처리)
         - 일반 레이어 (CPU 처리)
