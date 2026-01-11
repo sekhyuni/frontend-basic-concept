@@ -47,10 +47,10 @@
     1. 분리된 레이어들을 비트맵으로 픽셀화하고, 합성 레이어의 경우 transform/opacity/filter 변경 사항을 반영한 뒤, 모든 레이어를 하나로 합쳐서 최종 화면을 출력 (Composite)
 - reflow와 repaint
     - reflow
-        - 정의: 특정 요소의 속성값이 변경됨에 따라 Render Tree를 재배치하고 Paint 작업을 다시 진행하는 것
+        - 정의: 특정 요소의 속성값이 변경됨에 따라 Layout, Paint, Composite 단계를 다시 거치는 것
         - 대표적인 속성: position, top, right, bottom, left, display, width, height, padding, border, margin, font-size, font-weight, etc.
     - repaint
-        - 정의: 특정 요소의 속성값이 변경됨에 따라 Paint 작업을 다시 진행하는 것
+        - 정의: 특정 요소의 속성값이 변경됨에 따라 Paint, Composite 단계를 다시 거치는 것
         - 대표적인 속성: visibility, border-radius, border-style, box-shadow, outline, text-decoration, color, background, etc.
     - 참고
         - 렌더링 비용: reflow (CPU 처리) > repaint (CPU 처리) > composite (GPU 처리)
