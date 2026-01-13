@@ -106,20 +106,16 @@
     - Local Storage와 Persistent Cookies는 기본적으로 Disk에 저장되며, 브라우저 최초 로딩 시 빠른 접근을 위해 Browser Memory로 캐싱됨
     - Session Storage와 Session Cookies는 각각 브라우저 탭 종료 시, 브라우저 종료 시 삭제되어야 하므로 Browser Memory에만 저장됨
 - Cookies에서 가능한 설정
-    - HttpOnly: 브라우저 접근 가능 여부 (기본값: false)
-    - SameSite: 전송 가능 범위 (기본값: Lax)
-        - 개념
-            - SameSite: 쿠키를 설정한 서버와 요청을 보내는 서버가 동일한 도메인인 경우 (eTLD+1 기준)
-            - CrossSite: 쿠키를 설정한 서버와 요청을 보내는 서버가 다른 도메인인 경우
-        - 속성값
-            - None: 모든 경우에서 Cookies 전송 가능 (단, Secure: true가 함께 적용되어야 함)
-            - Lax
-                - SameSite인 경우 Cookies 전송 가능
-                - CrossSite인 경우 `<a href="...">`와 같이 최상위 탐색을 유발하는 GET 요청에만 Cookies 전송
-            - Strict: SameSite인 경우에만 Cookies 전송 가능
-    - Secure: https가 적용된 요청만 전송 가능 여부 (기본값: false, chrome에서 도메인이 localhost인 경우는 예외처리됨)
-    - Domain: 도메인 (기본값: 쿠키를 설정한 서버 도메인)
+    - HttpOnly: 브라우저에서 접근 가능 여부 (기본값: false)
+    - Secure: HTTPS 연결인지 판별하여 브라우저에서 Cookies 저장 및 전송 여부를 결정 (기본값: false, chrome에서 도메인이 localhost인 경우는 예외처리됨)
+    - Domain: 브라우저에서 Cookies를 전송할 대상 도메인을 설정 (기본값: Cookies를 설정한 서버 도메인)
         - eTLD+1을 Domain에 지정하면 해당 도메인의 서브도메인끼리는 Cookies 공유 가능 (eTLD는 [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat)에 등록된 정보를 따름)
+    - SameSite: eTLD+1을 기준으로 동일 사이트인지 판별하여 브라우저에서 Cookies 저장 및 전송 여부를 결정 (기본값: Lax)
+        - None: 모든 경우에서 Cookies 저장 및 전송 가능 (단, Secure: true가 함께 적용되어야 함)
+        - Lax
+            - SameSite인 경우 Cookies 저장 및 전송 가능
+            - CrossSite인 경우 `<a href="...">`와 같이 최상위 탐색을 유발하는 GET 요청에만 Cookies 전송
+        - Strict: SameSite인 경우에만 Cookies 저장 및 전송 가능
 - Cross Origin으로 Cookies를 전송하기 위한 설정
     - 조건: 브라우저와 서버 간의 통신에만 해당되며, 서버와 서버 간의 통신에는 해당되지 않음
     - 방법
