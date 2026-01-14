@@ -105,7 +105,7 @@
 - 저장 장소에 대한 부연 설명
     - Local Storage와 Persistent Cookies는 기본적으로 Disk에 저장되며, 브라우저 최초 로딩 시 빠른 접근을 위해 Browser Memory로 캐싱됨
     - Session Storage와 Session Cookies는 각각 브라우저 탭 종료 시, 브라우저 종료 시 삭제되어야 하므로 Browser Memory에만 저장됨
-- Cookies에서 가능한 설정
+- Cookies 속성들
     - HttpOnly: 브라우저에서 접근 가능 여부 (기본값: false)
     - Secure: HTTPS 연결인지 판별하여 브라우저에서 Cookies 저장 및 전송 여부를 결정 (기본값: false, chrome에서 도메인이 localhost인 경우는 예외처리됨)
     - Domain: 브라우저에서 Cookies를 전송할 대상 도메인을 설정 (기본값: Cookies를 설정한 서버 도메인)
