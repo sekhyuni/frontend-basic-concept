@@ -18,12 +18,12 @@
     1. hosts 파일 확인 (로컬에 직접 설정한 도메인-IP 매핑)
     1. 위에서 찾지 못한 경우, DNS 서버에 요청 (Application Layer: DNS protocol, Transport Layer: UDP protocol)
 1. 응답받은 IP 주소를 토대로 서버와의 TCP 연결을 진행 (3-way handshake, 1.5 RTT)
-    - HTTPS인 경우, TLS handshake 추가 진행 (TLS 1.3 기준 1 RTT)
+    - HTTPS인 경우, TLS handshake를 추가로 진행 (TLS 1.3 기준 1 RTT)
 1. 브라우저가 생성한 HTTP 요청 메시지를 TCP 연결을 통해 서버로 전송
-1. 서버는 전달받은 HTTP 요청 메시지를 처리한 후, TCP 연결을 통해 HTTP 응답 메시지를 브라우저로 전송
+1. 서버는 전달받은 HTTP 요청 메시지를 처리한 후, HTTP 응답 메시지를 TCP 연결을 통해 브라우저로 전송
 1. 브라우저는 전달받은 HTTP 응답 메시지를 처리하여 화면에 렌더링
-1. TCP 연결 수명 관리 (해제 시, 4-way handshake)
-    - HTTP/1.0: 매 요청/응답 후 즉시 연결 종료
+1. HTTP 버전에 따라 TCP 연결 수명 관리 (해제 시, 4-way handshake)
+    - HTTP/1.0: 매 요청/응답 후 즉시 연결 해제
     - HTTP/1.1: `Connection: keep-alive` 헤더가 기본 활성화되어 연결을 재사용하며, `Keep-Alive` 헤더를 통해 수명을 관리하고, 도메인당 최대 6개의 연결을 유지하는 Connection Pool 방식으로 HTTP 레벨의 HOL Blocking 현상을 개선
         - `Connection: keep-alive` 헤더와 `Keep-Alive: timeout=N, max=M` 헤더로 설정
         - timeout 시간 동안 요청이 없거나, max 횟수만큼 요청을 처리하면 연결 종료
