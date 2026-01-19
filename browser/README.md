@@ -97,7 +97,7 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#browser)
 ## Local Storage vs Session Storage vs Cookies
-||크기|수명|저장 장소|접근 가능한 곳|서버로 HTTP 요청 시, 자동 전송 여부|
+||저장 가능한 크기|수명|저장 장소|접근 가능한 곳|서버로 HTTP 요청 시, 자동 전송 여부|
 |:---:|:---:|:---:|:---:|:---:|:---:|
 |Local Storage|전체 5MB|명시적으로 제거될 때까지|Disk/Browser Memory|Browser|X|
 |Session Storage|전체 5MB|명시적으로 제거되거나 브라우저 탭이 닫힐 때까지|Browser Memory|Browser|X|
