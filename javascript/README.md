@@ -53,7 +53,7 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Hoisting
-- JavaScript 실행 컨텍스트의 생성 단계에서 코드 구문 분석이 이루어지면서 변수 및 함수를 해당 Scope의 최상단으로 끌어올리는 프로세스 (논리적인 개념)
+- JavaScript Engine이 실행 컨텍스트를 생성할 때, 코드 실행 전 구문 분석을 통해 변수와 함수 선언을 메모리에 미리 할당하여 해당 스코프의 최상단에 선언된 것처럼 동작하게 하는 프로세스
 - 모든 선언 키워드는 호이스팅되지만, 호이스팅으로 인해 선언문 전에서도 식별자에 접근 가능한 키워드는 var와 function밖에 없음
 - 선언 키워드별 동작 방식
     - var: 선언+초기화, 할당이 각각 따로 실행
@@ -99,8 +99,7 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Closure
-- 정의: 외부 함수의 실행 컨텍스트가 소멸되어도 해당 컨텍스트에서 생성되었던 Lexical Environment에 접근할 수 있는 내부 함수 (실행 컨텍스트는 Call Stack에서 사라지지만, Lexical Environment는 Memory 상에 남음)
-- 클로저가 외부 함수의 Lexical Environment에 접근할 수 있는 이유: 클로저의 Lexical Environment에서 외부 함수의 Lexical Environment에 대한 참조 값을 가지고 있기 때문
+- 정의: 외부 함수의 실행 컨텍스트가 소멸되어도 외부 함수의 Lexical Environment에 접근할 수 있는 내부 함수 (내부 함수가 외부 함수의 Lexical Environment를 참조하고 있는 한, 해당 Lexical Environment는 가비지 컬렉션에 의해 해제되지 않기 때문)
 - 장점: 실행 컨텍스트가 소멸되어 Lexical Environment에 직접 접근할 수 없으므로 정보를 은닉할 수 있음
 - 단점: Lexical Environment가 남아있으므로 사용하지 않는 식별자의 양에 따라 그만큼 메모리 누수가 발생할 수 있음
 - 클로저를 활용한 예
