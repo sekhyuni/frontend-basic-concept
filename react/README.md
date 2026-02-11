@@ -292,7 +292,7 @@
             export default App;
             ```
 - key prop의 역할
-    1. Reconciliation이 진행될 때, 형제 노드 사이에서 재정렬이 발생하는 경우 어떤 노드가 변경되지 않아도 되는지 알려주는 역할
+    1. Reconciliation이 진행될 때, 형제 노드 사이에서 재정렬이 발생하는 경우 어떤 노드가 변경되지 않아도 되는지 알려주는 식별자 역할
         - 각 Element의 key prop이 형제 노드 사이 기준 항상 unique한 경우 DOM Element의 속성 또는 Component Element의 props를 갱신하지 않아도 됨
         - 각 Element의 key prop이 형제 노드 사이 기준 항상 unique하지 않을 경우 DOM Element의 속성 또는 Component Element의 props를 갱신하기 때문에 성능적으로 좋지 않음 (최악의 경우 모든 형제 노드의 속성 또는 props가 변경됨)
     1. Reconciliation이 진행될 때, 특정 Element의 key prop이 이전 형제 노드의 어떤 key prop과도 동일하지 않은 key prop으로 변경된 경우 DOM Element 또는 Component Element를 다시 생성하게 할 수 있음
