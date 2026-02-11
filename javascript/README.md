@@ -53,8 +53,8 @@
 [메인으로 가기](https://github.com/sekhyuni/frontend-basic-concept)</br>
 [맨 위로 가기](#javascript)
 ## Hoisting
-- JavaScript Engine이 실행 컨텍스트를 생성할 때, 코드 실행 전 구문 분석을 통해 변수와 함수 선언을 메모리에 미리 할당하여 해당 스코프의 최상단에 선언된 것처럼 동작하게 하는 프로세스
-- 모든 선언 키워드는 호이스팅되지만, 호이스팅으로 인해 선언문 전에서도 식별자에 접근 가능한 키워드는 var와 function밖에 없음
+- 컴파일 타임에 변수와 함수 선언을 Environment Record에 미리 등록하여, 해당 스코프의 최상단에 선언된 것처럼 동작하게 하는 프로세스
+- 모든 선언 키워드는 호이스팅되지만, 선언문 전에서도 식별자에 접근 가능한 키워드는 var와 function밖에 없음
 - 선언 키워드별 동작 방식
     - var: 선언+초기화, 할당이 각각 따로 실행
         ```javascript
